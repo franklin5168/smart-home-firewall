@@ -1,4 +1,4 @@
-# iot-firewall
+# smart-home-firewall
 
 Profile-based Smart Home firewall, based on [nftables](https://wiki.nftables.org/wiki-nftables/index.php/Main_Page).
 
