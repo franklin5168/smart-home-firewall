@@ -1,0 +1,18 @@
+# Private folders
+tmp
+
+# Build folders
+build
+bin
+
+# Documentation folder
+docs
+
+# Auxiliary files
+*.log
+!requirements.txt
+
+# Config folders
+.vscode
+.vagrant
+__pycache__

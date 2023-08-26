@@ -1,0 +1,9 @@
+id,timestamp,protocol,field,old_value,new_value
+1,1648198321.756433,CoAP,code,1,4
+2,1648198321.756534,CoAP,type,1,0
+3,1648198321.756995,CoAP,uri,b'/oic/res/?rt=x.com.samsung.provisioninginfo',b'/mic/reH/?rt=x.com.samsung.provisioninginXo'
+4,1648198321.757068,CoAP,code,1,3
+5,1648198321.758170,CoAP,uri,b'/oic/res/?rt=x.com.samsung.provisioninginfo',b'/1ic/rUs/?rt=x.com.samsung.provisioningrnfo'
+6,1648198321.758247,CoAP,type,1,3
+7,1648198321.758693,CoAP,type,1,0
+8,1648198321.758764,CoAP,code,1,3

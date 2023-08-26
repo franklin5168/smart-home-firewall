@@ -1,0 +1,3 @@
+id,timestamp,protocol,field,old_value,new_value
+1,1683299279.2308333,IGMP,type,22,17
+2,1683299279.2313714,IGMP,gaddr,224.0.0.251,84.205.203.58

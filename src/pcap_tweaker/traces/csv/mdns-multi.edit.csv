@@ -1,0 +1,7 @@
+id,timestamp,protocol,field,old_value,new_value
+1,1648139821.622299,mDNS,qtype,255,15
+2,1648139821.622330,mDNS,qtype,255,15
+3,1648139821.882285,mDNS,qname,DCS-8000LH-B0C554435483.local. + DCS-8000LH-5483._http._tcp.local. + DCS-8000LH-5483._dcp._tcp.local.,DCS-n000LH-B0C554435483.local. + DCS-8000LH-5483._http._tcp.lkcal. + DCS-80k0LH-5483._dcp._tcp.local.
+4,1648139821.882314,mDNS,qr,0,1
+5,1648139822.142806,mDNS,qname,DCS-8000LH-B0C554435483.local. + DCS-8000LH-5483._http._tcp.local. + DCS-8000LH-5483._dcp._tcp.local.,DCS-8000LH-B0C5J4435483.local. + yCS-8000LH-5483._http._tcp.local. + DCS-8000LH-5483._dcp._4cp.local.
+6,1648139822.142830,mDNS,qname,DCS-8000LH-B0C554435483.local. + DCS-8000LH-5483._http._tcp.local. + DCS-8000LH-5483._dcp._tcp.local.,DCS-8004LH-B0C554435483.local. + DCS-8000LH-5483.Thttp._tcp.local. + DCS-8t00LH-5483._dcp._tcp.local.

@@ -1,0 +1,2 @@
+# Raw PCAP files containing all the attack traffic
+*.raw.pcap

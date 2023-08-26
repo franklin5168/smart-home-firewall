@@ -1,0 +1,2 @@
+id,timestamp,protocol,field,old_value,new_value,old_hash,new_hash
+1,1648118036.210245,ARP,hwsrc,64:66:b3:f6:68:52,eb:9e:7e:35:25:0e,b764b7875e85e82cfc2c7a63f79f9093360098bbcab320294d90a43799455d1f,608eff27736c8930f9700b35511b20eb00ec5a35178de3d606d1bd3d67d42ab2
