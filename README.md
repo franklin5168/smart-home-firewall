@@ -4,6 +4,7 @@ Profile-based Smart Home firewall, based on [nftables](https://wiki.nftables.org
 
 Compile locally with:
 ```bash
+./translate_profiles.sh
 mkdir build bin
 cd build
 cmake ..
@@ -11,5 +12,6 @@ cmake --build .
 ```
 or, more easily:
 ```bash
+./translate_profiles.sh
 ./build.sh
 ```
