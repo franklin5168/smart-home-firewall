@@ -154,6 +154,7 @@ if __name__ == "__main__":
     parser.add_argument("nfq_id_base", type=uint16, help="NFQueue start index for this profile's policies (must be an integer between 0 and 65535)")
     parser.add_argument("-l", "--log-type", type=lambda log_type: LogType[log_type], choices=list(LogType), default=LogType.NONE, help="Type of packet logging to be used")
     parser.add_argument("-g", "--log-group", type=uint16, default=100, help="Log group number (must be an integer between 0 and 65535)")
+    parser.add_argument("-t", "--test", action="store_true", help="Test mode: use VM instead of router")
     args = parser.parse_args()
 
     # Retrieve useful paths
@@ -350,7 +351,8 @@ if __name__ == "__main__":
             "other_hosts": global_accs["other_hosts"],
             "nfqueues": global_accs["nfqueues"],
             "log_type": args.log_type,
-            "log_group": args.log_group
+            "log_group": args.log_group,
+            "test": args.test
         }
         env.get_template("firewall.nft.j2").stream(nft_dict).dump(f"{device_path}/firewall.nft")
 

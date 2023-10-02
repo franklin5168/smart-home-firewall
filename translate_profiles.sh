@@ -25,10 +25,16 @@ usage() {
 ###### MAIN ######
 
 # Parse command line arguments
+TEST=""
 LOG_TYPE=""
-while getopts "l:" opt;
+while getopts "tl:" opt;
 do
     case "${opt}" in
+        t)
+            # Enable test mode
+            TEST="-t"
+            echo "Test mode enabled: use VM instead of router"
+            ;;
         l)
             # Enable packet logging
             LOG_TYPE="${OPTARG}"
@@ -55,7 +61,7 @@ do
             LOGGING="-l $LOG_TYPE -g $LOG_GROUP"
         fi
 
-        python3 $SCRIPTPATH/src/translator/translator.py $DEVICE/profile.yaml $NFQ_ID_START $LOGGING
+        python3 $SCRIPTPATH/src/translator/translator.py $DEVICE/profile.yaml $NFQ_ID_START $TEST $LOGGING
         NFQ_ID_START=$((NFQ_ID_START+1000))
         
         if [[ $LOG_TYPE == "PCAP" ]]

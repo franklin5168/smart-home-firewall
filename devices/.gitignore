@@ -2,4 +2,3 @@
 nfqueues.c
 nfqueues/
 *.nft
-*/traces
