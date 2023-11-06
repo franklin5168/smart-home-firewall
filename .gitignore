@@ -16,3 +16,6 @@ docs
 .vscode
 .vagrant
 __pycache__
+
+# PCAP traces
+**/traces/
