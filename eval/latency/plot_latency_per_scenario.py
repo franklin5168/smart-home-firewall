@@ -18,6 +18,10 @@ script_dir = script_path.parents[0]
 devices = [
     "dlink-cam",
     "philips-hue",
+    "smartthings-hub",
+    #"smartthings-door",
+    #"smartthings-motion",
+    #"smartthings-presence",
     "tplink-plug",
     "xiaomi-cam"
 ]
@@ -58,12 +62,12 @@ def build_df(devices: list) -> pd.DataFrame:
                 df = pd.concat([df, tmp_df], ignore_index=True)
         
         # Read latencies for the "all devices" scenario
-        csv_file_path = os.path.join(script_dir, "all", "my-firewall", "all_my-firewall.csv")
+        csv_file_path = os.path.join(script_dir, "all-devices", "my-firewall", "all_my-firewall.csv")
         all_df = pd.read_csv(csv_file_path)
         filtered_df = all_df[all_df["device"] == device]
         tmp_df = pd.DataFrame({
             "device": [device]*len(filtered_df),
-            "scenario": ["all"]*len(filtered_df),
+            "scenario": ["all-devices"]*len(filtered_df),
             "latency": filtered_df["latency"].apply(lambda x: x*1000)  # Convert to milliseconds
         })
         df = pd.concat([df, tmp_df], ignore_index=True)
@@ -186,7 +190,7 @@ def save_data(df: pd.DataFrame, is_median: bool, data_file: str) -> None:
     :param is_median: whether to compute the median instead of the mean
     :param data_file: file to save the data to
     """
-    all_scenarios = scenarios + ["all"]
+    all_scenarios = scenarios + ["all-devices"]
     m_column = ["median"] if is_median else ["mean"]
     data_columns = m_column + ["error_low", "error_high"]
     columns = ["device"]

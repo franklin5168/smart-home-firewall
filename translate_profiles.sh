@@ -9,15 +9,17 @@
 # Retrieve this script's path
 # (from https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself)
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+DEVICES_DIR="$SCRIPTPATH/devices"  # Devices directory
 # NFQueue IDs
 NFQ_ID_START=0  # NFQueue start index
 LOG_GROUP=2     # NFLog group ID
+
 
 ###### FUNCTIONS ######
 
 # Print usage information
 usage() {
-    echo "Usage: $0 [-l log_type]" 1>&2
+    echo "Usage: $0 [-t] [-l log_type]" 1>&2
     exit 1
 }
 
@@ -48,9 +50,10 @@ done
 shift $((OPTIND-1))
 
 # Iterate on all devices
-for DEVICE in $SCRIPTPATH/devices/*
+for DEVICE in amazon-echo dlink-cam philips-hue smartthings-hub tplink-plug xiaomi-cam
 do
-    if [[ -d $DEVICE ]]
+    DEVICE_PATH="$DEVICES_DIR/$DEVICE"
+    if [[ -d $DEVICE_PATH ]]
     then
         LOGGING=""
         if [[ $LOG_TYPE == "CSV" ]]
@@ -61,7 +64,7 @@ do
             LOGGING="-l $LOG_TYPE -g $LOG_GROUP"
         fi
 
-        python3 $SCRIPTPATH/src/translator/translator.py $DEVICE/profile.yaml $NFQ_ID_START $TEST $LOGGING
+        python3 $SCRIPTPATH/src/translator/translator.py $DEVICE_PATH/profile.yaml $NFQ_ID_START $TEST $LOGGING
         NFQ_ID_START=$((NFQ_ID_START+1000))
         
         if [[ $LOG_TYPE == "PCAP" ]]

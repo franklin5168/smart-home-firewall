@@ -16,6 +16,10 @@ scenario = "my-firewall"
 devices = [
     "dlink-cam",
     "philips-hue",
+    "smartthings-hub",
+    #"smartthings-door",
+    #"smartthings-motion",
+    #"smartthings-presence",
     "tplink-plug",
     "xiaomi-cam"
 ]

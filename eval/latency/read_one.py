@@ -17,9 +17,29 @@ ETH_HEADER_SIZE = 14
 script_name = os.path.basename(__file__)
 script_path = Path(os.path.abspath(__file__))
 script_dir = script_path.parents[0]
-devices = ["dlink-cam", "philips-hue", "tplink-plug", "xiaomi-cam"]
-all_pcaps = ["lan.pcap", "wlan2.4.pcap", "wlan5.0.pcap", "wan.pcap"]
+devices = [
+    "dlink-cam",
+    "philips-hue",
+    "smartthings-hub",
+    #"smartthings-door",
+    #"smartthings-motion",
+    #"smartthings-presence",
+    "tplink-plug",
+    "xiaomi-cam"
+]
+all_pcaps = [
+    "lan.pcap",
+    "wlan2.4.pcap",
+    "wlan5.0.pcap",
+    "wan.pcap"
+]
 
+smartthings_data = {
+    "pcap": "lan.pcap",
+    "mac":  "68:3a:48:13:27:04",
+    "ipv4": "192.168.1.223",
+    "ipv6": "fdb9:136b:cd34:e86f:6a3a:48ff:fe13:2704"
+}
 device_data = {
     "dlink-cam": {
         "pcap": "wlan2.4.pcap",
@@ -42,12 +62,10 @@ device_data = {
         "mac":  "78:8b:2a:b2:20:ea",
         "ipv4": "192.168.1.161"
     },
-    "smartthings-hub": {
-        "pcap": "lan.pcap",
-        "mac":  "d0:52:a8:72:aa:27",
-        "ipv4": "192.168.1.147",
-        "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
-    },
+    "smartthings-hub": smartthings_data,
+    #"smartthings-door": smartthings_data,
+    #"smartthings-motion": smartthings_data,
+    #"smartthings-presence": smartthings_data,
     "amazon-echo": {
         "pcap": "wlan2.4.pcap",
         "mac":  "50:dc:e7:a2:d8:95",

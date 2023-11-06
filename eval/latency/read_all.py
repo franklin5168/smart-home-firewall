@@ -18,24 +18,27 @@ ETH_HEADER_SIZE = 14
 script_name = os.path.basename(__file__)
 script_path = Path(os.path.abspath(__file__))
 script_dir = script_path.parents[0]
-devices = ["dlink-cam", "philips-hue", "tplink-plug", "xiaomi-cam"]
+devices = ["dlink-cam", "philips-hue", "smartthings-hub", "tplink-plug", "xiaomi-cam"]
 interface_pcaps = ["lan.pcap", "wlan2.4.pcap", "wlan5.0.pcap", "wan.pcap"]
 
 device_addrs = {
     "mac": {
         "b0:c5:54:43:54:83": "dlink-cam",
         "00:17:88:74:c2:dc": "philips-hue",
+        "68:3a:48:13:27:04": "smartthings-hub",
         "50:c7:bf:ed:0a:54": "tplink-plug",
         "78:8b:2a:b2:20:ea": "xiaomi-cam"
     },
     "ipv4": {
         "192.168.1.115": "dlink-cam",
         "192.168.1.141": "philips-hue",
+        "192.168.1.223": "smartthings-hub",
         "192.168.1.135": "tplink-plug",
         "192.168.1.161": "xiaomi-cam"
     },
     "ipv6": {
-        "fe80::217:88ff:fe74:c2dc": "philips-hue"
+        "fe80::217:88ff:fe74:c2dc": "philips-hue",
+        "fdb9:136b:cd34:e86f:6a3a:48ff:fe13:2704": "smartthings-hub"
     }
 }
 
@@ -63,8 +66,8 @@ device_data = {
     },
     "smartthings-hub": {
         "pcap": "lan.pcap",
-        "mac":  "d0:52:a8:72:aa:27",
-        "ipv4": "192.168.1.147",
+        "mac":  "68:3a:48:13:27:04",
+        "ipv4": "192.168.1.223",
         "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
     },
     "amazon-echo": {
@@ -536,7 +539,7 @@ if __name__ == "__main__":
     """
 
     # Get working directory for the given device and scenario
-    scenario_dir = os.path.join(script_dir, "all", "my-firewall")
+    scenario_dir = os.path.join(script_dir, "all-devices", "my-firewall")
 
     # Mapping between device addresses and PCAP files
     maps_addr_pcap = {
