@@ -1,5 +1,0 @@
-id,timestamp,protocol,field,old_value,new_value
-1,1648641940.456018,DNS,qtype,1,10
-2,1648641940.506902,DNS,qname,business.smartcamera.api.io.mi.com.,businesN.smartcamera.api.io.mi.com.
-3,1648641942.567213,DNS,qname,business.smartcamera.api.io.mi.com.,business.sma8tcamera.api.io.mi.com.
-4,1648641942.567522,DNS,qname,business.smartcamera.api.io.mi.com.,business.smartcamera.a1i.io.mi.com.

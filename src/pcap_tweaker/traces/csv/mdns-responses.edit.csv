@@ -1,5 +1,0 @@
-id,timestamp,protocol,field,old_value,new_value
-1,1648139822.413865,mDNS,qr,1,0
-2,1648139822.413899,mDNS,qr,1,0
-3,1648139823.432365,mDNS,qr,1,0
-4,1648139823.432399,mDNS,qr,1,0
