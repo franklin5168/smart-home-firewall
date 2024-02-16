@@ -20,6 +20,7 @@ class arp(Protocol):
     mac_addrs = {
         "gateway": "c0:56:27:73:46:0b",
         "default": "00:00:00:00:00:00",
+        "broadcast": "ff:ff:ff:ff:ff:ff",
         "phone": "3c:cd:5d:a2:a9:d7"
     }
     ip_addrs = {
