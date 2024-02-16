@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['evaluation_3a_20attacks_703',['Evaluation: Attacks',['../index.html',1,'']]]
+  ['evaluation_3a_20precision_20and_20accuracy_695',['Evaluation: precision and accuracy',['../index.html',1,'']]]
 ];

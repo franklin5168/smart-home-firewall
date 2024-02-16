@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['level_672',['level',['../namespacepcap__tweaker.html#a008006a9b49a4c4d610727cf79205fa4',1,'pcap_tweaker']]]
+  ['is_5fdevice_664',['is_device',['../classPolicy_1_1Policy.html#aa67fecbb56773864dc297e7204eb9c9b',1,'Policy::Policy']]]
 ];
