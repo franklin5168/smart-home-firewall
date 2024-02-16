@@ -25,7 +25,8 @@ devices = [
     #"smartthings-motion",
     #"smartthings-presence",
     "tplink-plug",
-    "xiaomi-cam"
+    "xiaomi-cam",
+    "tuya-motion"
 ]
 all_pcaps = [
     "lan.pcap",
@@ -61,6 +62,11 @@ device_data = {
         "pcap": "wlan2.4.pcap",
         "mac":  "78:8b:2a:b2:20:ea",
         "ipv4": "192.168.1.161"
+    },
+    "tuya-motion": {
+        "pcap": "wlan2.4.pcap",
+        "mac":  "a0:92:08:7b:03:1c",
+        "ipv4": "192.168.1.102"
     },
     "smartthings-hub": smartthings_data,
     #"smartthings-door": smartthings_data,

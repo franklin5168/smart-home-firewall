@@ -16,22 +16,11 @@ script_name = os.path.basename(__file__)
 script_path = Path(os.path.abspath(__file__))
 script_dir = script_path.parents[0]
 exp_cases = {
-    "philips-hue_https-flood": [
-        "no-attack",
-        "with-attack"
-    ],
-    "tplink-plug_tcp-flood": [
-        "no-attack",
-        "with-attack"
-    ],
-    "tplink-plug_tcp-without-arp": [
-        "no-attack",
-        "with-attack"
-    ],
-    "tplink-plug_https-without-dns": [
-        "no-attack",
-        "with-attack"
-    ]
+    "base": os.path.join(script_dir, "latency-base", "with-firewall"),
+    "proto": os.path.join(script_dir, "proto", "latency"),
+    "stats": os.path.join(script_dir, "stats", "latency"),
+    "inter-lan": os.path.join(script_dir, "interaction", "lan", "latency"),
+    "inter-wan": os.path.join(script_dir, "interaction", "wan", "latency")
 }
 
 
@@ -44,29 +33,21 @@ def build_df(exp_cases: dict) -> pd.DataFrame:
     :return: pandas DataFrame containing the latency data per attack type and scenario
     """
     # Result DataFrame, will be populated
-    columns = ["device_attack", "scenario", "latency"]
+    columns = ["scenario", "latency"]
     df = pd.DataFrame(columns=columns)
 
     # Iterate over devices and scenarios
-    for device_attack, scenarios in exp_cases.items():
-        # Get device and attack type
-        split = device_attack.split("_")
-        device = split[0]
-        attack = split[1]
+    for scenario, scenario_path in exp_cases.items():
         # Read timestamp list from CSV file
-        attack_path = os.path.join(script_dir, device, attack)
-        for scenario in scenarios:
-            scenario_path = os.path.join(attack_path, scenario)
-            if os.path.isdir(scenario_path) and len(os.listdir(scenario_path)):
-                csv_file_name = f"{device}_{attack}_{scenario}.csv"
-                csv_file_path = os.path.join(scenario_path, csv_file_name)
-                scenario_df = pd.read_csv(csv_file_path)
-                tmp_df = pd.DataFrame({
-                    "device_attack": [device_attack]*len(scenario_df),
-                    "scenario": [scenario]*len(scenario_df),
-                    "latency": scenario_df["latency"].apply(lambda x: x*1000)  # Convert to milliseconds
-                })
-                df = pd.concat([df, tmp_df], ignore_index=True)
+        if os.path.isdir(scenario_path) and len(os.listdir(scenario_path)) > 0:
+            csv_file_name = "latency.csv"
+            csv_file_path = os.path.join(scenario_path, csv_file_name)
+            scenario_df = pd.read_csv(csv_file_path)
+            tmp_df = pd.DataFrame({
+                "scenario": [scenario]*len(scenario_df),
+                "latency": scenario_df["latency"].apply(lambda x: x*1000)  # Convert to milliseconds
+            })
+            df = pd.concat([df, tmp_df], ignore_index=True)
     
     return df
 
@@ -81,9 +62,8 @@ def bar_plot(df: pd.DataFrame, ax: plt.Axes) -> None:
     sn.barplot(
         ax       = ax,
         data     = df,
-        x        = "device_attack",
+        x        = "scenario",
         y        = "latency",
-        hue      = "scenario",
         errorbar = "pi",
         errwidth = 1,
         capsize  = 0.1
@@ -100,9 +80,8 @@ def box_plot(df: pd.DataFrame, ax: plt.Axes) -> None:
     sn.boxplot(
         ax    = ax,
         data  = df,
-        x     = "device_attack",
-        y     = "latency",
-        hue   = "scenario"
+        x     = "scenario",
+        y     = "latency"
     )
 
 
@@ -116,9 +95,8 @@ def violin_plot(df: pd.DataFrame, ax: plt.Axes) -> None:
     sn.violinplot(
         ax    = ax,
         data  = df,
-        x     = "device_attack",
+        x     = "scenario",
         y     = "latency",
-        hue   = "scenario",
         split = False,
         width = 5
     )
@@ -134,9 +112,8 @@ def scatter_plot(df: pd.DataFrame, ax: plt.Axes) -> None:
     sn.scatterplot(
         ax    = ax,
         data  = df,
-        x     = "device_attack",
+        x     = "scenario",
         y     = "latency",
-        hue   = "scenario",
         alpha = 0.5
     )
 
@@ -151,9 +128,8 @@ def point_plot(df: pd.DataFrame, ax: plt.Axes) -> None:
     sn.pointplot(
         ax    = ax,
         data  = df,
-        x     = "device",
+        x     = "scenario",
         y     = "latency",
-        hue   = "scenario",
         errorbar = "pi",
         errwidth = 1,
         capsize  = 0.1
@@ -218,7 +194,6 @@ def save_data(df: pd.DataFrame, is_median: bool, data_file: str) -> None:
 # Program entry point
 if __name__ == "__main__":
 
-
     ### COMMAND LINE ARGUMENTS ###
     parser = argparse.ArgumentParser(
         prog=script_name,
@@ -256,16 +231,11 @@ if __name__ == "__main__":
     plot(args.plot_type, df, ax)
 
     # Plot metadata
+    ax.set_title("Latency under attack, per scenario")
     ax.set_xlabel(None)
-    xticks = [
-        "philips-hue\nattack 6.3.1",
-        "tplink-plug\nattack 6.3.2",
-        "tplink-plug\nattack 6.3.3",
-        "tplink-plug\nattack 6.3.4"
-    ]
-    ax.set_xticklabels(xticks)
     ax.set_ylabel("Latency [ms]")
-    ax.legend(loc="upper right")
+    xticklabels = ["base", "A1", "A2", "B", "C",]
+    ax.set_xticklabels(xticklabels)
     
     # Show or save plot
     fig.tight_layout()

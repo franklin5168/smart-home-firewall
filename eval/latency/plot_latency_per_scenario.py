@@ -23,13 +23,30 @@ devices = [
     #"smartthings-motion",
     #"smartthings-presence",
     "tplink-plug",
-    "xiaomi-cam"
+    "xiaomi-cam",
+    "tuya-motion"
 ]
 scenarios = [
     "no-firewall",
     "base-firewall",
     "my-firewall"
 ]
+pi = 80  # Percentile interval
+
+
+def percentile_interval(pi: str) -> int:
+    """
+    Argparse type for a percentile interval,
+    i.e. an integer between 0 and 100.
+
+    :param pi: input percentile interval
+    :return: percentile interval as an integer
+    :raises argparse.ArgumentTypeError: if the input is not a valid percentile interval
+    """
+    pi = int(pi)
+    if pi < 0 or pi > 100:
+        raise argparse.ArgumentTypeError(f"{pi} is not a valid percentile interval")
+    return pi
 
 
 def build_df(devices: list) -> pd.DataFrame:
@@ -93,7 +110,7 @@ def bar_plot(df: pd.DataFrame, ax: plt.Axes) -> None:
         x        = "device",
         y        = "latency",
         hue      = "scenario",
-        errorbar = "pi",
+        errorbar = ("pi", args.interval),
         errwidth = 1,
         capsize  = 0.1
     )
@@ -162,7 +179,7 @@ def point_plot(df: pd.DataFrame, ax: plt.Axes) -> None:
         x     = "device",
         y     = "latency",
         hue   = "scenario",
-        errorbar = "pi",
+        errorbar = ("pi", args.interval),
         errwidth = 1,
         capsize  = 0.1
     )
@@ -224,7 +241,6 @@ def save_data(df: pd.DataFrame, is_median: bool, data_file: str) -> None:
 # Program entry point
 if __name__ == "__main__":
 
-
     ### COMMAND LINE ARGUMENTS ###
     parser = argparse.ArgumentParser(
         prog=script_name,
@@ -240,6 +256,8 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--plot-type", type=str, choices=plot_types, default="bar", help="Plot type")
     # Optional argument #4: file to save the plot to
     parser.add_argument("-f", "--file", type=str, help="File to save the plot to")
+    # Optional argument #5: percentile interval
+    parser.add_argument("-i", "--interval", type=percentile_interval, default=pi, help="Percentile interval")
     # Parse arguments
     args = parser.parse_args()
 
@@ -247,7 +265,7 @@ if __name__ == "__main__":
     ### PLOTS ###
 
     # Initialize plot
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6, 4), dpi=100)
 
     # Read data
     df = build_df(devices)
@@ -259,7 +277,6 @@ if __name__ == "__main__":
         exit(0)
 
     # Plot data
-    #plot(args.plot_type, df, ax)
     plot(args.plot_type, df, ax)
 
     # Plot metadata
@@ -268,7 +285,7 @@ if __name__ == "__main__":
     ax.legend(title="Scenario", loc="upper right")
     
     # Show or save plot
-    fig.tight_layout()
+    #fig.tight_layout()
     if args.file:
         fig.savefig(args.file)
     else:

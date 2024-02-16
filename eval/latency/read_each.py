@@ -17,7 +17,8 @@ devices = [
     #"smartthings-motion",
     #"smartthings-presence",
     "tplink-plug",
-    "xiaomi-cam"
+    "xiaomi-cam",
+    "tuya-motion"
 ]
 scenarios = [
     "no-firewall",

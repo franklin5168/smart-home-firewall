@@ -1,9 +1,9 @@
 # Private folders
-tmp
+tmp/
 
 # Build folders
-build
-bin
+build/
+bin/
 
 # Documentation folder
 docs
@@ -13,9 +13,9 @@ docs
 !requirements.txt
 
 # Config folders
-.vscode
-.vagrant
-__pycache__
+.vscode/
+.vagrant/
+__pycache__/
 
 # PCAP traces
 **/traces/

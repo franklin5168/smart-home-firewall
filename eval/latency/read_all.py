@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import os
-from math import floor
 from copy import deepcopy
 from pathlib import Path
 from bisect import bisect
@@ -18,7 +17,7 @@ ETH_HEADER_SIZE = 14
 script_name = os.path.basename(__file__)
 script_path = Path(os.path.abspath(__file__))
 script_dir = script_path.parents[0]
-devices = ["dlink-cam", "philips-hue", "smartthings-hub", "tplink-plug", "xiaomi-cam"]
+devices = ["dlink-cam", "philips-hue", "smartthings-hub", "tplink-plug", "xiaomi-cam", "tuya-motion"]
 interface_pcaps = ["lan.pcap", "wlan2.4.pcap", "wlan5.0.pcap", "wan.pcap"]
 
 device_addrs = {
@@ -27,14 +26,16 @@ device_addrs = {
         "00:17:88:74:c2:dc": "philips-hue",
         "68:3a:48:13:27:04": "smartthings-hub",
         "50:c7:bf:ed:0a:54": "tplink-plug",
-        "78:8b:2a:b2:20:ea": "xiaomi-cam"
+        "78:8b:2a:b2:20:ea": "xiaomi-cam",
+        "a0:92:08:7b:03:1c": "tuya-motion"
     },
     "ipv4": {
         "192.168.1.115": "dlink-cam",
         "192.168.1.141": "philips-hue",
         "192.168.1.223": "smartthings-hub",
         "192.168.1.135": "tplink-plug",
-        "192.168.1.161": "xiaomi-cam"
+        "192.168.1.161": "xiaomi-cam",
+        "192.168.1.102": "tuya-motion"
     },
     "ipv6": {
         "fe80::217:88ff:fe74:c2dc": "philips-hue",
@@ -63,6 +64,11 @@ device_data = {
         "pcap": "wlan2.4.pcap",
         "mac":  "78:8b:2a:b2:20:ea",
         "ipv4": "192.168.1.161"
+    },
+    "tuya-motion": {
+        "pcap": "wlan2.4.pcap",
+        "mac":  "a0:92:08:7b:03:1c",
+        "ipv4": "192.168.1.102"
     },
     "smartthings-hub": {
         "pcap": "lan.pcap",
