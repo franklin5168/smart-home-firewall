@@ -3,7 +3,6 @@
 import os
 from pathlib import Path
 import argparse
-import csv
 import pandas as pd
 import matplotlib.lines as mlines
 import matplotlib.pyplot as plt
