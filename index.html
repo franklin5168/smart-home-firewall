@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Smart Home firewall: Evaluation: precision and accuracy</title>
+<title>Smart Home firewall: Evaluation: Latency under attacks</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,22 +63,26 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Evaluation: precision and accuracy </div>  </div>
+<div class="title">Evaluation: Latency under attacks </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_eval_fuzzing_README"></a> Please first make sure the system has been built with logging enabled. Uncomment line 28 from the <a href="../../CMakeLists.txt">root CMakeLists.txt</a>, which reads </p><div class="fragment"><div class="line">add_compile_options(-Wall -Werror -Wno-unused-variable -O3 -DLOG)</div>
-</div><!-- fragment --><p> then build the system again.</p>
-<p>Start Vagrant VM which will run the firewall: </p><div class="fragment"><div class="line">vagrant up</div>
-</div><!-- fragment --><p>Retrieve Vagrant VM SSH configuration: </p><div class="fragment"><div class="line">vagrant ssh-config &gt; vagrant-ssh-config</div>
-</div><!-- fragment --><p>Retrieve Vagrant VM MAC address: </p><div class="fragment"><div class="line">ssh -F vagrant-ssh-config default &quot;ip link show enp0s8&quot;</div>
-</div><!-- fragment --><p>Produce ground truth data: </p><div class="fragment"><div class="line">python3 ground_truth/ground-truth.py vm VAGRANT_VM_MAC</div>
-<div class="line">python3 ground_truth/merge-logs.py</div>
-</div><!-- fragment --><p>Generate edited PCAP files: </p><div class="fragment"><div class="line">python3 edited/generate-edited-pcaps.py</div>
-</div><!-- fragment --><p>Replay each PCAP firewall through the router on which the firewall is running: </p><div class="fragment"><div class="line">python3 edited/replay-edited-pcaps.py vm VAGRANT_VM_MAC</div>
-</div><!-- fragment --><p>Process data, and plot confusion matrix: </p><div class="fragment"><div class="line">python3 edited/merge-logs.py</div>
-<div class="line">python3 edited/link-interactions.py</div>
-<div class="line">python3 edited/plot.py</div>
-</div><!-- fragment --> </div></div><!-- PageDoc -->
+<div class="textblock"><p><a class="anchor" id="md_eval_attacks_README"></a> Plot latency induced by the firewall, when undergoing 4 attack scenarios.</p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Plot</h2>
+<p>Read data from the PCAP files, and save them in CSV files with: </p><div class="fragment"><div class="line">python3 read_each.py</div>
+</div><!-- fragment --><p>Plot latency data with: </p><div class="fragment"><div class="line">python3 plot.py [-p plot_type] [-f file_name]</div>
+</div><!-- fragment --><p> with the following options:</p><ul>
+<li><code>plot_type</code>:<ul>
+<li><code>bar</code>: bar plot (default)</li>
+<li><code>box</code>: box plot</li>
+<li><code>violin</code>: violin plot</li>
+<li><code>scatter</code>: scatter plot</li>
+<li><code>point</code>: point plot</li>
+</ul>
+</li>
+<li><code>file_name</code>: name of the file to save the graph to. If not specified, the graph is shown on screen. </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
