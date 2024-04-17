@@ -1,6 +1,7 @@
 # Supervising Smart Home Device Interactions: A Profile-Based Firewall Approach
 
 Profile-based Smart Home firewall, based on [nftables](https://wiki.nftables.org/wiki-nftables/index.php/Main_Page).
+Author: François De Keersmaeker (francois.dekeersmaeker@uclouvain.be)
 
 ## Local compilation
 
