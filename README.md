@@ -1,7 +1,11 @@
 # Supervising Smart Home Device Interactions: A Profile-Based Firewall Approach
 
+**Note: This is the anonymous repository for double-blind review.
+Now that this research has been accepted,
+please visit the [public version](https://github.com/smart-home-network-security/smart-home-firewall).**
+
 Profile-based Smart Home firewall, based on [nftables](https://wiki.nftables.org/wiki-nftables/index.php/Main_Page).
-Author: François De Keersmaeker (francois.dekeersmaeker@uclouvain.be)
+
 
 ## Local compilation
 
