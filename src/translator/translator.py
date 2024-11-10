@@ -244,7 +244,11 @@ if __name__ == "__main__":
                     "max_state": -1,
                     "nfq_id_base": nfq_id_base,
                     "nfq_id_offset": 0,
-                    "policies": []
+                    "policies": [],
+                    "in_loop": False,
+                    "loop_policies": [],
+                    "loop_size": 0,
+                    "next_policy": None
                 }
                 
                 # Parse policy
@@ -291,7 +295,12 @@ if __name__ == "__main__":
                     "max_state": -1,
                     "nfq_id_base": nfq_id_base,
                     "nfq_id_offset": 0,
-                    "policies": []
+                    # Add loop keys
+                    "policies": [],
+                    "in_loop": False,
+                    "loop_policies": [],
+                    "loop_size": 0,
+                    "next_policy": None
                 }
 
                 update_nfq_id_base = False
@@ -311,6 +320,20 @@ if __name__ == "__main__":
                     if new_nfq:
                         update_nfq_id_base = True
                     interaction_data["policies"].append(single_policy)
+
+                # Add loop processing
+                if "loop" in interaction_policy:
+                    loop_config = interaction_policy["loop"]
+                    interaction_data["in_loop"] = True
+                    
+                    for policy_name in loop_config:
+                        if isinstance(policy_name, str) and policy_name != "next":
+                            interaction_data["loop_policies"].append(policy_name)
+                    
+                    interaction_data["loop_size"] = len(interaction_data["loop_policies"])
+                    
+                    if isinstance(loop_config, dict) and "next" in loop_config:
+                        interaction_data["next_policy"] = loop_config["next"]
 
                 # Update nfqueue variables
                 global_accs["interactions"].append(interaction_data)
