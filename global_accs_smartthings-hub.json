@@ -1,0 +1,5368 @@
+{
+  "interaction_idx": 12,
+  "interactions": [
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 3000,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef6c5a1b0": {
+            "interaction_name": "single",
+            "name": "dns-ipv4",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": [
+                    "A",
+                    "AAAA"
+                  ],
+                  "domain-name": [
+                    "connectivity.smartthings.com",
+                    "api.smartthings.com",
+                    "fw-update2.smartthings.com"
+                  ]
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": false,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 53
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.223 ip daddr 192.168.1.1",
+            "queue_num": 3000,
+            "nft_action": "log prefix \\\"single#dns-ipv4,,QUEUE\\\" group 100 queue num 3000",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": [
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                ],
+                "match": [
+                  "A",
+                  "AAAA"
+                ]
+              },
+              {
+                "template": [
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")"
+                ],
+                "match": [
+                  "connectivity.smartthings.com",
+                  "api.smartthings.com",
+                  "fw-update2.smartthings.com"
+                ]
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef646f0e0": {
+            "interaction_name": "single",
+            "name": "dns-ipv4-backward",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": [
+                    "A",
+                    "AAAA"
+                  ],
+                  "domain-name": [
+                    "connectivity.smartthings.com",
+                    "api.smartthings.com",
+                    "fw-update2.smartthings.com"
+                  ]
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": false,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.223 ip saddr 192.168.1.1",
+            "queue_num": 3001,
+            "nft_action": "log prefix \\\"single#dns-ipv4-backward,,QUEUE\\\" group 100 queue num 3001",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": [
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                ],
+                "match": [
+                  "A",
+                  "AAAA"
+                ]
+              },
+              {
+                "template": [
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")"
+                ],
+                "match": [
+                  "connectivity.smartthings.com",
+                  "api.smartthings.com",
+                  "fw-update2.smartthings.com"
+                ]
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 3010,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef6238a70": {
+            "interaction_name": "single",
+            "name": "dns-ipv6",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": [
+                    "A",
+                    "AAAA"
+                  ],
+                  "domain-name": [
+                    "api.smartthings.com",
+                    "fw-update2.smartthings.com"
+                  ]
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv6": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": false,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 53
+              },
+              {
+                "template": "ip6 saddr {}",
+                "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+              },
+              {
+                "template": "ip6 daddr {}",
+                "match": "fddd:ed18:f05b::1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 53 ip6 saddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 daddr fddd:ed18:f05b::1",
+            "queue_num": 3010,
+            "nft_action": "log prefix \\\"single#dns-ipv6,,QUEUE\\\" group 100 queue num 3010",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": [
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                ],
+                "match": [
+                  "A",
+                  "AAAA"
+                ]
+              },
+              {
+                "template": [
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")"
+                ],
+                "match": [
+                  "api.smartthings.com",
+                  "fw-update2.smartthings.com"
+                ]
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef6ce2ab0": {
+            "interaction_name": "single",
+            "name": "dns-ipv6-backward",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": [
+                    "A",
+                    "AAAA"
+                  ],
+                  "domain-name": [
+                    "api.smartthings.com",
+                    "fw-update2.smartthings.com"
+                  ]
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv6": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": false,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              },
+              {
+                "template": "ip6 daddr {}",
+                "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+              },
+              {
+                "template": "ip6 saddr {}",
+                "match": "fddd:ed18:f05b::1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 53 ip6 daddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 saddr fddd:ed18:f05b::1",
+            "queue_num": 3011,
+            "nft_action": "log prefix \\\"single#dns-ipv6-backward,,QUEUE\\\" group 100 queue num 3011",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": [
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                ],
+                "match": [
+                  "A",
+                  "AAAA"
+                ]
+              },
+              {
+                "template": [
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                  "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")"
+                ],
+                "match": [
+                  "api.smartthings.com",
+                  "fw-update2.smartthings.com"
+                ]
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 0,
+      "max_state": 0,
+      "nfq_id_base": 3020,
+      "nfq_id_offset": 1,
+      "policies": [
+        {
+          "Policy-0x7fdef625a330": {
+            "interaction_name": "single",
+            "name": "mdns-hub-hue",
+            "profile_data": {
+              "protocols": {
+                "mdns": {
+                  "qtype": "PTR",
+                  "domain-name": "_hue._tcp.local"
+                },
+                "udp": {
+                  "src-port": 5353,
+                  "dst-port": 5353
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "mdns"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": false,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "mdns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 5353
+              },
+              {
+                "template": "udp dport {}",
+                "match": 5353
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "224.0.0.251"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 5353 udp dport 5353 ip saddr 192.168.1.223 ip daddr 224.0.0.251",
+            "queue_num": 3020,
+            "nft_action": "log prefix \\\"single#mdns-hub-hue,,QUEUE\\\" group 100 queue num 3020",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "PTR"
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "_hue._tcp.local"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 0,
+      "max_state": 0,
+      "nfq_id_base": 3030,
+      "nfq_id_offset": 1,
+      "policies": [
+        {
+          "Policy-0x7fdef625ac30": {
+            "interaction_name": "single",
+            "name": "ssdp-search-hub",
+            "profile_data": {
+              "protocols": {
+                "ssdp": {
+                  "type": "M-SEARCH"
+                },
+                "udp": {
+                  "dst-port": 1900
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "ssdp"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": false,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "ssdp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 1900
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "239.255.255.250"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 1900 ip saddr 192.168.1.223 ip daddr 239.255.255.250",
+            "queue_num": 3030,
+            "nft_action": "log prefix \\\"single#ssdp-search-hub,,QUEUE\\\" group 100 queue num 3030",
+            "nfq_matches": [
+              {
+                "template": "{}ssdp_message.is_request",
+                "match": ""
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 3040,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef625aed0": {
+            "interaction_name": "single",
+            "name": "background-https-hub-server",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "54.217.91.49"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": false,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp dport {}",
+                "match": 443
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "54.217.91.49"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.223 ip daddr 54.217.91.49",
+            "queue_num": 3040,
+            "nft_action": "log prefix \\\"single#background-https-hub-server,,QUEUE\\\" group 100 queue num 3040",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef6ce03b0": {
+            "interaction_name": "single",
+            "name": "background-https-hub-server-backward",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "54.217.91.49"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": false,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp sport {}",
+                "match": 443
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "54.217.91.49"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.223 ip saddr 54.217.91.49",
+            "queue_num": 3041,
+            "nft_action": "log prefix \\\"single#background-https-hub-server-backward,,QUEUE\\\" group 100 queue num 3041",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 3,
+      "max_state": 3,
+      "nfq_id_base": 3050,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef625af60": {
+            "interaction_name": "get-ip-address",
+            "name": "dhcp-discover",
+            "profile_data": {
+              "protocols": {
+                "dhcp": {
+                  "type": "discover",
+                  "client-mac": "self"
+                },
+                "udp": {
+                  "src-port": 68,
+                  "dst-port": 67
+                },
+                "ipv4": {
+                  "src": "0.0.0.0",
+                  "dst": "broadcast"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dhcp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 68
+              },
+              {
+                "template": "udp dport {}",
+                "match": 67
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "0.0.0.0"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "255.255.255.255"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 68 udp dport 67 ip saddr 0.0.0.0 ip daddr 255.255.255.255",
+            "queue_num": 3050,
+            "nft_action": "log prefix \\\"get-ip-address#dhcp-discover,,QUEUE\\\" group 100 queue num 3050",
+            "nfq_matches": [
+              {
+                "template": "dhcp_message.options.message_type == {}",
+                "match": "DHCP_DISCOVER"
+              },
+              {
+                "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                "match": "68:3a:48:13:27:04"
+              }
+            ],
+            "counters": {},
+            "is_device": false,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625b4d0": {
+            "interaction_name": "get-ip-address",
+            "name": "dhcp-offer",
+            "profile_data": {
+              "protocols": {
+                "dhcp": {
+                  "type": "offer",
+                  "client-mac": "self"
+                },
+                "udp": {
+                  "src-port": 67,
+                  "dst-port": 68
+                },
+                "ipv4": {
+                  "src": "gateway",
+                  "dst": "self"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dhcp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 67
+              },
+              {
+                "template": "udp dport {}",
+                "match": 68
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 67 udp dport 68 ip saddr 192.168.1.1 ip daddr 192.168.1.223",
+            "queue_num": 3051,
+            "nft_action": "log prefix \\\"get-ip-address#dhcp-offer,,QUEUE\\\" group 100 queue num 3051",
+            "nfq_matches": [
+              {
+                "template": "dhcp_message.options.message_type == {}",
+                "match": "DHCP_OFFER"
+              },
+              {
+                "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                "match": "68:3a:48:13:27:04"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625b770": {
+            "interaction_name": "get-ip-address",
+            "name": "dhcp-request",
+            "profile_data": {
+              "protocols": {
+                "dhcp": {
+                  "type": "request",
+                  "client-mac": "self"
+                },
+                "udp": {
+                  "src-port": 68,
+                  "dst-port": 67
+                },
+                "ipv4": {
+                  "src": "0.0.0.0",
+                  "dst": "broadcast"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dhcp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 68
+              },
+              {
+                "template": "udp dport {}",
+                "match": 67
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "0.0.0.0"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "255.255.255.255"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 68 udp dport 67 ip saddr 0.0.0.0 ip daddr 255.255.255.255",
+            "queue_num": 3052,
+            "nft_action": "log prefix \\\"get-ip-address#dhcp-request,,QUEUE\\\" group 100 queue num 3052",
+            "nfq_matches": [
+              {
+                "template": "dhcp_message.options.message_type == {}",
+                "match": "DHCP_REQUEST"
+              },
+              {
+                "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                "match": "68:3a:48:13:27:04"
+              }
+            ],
+            "counters": {},
+            "is_device": false,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef6aebe00": {
+            "interaction_name": "get-ip-address",
+            "name": "dhcp-ack",
+            "profile_data": {
+              "protocols": {
+                "dhcp": {
+                  "type": "ack",
+                  "client-mac": "self"
+                },
+                "udp": {
+                  "src-port": 67,
+                  "dst-port": 68
+                },
+                "ipv4": {
+                  "src": "gateway",
+                  "dst": "self"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dhcp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 67
+              },
+              {
+                "template": "udp dport {}",
+                "match": 68
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 67 udp dport 68 ip saddr 192.168.1.1 ip daddr 192.168.1.223",
+            "queue_num": 3052,
+            "nft_action": "log prefix \\\"get-ip-address#dhcp-ack,,QUEUE\\\" group 100 queue num 3052",
+            "nfq_matches": [
+              {
+                "template": "dhcp_message.options.message_type == {}",
+                "match": "DHCP_ACK"
+              },
+              {
+                "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                "match": "68:3a:48:13:27:04"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 3060,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef625b6b0": {
+            "interaction_name": "arp-from-gateway",
+            "name": "arp-request-gateway-hub",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "gateway",
+                  "tha": "default",
+                  "spa": "gateway",
+                  "tpa": "self"
+                }
+              },
+              "stats": {
+                "rate": "1/second"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "c0:56:27:73:46:0b"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.1"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "1/second"
+              }
+            },
+            "nft_match": "arp operation request arp saddr ether c0:56:27:73:46:0b arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.1 arp daddr ip 192.168.1.223 limit rate 1/second",
+            "queue_num": 3060,
+            "nft_action": "log prefix \\\"arp-from-gateway#arp-request-gateway-hub,,QUEUE\\\" group 100 queue num 3060",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625b290": {
+            "interaction_name": "arp-from-gateway",
+            "name": "arp-reply-hub-gateway",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "sha": "self",
+                  "tha": "gateway",
+                  "spa": "self",
+                  "tpa": "gateway"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "68:3a:48:13:27:04"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "c0:56:27:73:46:0b"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp saddr ether 68:3a:48:13:27:04 arp daddr ether c0:56:27:73:46:0b arp saddr ip 192.168.1.223 arp daddr ip 192.168.1.1",
+            "queue_num": 3061,
+            "nft_action": "log prefix \\\"arp-from-gateway#arp-reply-hub-gateway,,QUEUE\\\" group 100 queue num 3061",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 3070,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef625aff0": {
+            "interaction_name": "arp-from-phone",
+            "name": "arp-request-phone-hub",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "phone",
+                  "tha": "default",
+                  "spa": "phone",
+                  "tpa": "self"
+                }
+              },
+              "stats": {
+                "rate": "1/second"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "3c:cd:5d:a2:a9:d7"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.222"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "1/second"
+              }
+            },
+            "nft_match": "arp operation request arp saddr ether 3c:cd:5d:a2:a9:d7 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.222 arp daddr ip 192.168.1.223 limit rate 1/second",
+            "queue_num": 3070,
+            "nft_action": "log prefix \\\"arp-from-phone#arp-request-phone-hub,,QUEUE\\\" group 100 queue num 3070",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625bb30": {
+            "interaction_name": "arp-from-phone",
+            "name": "arp-reply-hub-phone",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "sha": "self",
+                  "tha": "phone",
+                  "spa": "self",
+                  "tpa": "phone"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "68:3a:48:13:27:04"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "3c:cd:5d:a2:a9:d7"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.222"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp saddr ether 68:3a:48:13:27:04 arp daddr ether 3c:cd:5d:a2:a9:d7 arp saddr ip 192.168.1.223 arp daddr ip 192.168.1.222",
+            "queue_num": 3071,
+            "nft_action": "log prefix \\\"arp-from-phone#arp-reply-hub-phone,,QUEUE\\\" group 100 queue num 3071",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 3080,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef625bf50": {
+            "interaction_name": "arp-local",
+            "name": "arp-request-hub-local",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "self",
+                  "tha": "default",
+                  "spa": "self",
+                  "tpa": "local"
+                }
+              },
+              "stats": {
+                "rate": "1/second"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "68:3a:48:13:27:04"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.223"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.0/24"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "1/second"
+              }
+            },
+            "nft_match": "arp operation request arp saddr ether 68:3a:48:13:27:04 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.223 arp daddr ip 192.168.1.0/24 limit rate 1/second",
+            "queue_num": 3080,
+            "nft_action": "log prefix \\\"arp-local#arp-request-hub-local,,QUEUE\\\" group 100 queue num 3080",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625bbc0": {
+            "interaction_name": "arp-local",
+            "name": "arp-reply-local-hub",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "tha": "self",
+                  "spa": "local",
+                  "tpa": "self"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "68:3a:48:13:27:04"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.0/24"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp daddr ether 68:3a:48:13:27:04 arp saddr ip 192.168.1.0/24 arp daddr ip 192.168.1.223",
+            "queue_num": 3081,
+            "nft_action": "log prefix \\\"arp-local#arp-reply-local-hub,,QUEUE\\\" group 100 queue num 3081",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 3,
+      "max_state": 3,
+      "nfq_id_base": 3090,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef625bcb0": {
+            "interaction_name": "background-hub-cloud",
+            "name": "dns-hub-cloud",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": [
+                    "A",
+                    "AAAA"
+                  ],
+                  "domain-name": "api.smartthings.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv6": {
+                  "src": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 53
+              },
+              {
+                "template": "ip6 saddr {}",
+                "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+              },
+              {
+                "template": "ip6 daddr {}",
+                "match": "fddd:ed18:f05b::1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 53 ip6 saddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 daddr fddd:ed18:f05b::1",
+            "queue_num": 3090,
+            "nft_action": "log prefix \\\"background-hub-cloud#dns-hub-cloud,,QUEUE\\\" group 100 queue num 3090",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": [
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                ],
+                "match": [
+                  "A",
+                  "AAAA"
+                ]
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "api.smartthings.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef620f8c0": {
+            "interaction_name": "background-hub-cloud",
+            "name": "dns-hub-cloud-backward",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": [
+                    "A",
+                    "AAAA"
+                  ],
+                  "domain-name": "api.smartthings.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv6": {
+                  "src": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              },
+              {
+                "template": "ip6 daddr {}",
+                "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+              },
+              {
+                "template": "ip6 saddr {}",
+                "match": "fddd:ed18:f05b::1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 53 ip6 daddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 saddr fddd:ed18:f05b::1",
+            "queue_num": 3090,
+            "nft_action": "log prefix \\\"background-hub-cloud#dns-hub-cloud-backward,,QUEUE\\\" group 100 queue num 3090",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": [
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                ],
+                "match": [
+                  "A",
+                  "AAAA"
+                ]
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "api.smartthings.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625be60": {
+            "interaction_name": "background-hub-cloud",
+            "name": "https-hub-cloud",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "api.smartthings.com"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "duration": 1
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp dport {}",
+                "match": 443
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.223",
+            "queue_num": 3090,
+            "nft_action": "log prefix \\\"background-hub-cloud#https-hub-cloud,,QUEUE\\\" group 100 queue num 3090",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                "match": "api.smartthings.com"
+              }
+            ],
+            "counters": {
+              "duration": {
+                "default": 1000000
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625be30": {
+            "interaction_name": "background-hub-cloud",
+            "name": "https-hub-cloud-backward",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "api.smartthings.com"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "duration": 1
+              }
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp sport {}",
+                "match": 443
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.223",
+            "queue_num": 3091,
+            "nft_action": "log prefix \\\"background-hub-cloud#https-hub-cloud-backward,,QUEUE\\\" group 100 queue num 3091",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                "match": "api.smartthings.com"
+              }
+            ],
+            "counters": {
+              "duration": {
+                "default": 1000000
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 3,
+      "max_state": 3,
+      "nfq_id_base": 3100,
+      "nfq_id_offset": 0,
+      "policies": [
+        {
+          "Policy-0x7fdef625bec0": {
+            "interaction_name": "traffic-hub-update-server",
+            "name": "dns-hub-server",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": [
+                    "A",
+                    "AAAA"
+                  ],
+                  "domain-name": "fw-update2.smartthings.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv6": {
+                  "src": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 53
+              },
+              {
+                "template": "ip6 saddr {}",
+                "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+              },
+              {
+                "template": "ip6 daddr {}",
+                "match": "fddd:ed18:f05b::1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 53 ip6 saddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 daddr fddd:ed18:f05b::1",
+            "queue_num": 3100,
+            "nft_action": "log prefix \\\"traffic-hub-update-server#dns-hub-server,,QUEUE\\\" group 100 queue num 3100",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": [
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                ],
+                "match": [
+                  "A",
+                  "AAAA"
+                ]
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "fw-update2.smartthings.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625bfe0": {
+            "interaction_name": "traffic-hub-update-server",
+            "name": "dns-hub-server-backward",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": [
+                    "A",
+                    "AAAA"
+                  ],
+                  "domain-name": "fw-update2.smartthings.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv6": {
+                  "src": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              },
+              {
+                "template": "ip6 daddr {}",
+                "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+              },
+              {
+                "template": "ip6 saddr {}",
+                "match": "fddd:ed18:f05b::1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 53 ip6 daddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 saddr fddd:ed18:f05b::1",
+            "queue_num": 3100,
+            "nft_action": "log prefix \\\"traffic-hub-update-server#dns-hub-server-backward,,QUEUE\\\" group 100 queue num 3100",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": [
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                  "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                ],
+                "match": [
+                  "A",
+                  "AAAA"
+                ]
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "fw-update2.smartthings.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625bf80": {
+            "interaction_name": "traffic-hub-update-server",
+            "name": "https-hub-server",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "fw-update2.smartthings.com"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "duration": 3
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp dport {}",
+                "match": 443
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.223",
+            "queue_num": 3100,
+            "nft_action": "log prefix \\\"traffic-hub-update-server#https-hub-server,,QUEUE\\\" group 100 queue num 3100",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                "match": "fw-update2.smartthings.com"
+              }
+            ],
+            "counters": {
+              "duration": {
+                "default": 3000000
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef625b2f0": {
+            "interaction_name": "traffic-hub-update-server",
+            "name": "https-hub-server-backward",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "fw-update2.smartthings.com"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "duration": 3
+              }
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp sport {}",
+                "match": 443
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.223"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.223",
+            "queue_num": 3100,
+            "nft_action": "log prefix \\\"traffic-hub-update-server#https-hub-server-backward,,QUEUE\\\" group 100 queue num 3100",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                "match": "fw-update2.smartthings.com"
+              }
+            ],
+            "counters": {
+              "duration": {
+                "default": 3000000
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 3100,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fdef625bfb0": {
+            "interaction_name": "open-app-local",
+            "name": "igmp-join-ssdp",
+            "profile_data": {
+              "protocols": {
+                "igmp": {
+                  "version": 3,
+                  "type": "membership report",
+                  "group": "ssdp"
+                },
+                "ipv4": {
+                  "src": "phone",
+                  "dst": "ssdp"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "igmp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": 2
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.222"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "239.255.255.250"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto 2 ip saddr 192.168.1.222 ip daddr 239.255.255.250",
+            "queue_num": 3100,
+            "nft_action": "log prefix \\\"open-app-local#igmp-join-ssdp,,QUEUE\\\" group 100 queue num 3100",
+            "nfq_matches": [
+              {
+                "template": "igmp_message.type == V3_{}",
+                "match": "MEMBERSHIP_REPORT"
+              },
+              {
+                "template": "strcmp(ipv4_net_to_str((igmp_message.body.v3_membership_report.groups)->group_address), \"{}\") == 0",
+                "match": "239.255.255.250"
+              }
+            ],
+            "counters": {},
+            "is_device": false,
+            "other_host": {
+              "protocol": "ipv4",
+              "direction": "src",
+              "address": {
+                "IPv4Network-0x7fdef6268170": {
+                  "network_address": "192.168.1.222",
+                  "netmask": "255.255.255.255",
+                  "_prefixlen": 32,
+                  "hosts": {
+                    "function-0x7fdef622fe20": {}
+                  },
+                  "hostmask": "0.0.0.0",
+                  "broadcast_address": "192.168.1.222"
+                }
+              }
+            },
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fdef6268110": {
+            "interaction_name": "open-app-local",
+            "name": "ssdp-msearch",
+            "profile_data": {
+              "protocols": {
+                "ssdp": {
+                  "method": "M-SEARCH"
+                },
+                "udp": {
+                  "dst-port": 1900
+                },
+                "ipv4": {
+                  "src": "phone",
+                  "dst": "ssdp"
+                }
+              },
+              "stats": {
+                "rate": "15/second burst 10 packets"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "smartthings-hub",
+              "mac": "68:3a:48:13:27:04",
+              "ipv4": "192.168.1.223",
+              "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+              "mud-version": 1,
+              "mud-url": "https://smartthings-hub.com/smartthings-hub",
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "cache-validity": 100,
+              "is-supported": true
+            },
+            "custom_parser": "ssdp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 1900
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.222"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "239.255.255.250"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "15/second burst 10 packets"
+              }
+            },
+            "nft_match": "meta l4proto udp udp dport 1900 ip saddr 192.168.1.222 ip daddr 239.255.255.250 limit rate 15/second burst 10 packets",
+            "queue_num": 3101,
+            "nft_action": "log prefix \\\"open-app-local#ssdp-msearch,,QUEUE\\\" group 100 queue num 3101",
+            "nfq_matches": [
+              {
+                "template": "{}ssdp_message.is_request",
+                "match": ""
+              },
+              {
+                "template": "ssdp_message.method == {}",
+                "match": "SSDP_M_SEARCH"
+              }
+            ],
+            "counters": {},
+            "is_device": false,
+            "other_host": {
+              "protocol": "ipv4",
+              "direction": "src",
+              "address": {
+                "IPv4Network-0x7fdef6268050": {
+                  "network_address": "192.168.1.222",
+                  "netmask": "255.255.255.255",
+                  "_prefixlen": 32,
+                  "hosts": {
+                    "function-0x7fdef622fd80": {}
+                  },
+                  "hostmask": "0.0.0.0",
+                  "broadcast_address": "192.168.1.222"
+                }
+              }
+            },
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        }
+      ]
+    }
+  ],
+  "custom_parsers": [
+    "mdns",
+    "dhcp",
+    "ssdp",
+    "igmp",
+    "dns"
+  ],
+  "nfqueues": [
+    {
+      "NFQueue-0x7fdef6238920": {
+        "name": "single#dns-ipv4",
+        "queue_num": 3000,
+        "policies": [
+          {
+            "interaction_idx": 0,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef6c5a1b0": {
+                "interaction_name": "single",
+                "name": "dns-ipv4",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": [
+                        "A",
+                        "AAAA"
+                      ],
+                      "domain-name": [
+                        "connectivity.smartthings.com",
+                        "api.smartthings.com",
+                        "fw-update2.smartthings.com"
+                      ]
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": false,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.223 ip daddr 192.168.1.1",
+                "queue_num": 3000,
+                "nft_action": "log prefix \\\"single#dns-ipv4,,QUEUE\\\" group 100 queue num 3000",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": [
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                    ],
+                    "match": [
+                      "A",
+                      "AAAA"
+                    ]
+                  },
+                  {
+                    "template": [
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")"
+                    ],
+                    "match": [
+                      "connectivity.smartthings.com",
+                      "api.smartthings.com",
+                      "fw-update2.smartthings.com"
+                    ]
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp dport {}",
+            "match": 53
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef6f58500": {
+        "name": "single#dns-ipv4-backward",
+        "queue_num": 3001,
+        "policies": [
+          {
+            "interaction_idx": 0,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef646f0e0": {
+                "interaction_name": "single",
+                "name": "dns-ipv4-backward",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": [
+                        "A",
+                        "AAAA"
+                      ],
+                      "domain-name": [
+                        "connectivity.smartthings.com",
+                        "api.smartthings.com",
+                        "fw-update2.smartthings.com"
+                      ]
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": false,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.223 ip saddr 192.168.1.1",
+                "queue_num": 3001,
+                "nft_action": "log prefix \\\"single#dns-ipv4-backward,,QUEUE\\\" group 100 queue num 3001",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": [
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                    ],
+                    "match": [
+                      "A",
+                      "AAAA"
+                    ]
+                  },
+                  {
+                    "template": [
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")"
+                    ],
+                    "match": [
+                      "connectivity.smartthings.com",
+                      "api.smartthings.com",
+                      "fw-update2.smartthings.com"
+                    ]
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 53
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef6c598b0": {
+        "name": "single#dns-ipv6",
+        "queue_num": 3010,
+        "policies": [
+          {
+            "interaction_idx": 1,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef6238a70": {
+                "interaction_name": "single",
+                "name": "dns-ipv6",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": [
+                        "A",
+                        "AAAA"
+                      ],
+                      "domain-name": [
+                        "api.smartthings.com",
+                        "fw-update2.smartthings.com"
+                      ]
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv6": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": false,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip6 saddr {}",
+                    "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+                  },
+                  {
+                    "template": "ip6 daddr {}",
+                    "match": "fddd:ed18:f05b::1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 53 ip6 saddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 daddr fddd:ed18:f05b::1",
+                "queue_num": 3010,
+                "nft_action": "log prefix \\\"single#dns-ipv6,,QUEUE\\\" group 100 queue num 3010",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": [
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                    ],
+                    "match": [
+                      "A",
+                      "AAAA"
+                    ]
+                  },
+                  {
+                    "template": [
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")"
+                    ],
+                    "match": [
+                      "api.smartthings.com",
+                      "fw-update2.smartthings.com"
+                    ]
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 9,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625bcb0": {
+                "interaction_name": "background-hub-cloud",
+                "name": "dns-hub-cloud",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": [
+                        "A",
+                        "AAAA"
+                      ],
+                      "domain-name": "api.smartthings.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv6": {
+                      "src": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip6 saddr {}",
+                    "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+                  },
+                  {
+                    "template": "ip6 daddr {}",
+                    "match": "fddd:ed18:f05b::1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 53 ip6 saddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 daddr fddd:ed18:f05b::1",
+                "queue_num": 3090,
+                "nft_action": "log prefix \\\"background-hub-cloud#dns-hub-cloud,,QUEUE\\\" group 100 queue num 3090",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": [
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                    ],
+                    "match": [
+                      "A",
+                      "AAAA"
+                    ]
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "api.smartthings.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 10,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625bec0": {
+                "interaction_name": "traffic-hub-update-server",
+                "name": "dns-hub-server",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": [
+                        "A",
+                        "AAAA"
+                      ],
+                      "domain-name": "fw-update2.smartthings.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv6": {
+                      "src": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip6 saddr {}",
+                    "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+                  },
+                  {
+                    "template": "ip6 daddr {}",
+                    "match": "fddd:ed18:f05b::1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 53 ip6 saddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 daddr fddd:ed18:f05b::1",
+                "queue_num": 3100,
+                "nft_action": "log prefix \\\"traffic-hub-update-server#dns-hub-server,,QUEUE\\\" group 100 queue num 3100",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": [
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                    ],
+                    "match": [
+                      "A",
+                      "AAAA"
+                    ]
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "fw-update2.smartthings.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp dport {}",
+            "match": 53
+          },
+          {
+            "template": "ip6 saddr {}",
+            "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+          },
+          {
+            "template": "ip6 daddr {}",
+            "match": "fddd:ed18:f05b::1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef625a360": {
+        "name": "single#dns-ipv6-backward",
+        "queue_num": 3011,
+        "policies": [
+          {
+            "interaction_idx": 1,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef6ce2ab0": {
+                "interaction_name": "single",
+                "name": "dns-ipv6-backward",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": [
+                        "A",
+                        "AAAA"
+                      ],
+                      "domain-name": [
+                        "api.smartthings.com",
+                        "fw-update2.smartthings.com"
+                      ]
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv6": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": false,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip6 daddr {}",
+                    "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+                  },
+                  {
+                    "template": "ip6 saddr {}",
+                    "match": "fddd:ed18:f05b::1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 53 ip6 daddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 saddr fddd:ed18:f05b::1",
+                "queue_num": 3011,
+                "nft_action": "log prefix \\\"single#dns-ipv6-backward,,QUEUE\\\" group 100 queue num 3011",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": [
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                    ],
+                    "match": [
+                      "A",
+                      "AAAA"
+                    ]
+                  },
+                  {
+                    "template": [
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                      "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")"
+                    ],
+                    "match": [
+                      "api.smartthings.com",
+                      "fw-update2.smartthings.com"
+                    ]
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 9,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef620f8c0": {
+                "interaction_name": "background-hub-cloud",
+                "name": "dns-hub-cloud-backward",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": [
+                        "A",
+                        "AAAA"
+                      ],
+                      "domain-name": "api.smartthings.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv6": {
+                      "src": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip6 daddr {}",
+                    "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+                  },
+                  {
+                    "template": "ip6 saddr {}",
+                    "match": "fddd:ed18:f05b::1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 53 ip6 daddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 saddr fddd:ed18:f05b::1",
+                "queue_num": 3090,
+                "nft_action": "log prefix \\\"background-hub-cloud#dns-hub-cloud-backward,,QUEUE\\\" group 100 queue num 3090",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": [
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                    ],
+                    "match": [
+                      "A",
+                      "AAAA"
+                    ]
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "api.smartthings.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 10,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef625bfe0": {
+                "interaction_name": "traffic-hub-update-server",
+                "name": "dns-hub-server-backward",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": [
+                        "A",
+                        "AAAA"
+                      ],
+                      "domain-name": "fw-update2.smartthings.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv6": {
+                      "src": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip6 daddr {}",
+                    "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+                  },
+                  {
+                    "template": "ip6 saddr {}",
+                    "match": "fddd:ed18:f05b::1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 53 ip6 daddr fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf ip6 saddr fddd:ed18:f05b::1",
+                "queue_num": 3100,
+                "nft_action": "log prefix \\\"traffic-hub-update-server#dns-hub-server-backward,,QUEUE\\\" group 100 queue num 3100",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": [
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                      "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )"
+                    ],
+                    "match": [
+                      "A",
+                      "AAAA"
+                    ]
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "fw-update2.smartthings.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 53
+          },
+          {
+            "template": "ip6 daddr {}",
+            "match": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf"
+          },
+          {
+            "template": "ip6 saddr {}",
+            "match": "fddd:ed18:f05b::1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef625a7b0": {
+        "name": "single#mdns-hub-hue",
+        "queue_num": 3020,
+        "policies": [
+          {
+            "interaction_idx": 2,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625a330": {
+                "interaction_name": "single",
+                "name": "mdns-hub-hue",
+                "profile_data": {
+                  "protocols": {
+                    "mdns": {
+                      "qtype": "PTR",
+                      "domain-name": "_hue._tcp.local"
+                    },
+                    "udp": {
+                      "src-port": 5353,
+                      "dst-port": 5353
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "mdns"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": false,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "mdns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 5353
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 5353
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "224.0.0.251"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 5353 udp dport 5353 ip saddr 192.168.1.223 ip daddr 224.0.0.251",
+                "queue_num": 3020,
+                "nft_action": "log prefix \\\"single#mdns-hub-hue,,QUEUE\\\" group 100 queue num 3020",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "PTR"
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "_hue._tcp.local"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 5353
+          },
+          {
+            "template": "udp dport {}",
+            "match": 5353
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "224.0.0.251"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef625ac00": {
+        "name": "single#ssdp-search-hub",
+        "queue_num": 3030,
+        "policies": [
+          {
+            "interaction_idx": 3,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625ac30": {
+                "interaction_name": "single",
+                "name": "ssdp-search-hub",
+                "profile_data": {
+                  "protocols": {
+                    "ssdp": {
+                      "type": "M-SEARCH"
+                    },
+                    "udp": {
+                      "dst-port": 1900
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "ssdp"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": false,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "ssdp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 1900
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "239.255.255.250"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 1900 ip saddr 192.168.1.223 ip daddr 239.255.255.250",
+                "queue_num": 3030,
+                "nft_action": "log prefix \\\"single#ssdp-search-hub,,QUEUE\\\" group 100 queue num 3030",
+                "nfq_matches": [
+                  {
+                    "template": "{}ssdp_message.is_request",
+                    "match": ""
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp dport {}",
+            "match": 1900
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "239.255.255.250"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef6d19640": {
+        "name": "single#background-https-hub-server",
+        "queue_num": 3040,
+        "policies": [
+          {
+            "interaction_idx": 4,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625aed0": {
+                "interaction_name": "single",
+                "name": "background-https-hub-server",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "54.217.91.49"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": false,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp dport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "54.217.91.49"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.223 ip daddr 54.217.91.49",
+                "queue_num": 3040,
+                "nft_action": "log prefix \\\"single#background-https-hub-server,,QUEUE\\\" group 100 queue num 3040",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "tcp"
+          },
+          {
+            "template": "tcp dport {}",
+            "match": 443
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "54.217.91.49"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef64e15b0": {
+        "name": "single#background-https-hub-server-backward",
+        "queue_num": 3041,
+        "policies": [
+          {
+            "interaction_idx": 4,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef6ce03b0": {
+                "interaction_name": "single",
+                "name": "background-https-hub-server-backward",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "54.217.91.49"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": false,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp sport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "54.217.91.49"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.223 ip saddr 54.217.91.49",
+                "queue_num": 3041,
+                "nft_action": "log prefix \\\"single#background-https-hub-server-backward,,QUEUE\\\" group 100 queue num 3041",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "tcp"
+          },
+          {
+            "template": "tcp sport {}",
+            "match": 443
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "54.217.91.49"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef625b140": {
+        "name": "get-ip-address#dhcp-discover",
+        "queue_num": 3050,
+        "policies": [
+          {
+            "interaction_idx": 5,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625af60": {
+                "interaction_name": "get-ip-address",
+                "name": "dhcp-discover",
+                "profile_data": {
+                  "protocols": {
+                    "dhcp": {
+                      "type": "discover",
+                      "client-mac": "self"
+                    },
+                    "udp": {
+                      "src-port": 68,
+                      "dst-port": 67
+                    },
+                    "ipv4": {
+                      "src": "0.0.0.0",
+                      "dst": "broadcast"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dhcp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 68
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 67
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "0.0.0.0"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "255.255.255.255"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 68 udp dport 67 ip saddr 0.0.0.0 ip daddr 255.255.255.255",
+                "queue_num": 3050,
+                "nft_action": "log prefix \\\"get-ip-address#dhcp-discover,,QUEUE\\\" group 100 queue num 3050",
+                "nfq_matches": [
+                  {
+                    "template": "dhcp_message.options.message_type == {}",
+                    "match": "DHCP_DISCOVER"
+                  },
+                  {
+                    "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                    "match": "68:3a:48:13:27:04"
+                  }
+                ],
+                "counters": {},
+                "is_device": false,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 5,
+            "policy_idx": 2,
+            "state": 2,
+            "policy": {
+              "Policy-0x7fdef625b770": {
+                "interaction_name": "get-ip-address",
+                "name": "dhcp-request",
+                "profile_data": {
+                  "protocols": {
+                    "dhcp": {
+                      "type": "request",
+                      "client-mac": "self"
+                    },
+                    "udp": {
+                      "src-port": 68,
+                      "dst-port": 67
+                    },
+                    "ipv4": {
+                      "src": "0.0.0.0",
+                      "dst": "broadcast"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dhcp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 68
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 67
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "0.0.0.0"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "255.255.255.255"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 68 udp dport 67 ip saddr 0.0.0.0 ip daddr 255.255.255.255",
+                "queue_num": 3052,
+                "nft_action": "log prefix \\\"get-ip-address#dhcp-request,,QUEUE\\\" group 100 queue num 3052",
+                "nfq_matches": [
+                  {
+                    "template": "dhcp_message.options.message_type == {}",
+                    "match": "DHCP_REQUEST"
+                  },
+                  {
+                    "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                    "match": "68:3a:48:13:27:04"
+                  }
+                ],
+                "counters": {},
+                "is_device": false,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 68
+          },
+          {
+            "template": "udp dport {}",
+            "match": 67
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "0.0.0.0"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "255.255.255.255"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef625b110": {
+        "name": "get-ip-address#dhcp-offer",
+        "queue_num": 3051,
+        "policies": [
+          {
+            "interaction_idx": 5,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef625b4d0": {
+                "interaction_name": "get-ip-address",
+                "name": "dhcp-offer",
+                "profile_data": {
+                  "protocols": {
+                    "dhcp": {
+                      "type": "offer",
+                      "client-mac": "self"
+                    },
+                    "udp": {
+                      "src-port": 67,
+                      "dst-port": 68
+                    },
+                    "ipv4": {
+                      "src": "gateway",
+                      "dst": "self"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dhcp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 67
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 68
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 67 udp dport 68 ip saddr 192.168.1.1 ip daddr 192.168.1.223",
+                "queue_num": 3051,
+                "nft_action": "log prefix \\\"get-ip-address#dhcp-offer,,QUEUE\\\" group 100 queue num 3051",
+                "nfq_matches": [
+                  {
+                    "template": "dhcp_message.options.message_type == {}",
+                    "match": "DHCP_OFFER"
+                  },
+                  {
+                    "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                    "match": "68:3a:48:13:27:04"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 5,
+            "policy_idx": 3,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fdef6aebe00": {
+                "interaction_name": "get-ip-address",
+                "name": "dhcp-ack",
+                "profile_data": {
+                  "protocols": {
+                    "dhcp": {
+                      "type": "ack",
+                      "client-mac": "self"
+                    },
+                    "udp": {
+                      "src-port": 67,
+                      "dst-port": 68
+                    },
+                    "ipv4": {
+                      "src": "gateway",
+                      "dst": "self"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "dhcp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 67
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 68
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 67 udp dport 68 ip saddr 192.168.1.1 ip daddr 192.168.1.223",
+                "queue_num": 3052,
+                "nft_action": "log prefix \\\"get-ip-address#dhcp-ack,,QUEUE\\\" group 100 queue num 3052",
+                "nfq_matches": [
+                  {
+                    "template": "dhcp_message.options.message_type == {}",
+                    "match": "DHCP_ACK"
+                  },
+                  {
+                    "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                    "match": "68:3a:48:13:27:04"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 67
+          },
+          {
+            "template": "udp dport {}",
+            "match": 68
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.1"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.223"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef6407a10": {
+        "name": "arp-from-gateway#arp-request-gateway-hub",
+        "queue_num": 3060,
+        "policies": [
+          {
+            "interaction_idx": 6,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625b6b0": {
+                "interaction_name": "arp-from-gateway",
+                "name": "arp-request-gateway-hub",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "gateway",
+                      "tha": "default",
+                      "spa": "gateway",
+                      "tpa": "self"
+                    }
+                  },
+                  "stats": {
+                    "rate": "1/second"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "c0:56:27:73:46:0b"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.1"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "1/second"
+                  }
+                },
+                "nft_match": "arp operation request arp saddr ether c0:56:27:73:46:0b arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.1 arp daddr ip 192.168.1.223 limit rate 1/second",
+                "queue_num": 3060,
+                "nft_action": "log prefix \\\"arp-from-gateway#arp-request-gateway-hub,,QUEUE\\\" group 100 queue num 3060",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "c0:56:27:73:46:0b"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.1"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.223"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "1/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fdef625b680": {
+        "name": "arp-from-gateway#arp-reply-hub-gateway",
+        "queue_num": 3061,
+        "policies": [
+          {
+            "interaction_idx": 6,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef625b290": {
+                "interaction_name": "arp-from-gateway",
+                "name": "arp-reply-hub-gateway",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "sha": "self",
+                      "tha": "gateway",
+                      "spa": "self",
+                      "tpa": "gateway"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "68:3a:48:13:27:04"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "c0:56:27:73:46:0b"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp saddr ether 68:3a:48:13:27:04 arp daddr ether c0:56:27:73:46:0b arp saddr ip 192.168.1.223 arp daddr ip 192.168.1.1",
+                "queue_num": 3061,
+                "nft_action": "log prefix \\\"arp-from-gateway#arp-reply-hub-gateway,,QUEUE\\\" group 100 queue num 3061",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "68:3a:48:13:27:04"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "c0:56:27:73:46:0b"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef625b5c0": {
+        "name": "arp-from-phone#arp-request-phone-hub",
+        "queue_num": 3070,
+        "policies": [
+          {
+            "interaction_idx": 7,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625aff0": {
+                "interaction_name": "arp-from-phone",
+                "name": "arp-request-phone-hub",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "phone",
+                      "tha": "default",
+                      "spa": "phone",
+                      "tpa": "self"
+                    }
+                  },
+                  "stats": {
+                    "rate": "1/second"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "3c:cd:5d:a2:a9:d7"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.222"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "1/second"
+                  }
+                },
+                "nft_match": "arp operation request arp saddr ether 3c:cd:5d:a2:a9:d7 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.222 arp daddr ip 192.168.1.223 limit rate 1/second",
+                "queue_num": 3070,
+                "nft_action": "log prefix \\\"arp-from-phone#arp-request-phone-hub,,QUEUE\\\" group 100 queue num 3070",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "3c:cd:5d:a2:a9:d7"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.222"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.223"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "1/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fdef625bb90": {
+        "name": "arp-from-phone#arp-reply-hub-phone",
+        "queue_num": 3071,
+        "policies": [
+          {
+            "interaction_idx": 7,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef625bb30": {
+                "interaction_name": "arp-from-phone",
+                "name": "arp-reply-hub-phone",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "sha": "self",
+                      "tha": "phone",
+                      "spa": "self",
+                      "tpa": "phone"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "68:3a:48:13:27:04"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "3c:cd:5d:a2:a9:d7"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.222"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp saddr ether 68:3a:48:13:27:04 arp daddr ether 3c:cd:5d:a2:a9:d7 arp saddr ip 192.168.1.223 arp daddr ip 192.168.1.222",
+                "queue_num": 3071,
+                "nft_action": "log prefix \\\"arp-from-phone#arp-reply-hub-phone,,QUEUE\\\" group 100 queue num 3071",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "68:3a:48:13:27:04"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "3c:cd:5d:a2:a9:d7"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.222"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef625b980": {
+        "name": "arp-local#arp-request-hub-local",
+        "queue_num": 3080,
+        "policies": [
+          {
+            "interaction_idx": 8,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625bf50": {
+                "interaction_name": "arp-local",
+                "name": "arp-request-hub-local",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "self",
+                      "tha": "default",
+                      "spa": "self",
+                      "tpa": "local"
+                    }
+                  },
+                  "stats": {
+                    "rate": "1/second"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "68:3a:48:13:27:04"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.223"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.0/24"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "1/second"
+                  }
+                },
+                "nft_match": "arp operation request arp saddr ether 68:3a:48:13:27:04 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.223 arp daddr ip 192.168.1.0/24 limit rate 1/second",
+                "queue_num": 3080,
+                "nft_action": "log prefix \\\"arp-local#arp-request-hub-local,,QUEUE\\\" group 100 queue num 3080",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "68:3a:48:13:27:04"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.223"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.0/24"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "1/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fdef625bc80": {
+        "name": "arp-local#arp-reply-local-hub",
+        "queue_num": 3081,
+        "policies": [
+          {
+            "interaction_idx": 8,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef625bbc0": {
+                "interaction_name": "arp-local",
+                "name": "arp-reply-local-hub",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "tha": "self",
+                      "spa": "local",
+                      "tpa": "self"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "68:3a:48:13:27:04"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.0/24"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp daddr ether 68:3a:48:13:27:04 arp saddr ip 192.168.1.0/24 arp daddr ip 192.168.1.223",
+                "queue_num": 3081,
+                "nft_action": "log prefix \\\"arp-local#arp-reply-local-hub,,QUEUE\\\" group 100 queue num 3081",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "68:3a:48:13:27:04"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.0/24"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.223"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef620eba0": {
+        "name": "background-hub-cloud#https-hub-cloud",
+        "queue_num": 3090,
+        "policies": [
+          {
+            "interaction_idx": 9,
+            "policy_idx": 2,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fdef625be60": {
+                "interaction_name": "background-hub-cloud",
+                "name": "https-hub-cloud",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "api.smartthings.com"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "duration": 1
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp dport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.223",
+                "queue_num": 3090,
+                "nft_action": "log prefix \\\"background-hub-cloud#https-hub-cloud,,QUEUE\\\" group 100 queue num 3090",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                    "match": "api.smartthings.com"
+                  }
+                ],
+                "counters": {
+                  "duration": {
+                    "default": 1000000
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {
+              "duration": 2
+            }
+          },
+          {
+            "interaction_idx": 10,
+            "policy_idx": 2,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fdef625bf80": {
+                "interaction_name": "traffic-hub-update-server",
+                "name": "https-hub-server",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "fw-update2.smartthings.com"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "duration": 3
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp dport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.223",
+                "queue_num": 3100,
+                "nft_action": "log prefix \\\"traffic-hub-update-server#https-hub-server,,QUEUE\\\" group 100 queue num 3100",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                    "match": "fw-update2.smartthings.com"
+                  }
+                ],
+                "counters": {
+                  "duration": {
+                    "default": 3000000
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {
+              "duration": 2
+            }
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "tcp"
+          },
+          {
+            "template": "tcp dport {}",
+            "match": 443
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.223"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef625baa0": {
+        "name": "background-hub-cloud#https-hub-cloud-backward",
+        "queue_num": 3091,
+        "policies": [
+          {
+            "interaction_idx": 9,
+            "policy_idx": 3,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fdef625be30": {
+                "interaction_name": "background-hub-cloud",
+                "name": "https-hub-cloud-backward",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "api.smartthings.com"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "duration": 1
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp sport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.223",
+                "queue_num": 3091,
+                "nft_action": "log prefix \\\"background-hub-cloud#https-hub-cloud-backward,,QUEUE\\\" group 100 queue num 3091",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                    "match": "api.smartthings.com"
+                  }
+                ],
+                "counters": {
+                  "duration": {
+                    "default": 1000000
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {
+              "duration": 2
+            }
+          },
+          {
+            "interaction_idx": 10,
+            "policy_idx": 3,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fdef625b2f0": {
+                "interaction_name": "traffic-hub-update-server",
+                "name": "https-hub-server-backward",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "fw-update2.smartthings.com"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "duration": 3
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp sport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.223"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.223",
+                "queue_num": 3100,
+                "nft_action": "log prefix \\\"traffic-hub-update-server#https-hub-server-backward,,QUEUE\\\" group 100 queue num 3100",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                    "match": "fw-update2.smartthings.com"
+                  }
+                ],
+                "counters": {
+                  "duration": {
+                    "default": 3000000
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {
+              "duration": 2
+            }
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "tcp"
+          },
+          {
+            "template": "tcp sport {}",
+            "match": 443
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.223"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef6268a10": {
+        "name": "open-app-local#igmp-join-ssdp",
+        "queue_num": 3100,
+        "policies": [
+          {
+            "interaction_idx": 11,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fdef625bfb0": {
+                "interaction_name": "open-app-local",
+                "name": "igmp-join-ssdp",
+                "profile_data": {
+                  "protocols": {
+                    "igmp": {
+                      "version": 3,
+                      "type": "membership report",
+                      "group": "ssdp"
+                    },
+                    "ipv4": {
+                      "src": "phone",
+                      "dst": "ssdp"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "igmp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": 2
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.222"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "239.255.255.250"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto 2 ip saddr 192.168.1.222 ip daddr 239.255.255.250",
+                "queue_num": 3100,
+                "nft_action": "log prefix \\\"open-app-local#igmp-join-ssdp,,QUEUE\\\" group 100 queue num 3100",
+                "nfq_matches": [
+                  {
+                    "template": "igmp_message.type == V3_{}",
+                    "match": "MEMBERSHIP_REPORT"
+                  },
+                  {
+                    "template": "strcmp(ipv4_net_to_str((igmp_message.body.v3_membership_report.groups)->group_address), \"{}\") == 0",
+                    "match": "239.255.255.250"
+                  }
+                ],
+                "counters": {},
+                "is_device": false,
+                "other_host": {
+                  "protocol": "ipv4",
+                  "direction": "src",
+                  "address": {
+                    "IPv4Network-0x7fdef6268170": {
+                      "network_address": "192.168.1.222",
+                      "netmask": "255.255.255.255",
+                      "_prefixlen": 32,
+                      "hosts": {
+                        "function-0x7fdef622fe20": {}
+                      },
+                      "hostmask": "0.0.0.0",
+                      "broadcast_address": "192.168.1.222"
+                    }
+                  }
+                },
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": 2
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.222"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "239.255.255.250"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fdef6269040": {
+        "name": "open-app-local#ssdp-msearch",
+        "queue_num": 3101,
+        "policies": [
+          {
+            "interaction_idx": 11,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fdef6268110": {
+                "interaction_name": "open-app-local",
+                "name": "ssdp-msearch",
+                "profile_data": {
+                  "protocols": {
+                    "ssdp": {
+                      "method": "M-SEARCH"
+                    },
+                    "udp": {
+                      "dst-port": 1900
+                    },
+                    "ipv4": {
+                      "src": "phone",
+                      "dst": "ssdp"
+                    }
+                  },
+                  "stats": {
+                    "rate": "15/second burst 10 packets"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "smartthings-hub",
+                  "mac": "68:3a:48:13:27:04",
+                  "ipv4": "192.168.1.223",
+                  "ipv6": "fddd:ed18:f05b:0:d8a3:adc0:f68f:e5cf",
+                  "mud-version": 1,
+                  "mud-url": "https://smartthings-hub.com/smartthings-hub",
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "cache-validity": 100,
+                  "is-supported": true
+                },
+                "custom_parser": "ssdp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 1900
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.222"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "239.255.255.250"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "15/second burst 10 packets"
+                  }
+                },
+                "nft_match": "meta l4proto udp udp dport 1900 ip saddr 192.168.1.222 ip daddr 239.255.255.250 limit rate 15/second burst 10 packets",
+                "queue_num": 3101,
+                "nft_action": "log prefix \\\"open-app-local#ssdp-msearch,,QUEUE\\\" group 100 queue num 3101",
+                "nfq_matches": [
+                  {
+                    "template": "{}ssdp_message.is_request",
+                    "match": ""
+                  },
+                  {
+                    "template": "ssdp_message.method == {}",
+                    "match": "SSDP_M_SEARCH"
+                  }
+                ],
+                "counters": {},
+                "is_device": false,
+                "other_host": {
+                  "protocol": "ipv4",
+                  "direction": "src",
+                  "address": {
+                    "IPv4Network-0x7fdef6268050": {
+                      "network_address": "192.168.1.222",
+                      "netmask": "255.255.255.255",
+                      "_prefixlen": 32,
+                      "hosts": {
+                        "function-0x7fdef622fd80": {}
+                      },
+                      "hostmask": "0.0.0.0",
+                      "broadcast_address": "192.168.1.222"
+                    }
+                  }
+                },
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp dport {}",
+            "match": 1900
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.222"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "239.255.255.250"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "15/second burst 10 packets"
+          }
+        }
+      }
+    }
+  ],
+  "other_hosts": {
+    "arp": {
+      "src": {
+        "match": "arp saddr ip",
+        "addrs": []
+      },
+      "dst": {
+        "match": "arp daddr ip",
+        "addrs": []
+      }
+    },
+    "ipv4": {
+      "src": {
+        "match": "ip saddr",
+        "addrs": [
+          "192.168.1.222/32"
+        ]
+      },
+      "dst": {
+        "match": "ip daddr",
+        "addrs": []
+      }
+    },
+    "ipv6": {
+      "src": {
+        "match": "ip6 saddr",
+        "addrs": []
+      },
+      "dst": {
+        "match": "ip6 daddr",
+        "addrs": []
+      }
+    }
+  }
+}

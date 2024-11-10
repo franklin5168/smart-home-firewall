@@ -339,6 +339,42 @@ if __name__ == "__main__":
         }
         main = env.get_template("main.c.j2").render(main_dict)
 
+        ###############################################
+        ###############################################
+        ##############################################
+        # Add this new code to save global_accs as JSON
+        import json
+        from ipaddress import IPv4Address, IPv6Address
+
+        def object_to_dict(obj):
+            if isinstance(obj, dict):
+                return {k: object_to_dict(v) for k, v in obj.items()}
+            elif hasattr(obj, '__dict__'):
+                return {f"{obj.__class__.__name__}-{hex(id(obj))}": object_to_dict(obj.__dict__)}
+            elif isinstance(obj, list):
+                return [object_to_dict(item) for item in obj]
+            elif isinstance(obj, set):
+                return list(obj)  # Convert set to list
+            elif isinstance(obj, (IPv4Address, IPv6Address)):
+                return str(obj)  # Convert IP addresses to strings
+            else:
+                return obj
+
+        global_accs_json = object_to_dict(global_accs)
+
+        # Get the device name from the global_accs structure
+        device_name = device["name"]
+
+        # Create the filename with the device name
+        filename = f'global_accs_{device_name}.json'
+
+        with open(filename, 'w') as f:
+            json.dump(global_accs_json, f, indent=2)
+
+        ###############################################
+        ###############################################
+        ##############################################
+
         # Write policy C file
         with open(f"{device_path}/nfqueues.c", "w+") as fw:
             fw.write(header)
@@ -361,3 +397,5 @@ if __name__ == "__main__":
         env.get_template("CMakeLists.txt.j2").stream(cmake_dict).dump(f"{device_path}/CMakeLists.txt")
 
     print(f"Done translating {args.profile}.")
+
+

@@ -1,0 +1,5889 @@
+{
+  "interaction_idx": 13,
+  "interactions": [
+    {
+      "policy_idx": 0,
+      "max_state": 0,
+      "nfq_id_base": 4000,
+      "nfq_id_offset": 1,
+      "policies": [
+        {
+          "Policy-0x7fefd446c590": {
+            "interaction_name": "single",
+            "name": "udp-plug-phone",
+            "profile_data": {
+              "protocols": {
+                "udp": {
+                  "src-port": 9999
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "phone"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": false,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 9999
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.222"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 9999 ip saddr 192.168.1.135 ip daddr 192.168.1.222",
+            "queue_num": -1,
+            "nft_action": "log prefix \\\"single#udp-plug-phone,,ACCEPT\\\" group 100 accept",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": -1,
+      "nfq_id_base": 4000,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3c6a5d0": {
+            "interaction_name": "single",
+            "name": "tcp-device-plug-lan",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 9999
+                },
+                "ipv4": {
+                  "src": [
+                    "phone",
+                    "192.168.1.150"
+                  ],
+                  "dst": "self"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "rate": "20/second"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": false,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp dport {}",
+                "match": 9999
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "{ 192.168.1.222, 192.168.1.150 }"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "20/second"
+              }
+            },
+            "nft_match": "meta l4proto tcp tcp dport 9999 ip saddr { 192.168.1.222, 192.168.1.150 } ip daddr 192.168.1.135 limit rate 20/second",
+            "queue_num": -1,
+            "nft_action": "log prefix \\\"single#tcp-device-plug-lan,,ACCEPT\\\" group 100 accept",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd4542030": {
+            "interaction_name": "single",
+            "name": "tcp-device-plug-lan-backward",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 9999
+                },
+                "ipv4": {
+                  "src": [
+                    "phone",
+                    "192.168.1.150"
+                  ],
+                  "dst": "self"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "rate": "20/second"
+              }
+            },
+            "is_backward": true,
+            "in_interaction": false,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp sport {}",
+                "match": 9999
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "{ 192.168.1.222, 192.168.1.150 }"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "20/second"
+              }
+            },
+            "nft_match": "meta l4proto tcp tcp sport 9999 ip daddr { 192.168.1.222, 192.168.1.150 } ip saddr 192.168.1.135 limit rate 20/second",
+            "queue_num": -1,
+            "nft_action": "log prefix \\\"single#tcp-device-plug-lan-backward,,ACCEPT\\\" group 100 accept",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 3,
+      "max_state": 3,
+      "nfq_id_base": 4000,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3c4f710": {
+            "interaction_name": "dhcp-boot",
+            "name": "dhcp-discover",
+            "profile_data": {
+              "protocols": {
+                "dhcp": {
+                  "type": "discover",
+                  "client-mac": "self"
+                },
+                "udp": {
+                  "src-port": 68,
+                  "dst-port": 67
+                },
+                "ipv4": {
+                  "src": "0.0.0.0",
+                  "dst": "broadcast"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dhcp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 68
+              },
+              {
+                "template": "udp dport {}",
+                "match": 67
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "0.0.0.0"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "255.255.255.255"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 68 udp dport 67 ip saddr 0.0.0.0 ip daddr 255.255.255.255",
+            "queue_num": 4000,
+            "nft_action": "log prefix \\\"dhcp-boot#dhcp-discover,,QUEUE\\\" group 100 queue num 4000",
+            "nfq_matches": [
+              {
+                "template": "dhcp_message.options.message_type == {}",
+                "match": "DHCP_DISCOVER"
+              },
+              {
+                "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                "match": "50:c7:bf:ed:0a:54"
+              }
+            ],
+            "counters": {},
+            "is_device": false,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd45692b0": {
+            "interaction_name": "dhcp-boot",
+            "name": "dhcp-offer",
+            "profile_data": {
+              "protocols": {
+                "dhcp": {
+                  "type": "offer",
+                  "client-mac": "self"
+                },
+                "udp": {
+                  "src-port": 67,
+                  "dst-port": 68
+                },
+                "ipv4": {
+                  "src": "gateway",
+                  "dst": "self"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dhcp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 67
+              },
+              {
+                "template": "udp dport {}",
+                "match": 68
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 67 udp dport 68 ip saddr 192.168.1.1 ip daddr 192.168.1.135",
+            "queue_num": 4001,
+            "nft_action": "log prefix \\\"dhcp-boot#dhcp-offer,,QUEUE\\\" group 100 queue num 4001",
+            "nfq_matches": [
+              {
+                "template": "dhcp_message.options.message_type == {}",
+                "match": "DHCP_OFFER"
+              },
+              {
+                "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                "match": "50:c7:bf:ed:0a:54"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd444ab40": {
+            "interaction_name": "dhcp-boot",
+            "name": "dhcp-request",
+            "profile_data": {
+              "protocols": {
+                "dhcp": {
+                  "type": "request",
+                  "client-mac": "self"
+                },
+                "udp": {
+                  "src-port": 68,
+                  "dst-port": 67
+                },
+                "ipv4": {
+                  "src": "0.0.0.0",
+                  "dst": "broadcast"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dhcp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 68
+              },
+              {
+                "template": "udp dport {}",
+                "match": 67
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "0.0.0.0"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "255.255.255.255"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 68 udp dport 67 ip saddr 0.0.0.0 ip daddr 255.255.255.255",
+            "queue_num": 4002,
+            "nft_action": "log prefix \\\"dhcp-boot#dhcp-request,,QUEUE\\\" group 100 queue num 4002",
+            "nfq_matches": [
+              {
+                "template": "dhcp_message.options.message_type == {}",
+                "match": "DHCP_REQUEST"
+              },
+              {
+                "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                "match": "50:c7:bf:ed:0a:54"
+              }
+            ],
+            "counters": {},
+            "is_device": false,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1ed80": {
+            "interaction_name": "dhcp-boot",
+            "name": "dhcp-ack",
+            "profile_data": {
+              "protocols": {
+                "dhcp": {
+                  "type": "ack",
+                  "client-mac": "self"
+                },
+                "udp": {
+                  "src-port": 67,
+                  "dst-port": 68
+                },
+                "ipv4": {
+                  "src": "gateway",
+                  "dst": "self"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dhcp",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 67
+              },
+              {
+                "template": "udp dport {}",
+                "match": 68
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 67 udp dport 68 ip saddr 192.168.1.1 ip daddr 192.168.1.135",
+            "queue_num": 4002,
+            "nft_action": "log prefix \\\"dhcp-boot#dhcp-ack,,QUEUE\\\" group 100 queue num 4002",
+            "nfq_matches": [
+              {
+                "template": "dhcp_message.options.message_type == {}",
+                "match": "DHCP_ACK"
+              },
+              {
+                "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                "match": "50:c7:bf:ed:0a:54"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 4010,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1ee40": {
+            "interaction_name": "arp-plug-gateway",
+            "name": "arp-request",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "self",
+                  "tha": "default",
+                  "spa": "self",
+                  "tpa": "gateway"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation request arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.1",
+            "queue_num": 4010,
+            "nft_action": "log prefix \\\"arp-plug-gateway#arp-request,,QUEUE\\\" group 100 queue num 4010",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1edb0": {
+            "interaction_name": "arp-plug-gateway",
+            "name": "arp-reply",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "sha": "gateway",
+                  "tha": "self",
+                  "spa": "gateway",
+                  "tpa": "self"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "c0:56:27:73:46:0b"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.1"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp saddr ether c0:56:27:73:46:0b arp daddr ether 50:c7:bf:ed:0a:54 arp saddr ip 192.168.1.1 arp daddr ip 192.168.1.135",
+            "queue_num": 4011,
+            "nft_action": "log prefix \\\"arp-plug-gateway#arp-reply,,QUEUE\\\" group 100 queue num 4011",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 4020,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1f1d0": {
+            "interaction_name": "arp-gateway-plug",
+            "name": "arp-request",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "gateway",
+                  "tha": "default",
+                  "spa": "gateway",
+                  "tpa": "self"
+                }
+              },
+              "stats": {
+                "rate": "1/second"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "c0:56:27:73:46:0b"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.1"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "1/second"
+              }
+            },
+            "nft_match": "arp operation request arp saddr ether c0:56:27:73:46:0b arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.1 arp daddr ip 192.168.1.135 limit rate 1/second",
+            "queue_num": 4020,
+            "nft_action": "log prefix \\\"arp-gateway-plug#arp-request,,QUEUE\\\" group 100 queue num 4020",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1f050": {
+            "interaction_name": "arp-gateway-plug",
+            "name": "arp-reply",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "sha": "self",
+                  "tha": "gateway",
+                  "spa": "self",
+                  "tpa": "gateway"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "c0:56:27:73:46:0b"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether c0:56:27:73:46:0b arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.1",
+            "queue_num": 4021,
+            "nft_action": "log prefix \\\"arp-gateway-plug#arp-reply,,QUEUE\\\" group 100 queue num 4021",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 3,
+      "max_state": 2,
+      "nfq_id_base": 4030,
+      "nfq_id_offset": 4,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1f1a0": {
+            "interaction_name": "dns-ntp-boot",
+            "name": "dns-query-plug-ntp",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": "A",
+                  "domain-name": [
+                    "$.pool.ntp.org",
+                    "$.time.edu.cn",
+                    "$.nist.gov"
+                  ]
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 53
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.135 ip daddr 192.168.1.1",
+            "queue_num": 4030,
+            "nft_action": "log prefix \\\"dns-ntp-boot#dns-query-plug-ntp,,QUEUE\\\" group 100 queue num 4030",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "A"
+              },
+              {
+                "template": [
+                  "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 13)",
+                  "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 12)",
+                  "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 9)"
+                ],
+                "match": [
+                  ".pool.ntp.org",
+                  ".time.edu.cn",
+                  ".nist.gov"
+                ]
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1f320": {
+            "interaction_name": "dns-ntp-boot",
+            "name": "dns-query-plug-ntp-backward",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": "A",
+                  "domain-name": [
+                    "$.pool.ntp.org",
+                    "$.time.edu.cn",
+                    "$.nist.gov"
+                  ]
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.135 ip saddr 192.168.1.1",
+            "queue_num": 4031,
+            "nft_action": "log prefix \\\"dns-ntp-boot#dns-query-plug-ntp-backward,,QUEUE\\\" group 100 queue num 4031",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "A"
+              },
+              {
+                "template": [
+                  "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 13)",
+                  "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 12)",
+                  "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 9)"
+                ],
+                "match": [
+                  ".pool.ntp.org",
+                  ".time.edu.cn",
+                  ".nist.gov"
+                ]
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1f6b0": {
+            "interaction_name": "dns-ntp-boot",
+            "name": "ntp-plug-server",
+            "profile_data": {
+              "protocols": {
+                "udp": {
+                  "dst-port": 123
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "external"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "rate": "2/minute"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 123
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "!= 192.168.0.0/16"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "2/minute"
+              }
+            },
+            "nft_match": "meta l4proto udp udp dport 123 ip saddr 192.168.1.135 ip daddr != 192.168.0.0/16 limit rate 2/minute",
+            "queue_num": 4032,
+            "nft_action": "log prefix \\\"dns-ntp-boot#ntp-plug-server,,QUEUE\\\" group 100 queue num 4032",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1f200": {
+            "interaction_name": "dns-ntp-boot",
+            "name": "ntp-plug-server-backward",
+            "profile_data": {
+              "protocols": {
+                "udp": {
+                  "dst-port": 123
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "external"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "rate": "2/minute"
+              }
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 123
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "!= 192.168.0.0/16"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "2/minute"
+              }
+            },
+            "nft_match": "meta l4proto udp udp sport 123 ip daddr 192.168.1.135 ip saddr != 192.168.0.0/16 limit rate 2/minute",
+            "queue_num": 4033,
+            "nft_action": "log prefix \\\"dns-ntp-boot#ntp-plug-server-backward,,QUEUE\\\" group 100 queue num 4033",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 3,
+      "max_state": 2,
+      "nfq_id_base": 4040,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1f7a0": {
+            "interaction_name": "dns-https-tplinkcloud",
+            "name": "dns-query-plug-tplinkcloud",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": "A",
+                  "domain-name": "n-devs.tplinkcloud.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 53
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.135 ip daddr 192.168.1.1",
+            "queue_num": 4040,
+            "nft_action": "log prefix \\\"dns-https-tplinkcloud#dns-query-plug-tplinkcloud,,QUEUE\\\" group 100 queue num 4040",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "A"
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "n-devs.tplinkcloud.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1f830": {
+            "interaction_name": "dns-https-tplinkcloud",
+            "name": "dns-query-plug-tplinkcloud-backward",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": "A",
+                  "domain-name": "n-devs.tplinkcloud.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.135 ip saddr 192.168.1.1",
+            "queue_num": 4040,
+            "nft_action": "log prefix \\\"dns-https-tplinkcloud#dns-query-plug-tplinkcloud-backward,,QUEUE\\\" group 100 queue num 4040",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "A"
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "n-devs.tplinkcloud.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1f6e0": {
+            "interaction_name": "dns-https-tplinkcloud",
+            "name": "https-plug-tplinkcloud",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "n-devs.tplinkcloud.com"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "rate": "10/second"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp dport {}",
+                "match": 443
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "10/second"
+              }
+            },
+            "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.135 limit rate 10/second",
+            "queue_num": 4040,
+            "nft_action": "log prefix \\\"dns-https-tplinkcloud#https-plug-tplinkcloud,,QUEUE\\\" group 100 queue num 4040",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                "match": "n-devs.tplinkcloud.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd46f06b0": {
+            "interaction_name": "dns-https-tplinkcloud",
+            "name": "https-plug-tplinkcloud-backward",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "n-devs.tplinkcloud.com"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "rate": "10/second"
+              }
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp sport {}",
+                "match": 443
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "10/second"
+              }
+            },
+            "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.135 limit rate 10/second",
+            "queue_num": 4041,
+            "nft_action": "log prefix \\\"dns-https-tplinkcloud#https-plug-tplinkcloud-backward,,QUEUE\\\" group 100 queue num 4041",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                "match": "n-devs.tplinkcloud.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 3,
+      "max_state": 3,
+      "nfq_id_base": 4050,
+      "nfq_id_offset": 0,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1f920": {
+            "interaction_name": "dns-https-tplinkra",
+            "name": "dns-query-plug-tplinkra",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": "A",
+                  "domain-name": "euw1-api.tplinkra.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 53
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.135 ip daddr 192.168.1.1",
+            "queue_num": 4050,
+            "nft_action": "log prefix \\\"dns-https-tplinkra#dns-query-plug-tplinkra,,QUEUE\\\" group 100 queue num 4050",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "A"
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "euw1-api.tplinkra.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd4542f30": {
+            "interaction_name": "dns-https-tplinkra",
+            "name": "dns-query-plug-tplinkra-backward",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": "A",
+                  "domain-name": "euw1-api.tplinkra.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.135 ip saddr 192.168.1.1",
+            "queue_num": 4050,
+            "nft_action": "log prefix \\\"dns-https-tplinkra#dns-query-plug-tplinkra-backward,,QUEUE\\\" group 100 queue num 4050",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "A"
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "euw1-api.tplinkra.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd4543770": {
+            "interaction_name": "dns-https-tplinkra",
+            "name": "https-plug-tplinkra",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "euw1-api.tplinkra.com"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "packet-count": 40
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp dport {}",
+                "match": 443
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.135",
+            "queue_num": 4050,
+            "nft_action": "log prefix \\\"dns-https-tplinkra#https-plug-tplinkra,,QUEUE\\\" group 100 queue num 4050",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                "match": "euw1-api.tplinkra.com"
+              }
+            ],
+            "counters": {
+              "packet-count": {
+                "default": 40
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1f860": {
+            "interaction_name": "dns-https-tplinkra",
+            "name": "https-plug-tplinkra-backward",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "euw1-api.tplinkra.com"
+                }
+              },
+              "bidirectional": true,
+              "stats": {
+                "packet-count": 40
+              }
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp sport {}",
+                "match": 443
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.135",
+            "queue_num": 4050,
+            "nft_action": "log prefix \\\"dns-https-tplinkra#https-plug-tplinkra-backward,,QUEUE\\\" group 100 queue num 4050",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                "match": "euw1-api.tplinkra.com"
+              }
+            ],
+            "counters": {
+              "packet-count": {
+                "default": 40
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 4050,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1fbc0": {
+            "interaction_name": "arp-plug-phone",
+            "name": "arp-request-plug-phone",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "self",
+                  "tha": "default",
+                  "spa": "self",
+                  "tpa": "phone"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.222"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation request arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.222",
+            "queue_num": 4050,
+            "nft_action": "log prefix \\\"arp-plug-phone#arp-request-plug-phone,,QUEUE\\\" group 100 queue num 4050",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1fb00": {
+            "interaction_name": "arp-plug-phone",
+            "name": "arp-reply-phone-plug",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "sha": "phone",
+                  "tha": "self",
+                  "spa": "phone",
+                  "tpa": "self"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "3c:cd:5d:a2:a9:d7"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.222"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp saddr ether 3c:cd:5d:a2:a9:d7 arp daddr ether 50:c7:bf:ed:0a:54 arp saddr ip 192.168.1.222 arp daddr ip 192.168.1.135",
+            "queue_num": 4051,
+            "nft_action": "log prefix \\\"arp-plug-phone#arp-reply-phone-plug,,QUEUE\\\" group 100 queue num 4051",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 4060,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1fad0": {
+            "interaction_name": "arp-phone-plug",
+            "name": "arp-request-phone-plug",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "phone",
+                  "tha": "default",
+                  "spa": "phone",
+                  "tpa": "self"
+                }
+              },
+              "stats": {
+                "rate": "1/second"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "3c:cd:5d:a2:a9:d7"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.222"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "1/second"
+              }
+            },
+            "nft_match": "arp operation request arp saddr ether 3c:cd:5d:a2:a9:d7 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.222 arp daddr ip 192.168.1.135 limit rate 1/second",
+            "queue_num": 4060,
+            "nft_action": "log prefix \\\"arp-phone-plug#arp-request-phone-plug,,QUEUE\\\" group 100 queue num 4060",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1fc50": {
+            "interaction_name": "arp-phone-plug",
+            "name": "arp-reply-plug-phone",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "sha": "self",
+                  "tha": "phone",
+                  "spa": "self",
+                  "tpa": "phone"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "3c:cd:5d:a2:a9:d7"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.222"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 3c:cd:5d:a2:a9:d7 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.222",
+            "queue_num": 4061,
+            "nft_action": "log prefix \\\"arp-phone-plug#arp-reply-plug-phone,,QUEUE\\\" group 100 queue num 4061",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 3,
+      "max_state": 3,
+      "nfq_id_base": 4070,
+      "nfq_id_offset": 0,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1fdd0": {
+            "interaction_name": "update-to-cloud",
+            "name": "dns-plug-use1-api",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": "A",
+                  "domain-name": "use1-api.tplinkra.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp dport {}",
+                "match": 53
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.135 ip daddr 192.168.1.1",
+            "queue_num": 4070,
+            "nft_action": "log prefix \\\"update-to-cloud#dns-plug-use1-api,,QUEUE\\\" group 100 queue num 4070",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 0
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "A"
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "use1-api.tplinkra.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1fa10": {
+            "interaction_name": "update-to-cloud",
+            "name": "dns-plug-use1-api-backward",
+            "profile_data": {
+              "protocols": {
+                "dns": {
+                  "qtype": "A",
+                  "domain-name": "use1-api.tplinkra.com"
+                },
+                "udp": {
+                  "dst-port": 53
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "gateway"
+                }
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.135 ip saddr 192.168.1.1",
+            "queue_num": 4070,
+            "nft_action": "log prefix \\\"update-to-cloud#dns-plug-use1-api-backward,,QUEUE\\\" group 100 queue num 4070",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "A"
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "use1-api.tplinkra.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1fc80": {
+            "interaction_name": "update-to-cloud",
+            "name": "https-use1-api",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "use1-api.tplinkra.com"
+                }
+              },
+              "stats": {
+                "packet-count": 40
+              },
+              "bidirectional": true
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp dport {}",
+                "match": 443
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.135",
+            "queue_num": 4070,
+            "nft_action": "log prefix \\\"update-to-cloud#https-use1-api,,QUEUE\\\" group 100 queue num 4070",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                "match": "use1-api.tplinkra.com"
+              }
+            ],
+            "counters": {
+              "packet-count": {
+                "default": 40
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1fe60": {
+            "interaction_name": "update-to-cloud",
+            "name": "https-use1-api-backward",
+            "profile_data": {
+              "protocols": {
+                "tcp": {
+                  "dst-port": 443
+                },
+                "ipv4": {
+                  "src": "self",
+                  "dst": "use1-api.tplinkra.com"
+                }
+              },
+              "stats": {
+                "packet-count": 40
+              },
+              "bidirectional": true
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "meta l4proto {}",
+                "match": "tcp"
+              },
+              {
+                "template": "tcp sport {}",
+                "match": 443
+              },
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.135",
+            "queue_num": 4070,
+            "nft_action": "log prefix \\\"update-to-cloud#https-use1-api-backward,,QUEUE\\\" group 100 queue num 4070",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                "match": "use1-api.tplinkra.com"
+              }
+            ],
+            "counters": {
+              "packet-count": {
+                "default": 40
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 4070,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1fb60": {
+            "interaction_name": "arp-plug-echo",
+            "name": "arp-request-plug-echo",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "self",
+                  "tha": "default",
+                  "spa": "self",
+                  "tpa": "192.168.1.150"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.150"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation request arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.150",
+            "queue_num": 4070,
+            "nft_action": "log prefix \\\"arp-plug-echo#arp-request-plug-echo,,QUEUE\\\" group 100 queue num 4070",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1ff20": {
+            "interaction_name": "arp-plug-echo",
+            "name": "arp-reply-echo-plug",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "sha": "50:dc:e7:a2:d8:95",
+                  "tha": "self",
+                  "spa": "192.168.1.150",
+                  "tpa": "self"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "50:dc:e7:a2:d8:95"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.150"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp saddr ether 50:dc:e7:a2:d8:95 arp daddr ether 50:c7:bf:ed:0a:54 arp saddr ip 192.168.1.150 arp daddr ip 192.168.1.135",
+            "queue_num": 4071,
+            "nft_action": "log prefix \\\"arp-plug-echo#arp-reply-echo-plug,,QUEUE\\\" group 100 queue num 4071",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    },
+    {
+      "policy_idx": 1,
+      "max_state": 1,
+      "nfq_id_base": 4080,
+      "nfq_id_offset": 2,
+      "policies": [
+        {
+          "Policy-0x7fefd3a1ffe0": {
+            "interaction_name": "arp-echo-plug",
+            "name": "arp-request-echo-plug",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "request",
+                  "sha": "50:dc:e7:a2:d8:95",
+                  "tha": "default",
+                  "spa": "192.168.1.150",
+                  "tpa": "self"
+                }
+              },
+              "stats": {
+                "rate": "1/second"
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "request"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "50:dc:e7:a2:d8:95"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "00:00:00:00:00:00"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.150"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.135"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "1/second"
+              }
+            },
+            "nft_match": "arp operation request arp saddr ether 50:dc:e7:a2:d8:95 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.150 arp daddr ip 192.168.1.135 limit rate 1/second",
+            "queue_num": 4080,
+            "nft_action": "log prefix \\\"arp-echo-plug#arp-request-echo-plug,,QUEUE\\\" group 100 queue num 4080",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": ""
+          }
+        },
+        {
+          "Policy-0x7fefd3a1ff80": {
+            "interaction_name": "arp-echo-plug",
+            "name": "arp-reply-plug-echo",
+            "profile_data": {
+              "protocols": {
+                "arp": {
+                  "type": "reply",
+                  "sha": "self",
+                  "tha": "50:dc:e7:a2:d8:95",
+                  "spa": "self",
+                  "tpa": "192.168.1.150"
+                }
+              }
+            },
+            "is_backward": false,
+            "in_interaction": true,
+            "device": {
+              "name": "tplink-plug",
+              "mac": "50:c7:bf:ed:0a:54",
+              "ipv4": "192.168.1.135",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "arp operation {}",
+                "match": "reply"
+              },
+              {
+                "template": "arp saddr ether {}",
+                "match": "50:c7:bf:ed:0a:54"
+              },
+              {
+                "template": "arp daddr ether {}",
+                "match": "50:dc:e7:a2:d8:95"
+              },
+              {
+                "template": "arp saddr ip {}",
+                "match": "192.168.1.135"
+              },
+              {
+                "template": "arp daddr ip {}",
+                "match": "192.168.1.150"
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "arp operation reply arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 50:dc:e7:a2:d8:95 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.150",
+            "queue_num": 4081,
+            "nft_action": "log prefix \\\"arp-echo-plug#arp-reply-plug-echo,,QUEUE\\\" group 100 queue num 4081",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": false,
+            "transient": false,
+            "periodic": false,
+            "one_off": true,
+            "initiator": ""
+          }
+        }
+      ]
+    }
+  ],
+  "custom_parsers": [
+    "dhcp",
+    "dns"
+  ],
+  "nfqueues": [
+    {
+      "NFQueue-0x7fefd46db7d0": {
+        "name": "single#udp-plug-phone",
+        "queue_num": -1,
+        "policies": [
+          {
+            "interaction_idx": 0,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd446c590": {
+                "interaction_name": "single",
+                "name": "udp-plug-phone",
+                "profile_data": {
+                  "protocols": {
+                    "udp": {
+                      "src-port": 9999
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "phone"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": false,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 9999
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.222"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 9999 ip saddr 192.168.1.135 ip daddr 192.168.1.222",
+                "queue_num": -1,
+                "nft_action": "log prefix \\\"single#udp-plug-phone,,ACCEPT\\\" group 100 accept",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 9999
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.222"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3ca5430": {
+        "name": "single#tcp-device-plug-lan",
+        "queue_num": -1,
+        "policies": [
+          {
+            "interaction_idx": 1,
+            "policy_idx": 0,
+            "state": -1,
+            "policy": {
+              "Policy-0x7fefd3c6a5d0": {
+                "interaction_name": "single",
+                "name": "tcp-device-plug-lan",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 9999
+                    },
+                    "ipv4": {
+                      "src": [
+                        "phone",
+                        "192.168.1.150"
+                      ],
+                      "dst": "self"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "rate": "20/second"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": false,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp dport {}",
+                    "match": 9999
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "{ 192.168.1.222, 192.168.1.150 }"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "20/second"
+                  }
+                },
+                "nft_match": "meta l4proto tcp tcp dport 9999 ip saddr { 192.168.1.222, 192.168.1.150 } ip daddr 192.168.1.135 limit rate 20/second",
+                "queue_num": -1,
+                "nft_action": "log prefix \\\"single#tcp-device-plug-lan,,ACCEPT\\\" group 100 accept",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "tcp"
+          },
+          {
+            "template": "tcp dport {}",
+            "match": 9999
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "{ 192.168.1.222, 192.168.1.150 }"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "20/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd39fd790": {
+        "name": "single#tcp-device-plug-lan-backward",
+        "queue_num": -1,
+        "policies": [
+          {
+            "interaction_idx": 1,
+            "policy_idx": 1,
+            "state": -1,
+            "policy": {
+              "Policy-0x7fefd4542030": {
+                "interaction_name": "single",
+                "name": "tcp-device-plug-lan-backward",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 9999
+                    },
+                    "ipv4": {
+                      "src": [
+                        "phone",
+                        "192.168.1.150"
+                      ],
+                      "dst": "self"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "rate": "20/second"
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": false,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp sport {}",
+                    "match": 9999
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "{ 192.168.1.222, 192.168.1.150 }"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "20/second"
+                  }
+                },
+                "nft_match": "meta l4proto tcp tcp sport 9999 ip daddr { 192.168.1.222, 192.168.1.150 } ip saddr 192.168.1.135 limit rate 20/second",
+                "queue_num": -1,
+                "nft_action": "log prefix \\\"single#tcp-device-plug-lan-backward,,ACCEPT\\\" group 100 accept",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "tcp"
+          },
+          {
+            "template": "tcp sport {}",
+            "match": 9999
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "{ 192.168.1.222, 192.168.1.150 }"
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "20/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd428de20": {
+        "name": "dhcp-boot#dhcp-discover",
+        "queue_num": 4000,
+        "policies": [
+          {
+            "interaction_idx": 2,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3c4f710": {
+                "interaction_name": "dhcp-boot",
+                "name": "dhcp-discover",
+                "profile_data": {
+                  "protocols": {
+                    "dhcp": {
+                      "type": "discover",
+                      "client-mac": "self"
+                    },
+                    "udp": {
+                      "src-port": 68,
+                      "dst-port": 67
+                    },
+                    "ipv4": {
+                      "src": "0.0.0.0",
+                      "dst": "broadcast"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dhcp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 68
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 67
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "0.0.0.0"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "255.255.255.255"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 68 udp dport 67 ip saddr 0.0.0.0 ip daddr 255.255.255.255",
+                "queue_num": 4000,
+                "nft_action": "log prefix \\\"dhcp-boot#dhcp-discover,,QUEUE\\\" group 100 queue num 4000",
+                "nfq_matches": [
+                  {
+                    "template": "dhcp_message.options.message_type == {}",
+                    "match": "DHCP_DISCOVER"
+                  },
+                  {
+                    "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                    "match": "50:c7:bf:ed:0a:54"
+                  }
+                ],
+                "counters": {},
+                "is_device": false,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 2,
+            "policy_idx": 2,
+            "state": 2,
+            "policy": {
+              "Policy-0x7fefd444ab40": {
+                "interaction_name": "dhcp-boot",
+                "name": "dhcp-request",
+                "profile_data": {
+                  "protocols": {
+                    "dhcp": {
+                      "type": "request",
+                      "client-mac": "self"
+                    },
+                    "udp": {
+                      "src-port": 68,
+                      "dst-port": 67
+                    },
+                    "ipv4": {
+                      "src": "0.0.0.0",
+                      "dst": "broadcast"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dhcp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 68
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 67
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "0.0.0.0"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "255.255.255.255"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 68 udp dport 67 ip saddr 0.0.0.0 ip daddr 255.255.255.255",
+                "queue_num": 4002,
+                "nft_action": "log prefix \\\"dhcp-boot#dhcp-request,,QUEUE\\\" group 100 queue num 4002",
+                "nfq_matches": [
+                  {
+                    "template": "dhcp_message.options.message_type == {}",
+                    "match": "DHCP_REQUEST"
+                  },
+                  {
+                    "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                    "match": "50:c7:bf:ed:0a:54"
+                  }
+                ],
+                "counters": {},
+                "is_device": false,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 68
+          },
+          {
+            "template": "udp dport {}",
+            "match": 67
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "0.0.0.0"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "255.255.255.255"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3ca5700": {
+        "name": "dhcp-boot#dhcp-offer",
+        "queue_num": 4001,
+        "policies": [
+          {
+            "interaction_idx": 2,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd45692b0": {
+                "interaction_name": "dhcp-boot",
+                "name": "dhcp-offer",
+                "profile_data": {
+                  "protocols": {
+                    "dhcp": {
+                      "type": "offer",
+                      "client-mac": "self"
+                    },
+                    "udp": {
+                      "src-port": 67,
+                      "dst-port": 68
+                    },
+                    "ipv4": {
+                      "src": "gateway",
+                      "dst": "self"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dhcp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 67
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 68
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 67 udp dport 68 ip saddr 192.168.1.1 ip daddr 192.168.1.135",
+                "queue_num": 4001,
+                "nft_action": "log prefix \\\"dhcp-boot#dhcp-offer,,QUEUE\\\" group 100 queue num 4001",
+                "nfq_matches": [
+                  {
+                    "template": "dhcp_message.options.message_type == {}",
+                    "match": "DHCP_OFFER"
+                  },
+                  {
+                    "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                    "match": "50:c7:bf:ed:0a:54"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 2,
+            "policy_idx": 3,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fefd3a1ed80": {
+                "interaction_name": "dhcp-boot",
+                "name": "dhcp-ack",
+                "profile_data": {
+                  "protocols": {
+                    "dhcp": {
+                      "type": "ack",
+                      "client-mac": "self"
+                    },
+                    "udp": {
+                      "src-port": 67,
+                      "dst-port": 68
+                    },
+                    "ipv4": {
+                      "src": "gateway",
+                      "dst": "self"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dhcp",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 67
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 68
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 67 udp dport 68 ip saddr 192.168.1.1 ip daddr 192.168.1.135",
+                "queue_num": 4002,
+                "nft_action": "log prefix \\\"dhcp-boot#dhcp-ack,,QUEUE\\\" group 100 queue num 4002",
+                "nfq_matches": [
+                  {
+                    "template": "dhcp_message.options.message_type == {}",
+                    "match": "DHCP_ACK"
+                  },
+                  {
+                    "template": "strcmp(mac_hex_to_str(dhcp_message.chaddr), \"{}\") == 0",
+                    "match": "50:c7:bf:ed:0a:54"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 67
+          },
+          {
+            "template": "udp dport {}",
+            "match": 68
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.1"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1e4b0": {
+        "name": "arp-plug-gateway#arp-request",
+        "queue_num": 4010,
+        "policies": [
+          {
+            "interaction_idx": 3,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1ee40": {
+                "interaction_name": "arp-plug-gateway",
+                "name": "arp-request",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "self",
+                      "tha": "default",
+                      "spa": "self",
+                      "tpa": "gateway"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation request arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.1",
+                "queue_num": 4010,
+                "nft_action": "log prefix \\\"arp-plug-gateway#arp-request,,QUEUE\\\" group 100 queue num 4010",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1e930": {
+        "name": "arp-plug-gateway#arp-reply",
+        "queue_num": 4011,
+        "policies": [
+          {
+            "interaction_idx": 3,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1edb0": {
+                "interaction_name": "arp-plug-gateway",
+                "name": "arp-reply",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "sha": "gateway",
+                      "tha": "self",
+                      "spa": "gateway",
+                      "tpa": "self"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "c0:56:27:73:46:0b"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.1"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp saddr ether c0:56:27:73:46:0b arp daddr ether 50:c7:bf:ed:0a:54 arp saddr ip 192.168.1.1 arp daddr ip 192.168.1.135",
+                "queue_num": 4011,
+                "nft_action": "log prefix \\\"arp-plug-gateway#arp-reply,,QUEUE\\\" group 100 queue num 4011",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "c0:56:27:73:46:0b"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.1"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f290": {
+        "name": "arp-gateway-plug#arp-request",
+        "queue_num": 4020,
+        "policies": [
+          {
+            "interaction_idx": 4,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1f1d0": {
+                "interaction_name": "arp-gateway-plug",
+                "name": "arp-request",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "gateway",
+                      "tha": "default",
+                      "spa": "gateway",
+                      "tpa": "self"
+                    }
+                  },
+                  "stats": {
+                    "rate": "1/second"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "c0:56:27:73:46:0b"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.1"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "1/second"
+                  }
+                },
+                "nft_match": "arp operation request arp saddr ether c0:56:27:73:46:0b arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.1 arp daddr ip 192.168.1.135 limit rate 1/second",
+                "queue_num": 4020,
+                "nft_action": "log prefix \\\"arp-gateway-plug#arp-request,,QUEUE\\\" group 100 queue num 4020",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "c0:56:27:73:46:0b"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.1"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "1/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f260": {
+        "name": "arp-gateway-plug#arp-reply",
+        "queue_num": 4021,
+        "policies": [
+          {
+            "interaction_idx": 4,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1f050": {
+                "interaction_name": "arp-gateway-plug",
+                "name": "arp-reply",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "sha": "self",
+                      "tha": "gateway",
+                      "spa": "self",
+                      "tpa": "gateway"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "c0:56:27:73:46:0b"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether c0:56:27:73:46:0b arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.1",
+                "queue_num": 4021,
+                "nft_action": "log prefix \\\"arp-gateway-plug#arp-reply,,QUEUE\\\" group 100 queue num 4021",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "c0:56:27:73:46:0b"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f110": {
+        "name": "dns-ntp-boot#dns-query-plug-ntp",
+        "queue_num": 4030,
+        "policies": [
+          {
+            "interaction_idx": 5,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1f1a0": {
+                "interaction_name": "dns-ntp-boot",
+                "name": "dns-query-plug-ntp",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": "A",
+                      "domain-name": [
+                        "$.pool.ntp.org",
+                        "$.time.edu.cn",
+                        "$.nist.gov"
+                      ]
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.135 ip daddr 192.168.1.1",
+                "queue_num": 4030,
+                "nft_action": "log prefix \\\"dns-ntp-boot#dns-query-plug-ntp,,QUEUE\\\" group 100 queue num 4030",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "A"
+                  },
+                  {
+                    "template": [
+                      "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 13)",
+                      "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 12)",
+                      "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 9)"
+                    ],
+                    "match": [
+                      ".pool.ntp.org",
+                      ".time.edu.cn",
+                      ".nist.gov"
+                    ]
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 6,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1f7a0": {
+                "interaction_name": "dns-https-tplinkcloud",
+                "name": "dns-query-plug-tplinkcloud",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": "A",
+                      "domain-name": "n-devs.tplinkcloud.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.135 ip daddr 192.168.1.1",
+                "queue_num": 4040,
+                "nft_action": "log prefix \\\"dns-https-tplinkcloud#dns-query-plug-tplinkcloud,,QUEUE\\\" group 100 queue num 4040",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "A"
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "n-devs.tplinkcloud.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 7,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1f920": {
+                "interaction_name": "dns-https-tplinkra",
+                "name": "dns-query-plug-tplinkra",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": "A",
+                      "domain-name": "euw1-api.tplinkra.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.135 ip daddr 192.168.1.1",
+                "queue_num": 4050,
+                "nft_action": "log prefix \\\"dns-https-tplinkra#dns-query-plug-tplinkra,,QUEUE\\\" group 100 queue num 4050",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "A"
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "euw1-api.tplinkra.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 10,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1fdd0": {
+                "interaction_name": "update-to-cloud",
+                "name": "dns-plug-use1-api",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": "A",
+                      "domain-name": "use1-api.tplinkra.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp dport 53 ip saddr 192.168.1.135 ip daddr 192.168.1.1",
+                "queue_num": 4070,
+                "nft_action": "log prefix \\\"update-to-cloud#dns-plug-use1-api,,QUEUE\\\" group 100 queue num 4070",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 0
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "A"
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "use1-api.tplinkra.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp dport {}",
+            "match": 53
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f2c0": {
+        "name": "dns-ntp-boot#dns-query-plug-ntp-backward",
+        "queue_num": 4031,
+        "policies": [
+          {
+            "interaction_idx": 5,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1f320": {
+                "interaction_name": "dns-ntp-boot",
+                "name": "dns-query-plug-ntp-backward",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": "A",
+                      "domain-name": [
+                        "$.pool.ntp.org",
+                        "$.time.edu.cn",
+                        "$.nist.gov"
+                      ]
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.135 ip saddr 192.168.1.1",
+                "queue_num": 4031,
+                "nft_action": "log prefix \\\"dns-ntp-boot#dns-query-plug-ntp-backward,,QUEUE\\\" group 100 queue num 4031",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "A"
+                  },
+                  {
+                    "template": [
+                      "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 13)",
+                      "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 12)",
+                      "dns_contains_suffix_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\", 9)"
+                    ],
+                    "match": [
+                      ".pool.ntp.org",
+                      ".time.edu.cn",
+                      ".nist.gov"
+                    ]
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 6,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1f830": {
+                "interaction_name": "dns-https-tplinkcloud",
+                "name": "dns-query-plug-tplinkcloud-backward",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": "A",
+                      "domain-name": "n-devs.tplinkcloud.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.135 ip saddr 192.168.1.1",
+                "queue_num": 4040,
+                "nft_action": "log prefix \\\"dns-https-tplinkcloud#dns-query-plug-tplinkcloud-backward,,QUEUE\\\" group 100 queue num 4040",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "A"
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "n-devs.tplinkcloud.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 7,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd4542f30": {
+                "interaction_name": "dns-https-tplinkra",
+                "name": "dns-query-plug-tplinkra-backward",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": "A",
+                      "domain-name": "euw1-api.tplinkra.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.135 ip saddr 192.168.1.1",
+                "queue_num": 4050,
+                "nft_action": "log prefix \\\"dns-https-tplinkra#dns-query-plug-tplinkra-backward,,QUEUE\\\" group 100 queue num 4050",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "A"
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "euw1-api.tplinkra.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 10,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1fa10": {
+                "interaction_name": "update-to-cloud",
+                "name": "dns-plug-use1-api-backward",
+                "profile_data": {
+                  "protocols": {
+                    "dns": {
+                      "qtype": "A",
+                      "domain-name": "use1-api.tplinkra.com"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "gateway"
+                    }
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto udp udp sport 53 ip daddr 192.168.1.135 ip saddr 192.168.1.1",
+                "queue_num": 4070,
+                "nft_action": "log prefix \\\"update-to-cloud#dns-plug-use1-api-backward,,QUEUE\\\" group 100 queue num 4070",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "A"
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "use1-api.tplinkra.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 53
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.1"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f800": {
+        "name": "dns-ntp-boot#ntp-plug-server",
+        "queue_num": 4032,
+        "policies": [
+          {
+            "interaction_idx": 5,
+            "policy_idx": 2,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1f6b0": {
+                "interaction_name": "dns-ntp-boot",
+                "name": "ntp-plug-server",
+                "profile_data": {
+                  "protocols": {
+                    "udp": {
+                      "dst-port": 123
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "external"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "rate": "2/minute"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp dport {}",
+                    "match": 123
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "!= 192.168.0.0/16"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "2/minute"
+                  }
+                },
+                "nft_match": "meta l4proto udp udp dport 123 ip saddr 192.168.1.135 ip daddr != 192.168.0.0/16 limit rate 2/minute",
+                "queue_num": 4032,
+                "nft_action": "log prefix \\\"dns-ntp-boot#ntp-plug-server,,QUEUE\\\" group 100 queue num 4032",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp dport {}",
+            "match": 123
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "!= 192.168.0.0/16"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "2/minute"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f890": {
+        "name": "dns-ntp-boot#ntp-plug-server-backward",
+        "queue_num": 4033,
+        "policies": [
+          {
+            "interaction_idx": 5,
+            "policy_idx": 3,
+            "state": 2,
+            "policy": {
+              "Policy-0x7fefd3a1f200": {
+                "interaction_name": "dns-ntp-boot",
+                "name": "ntp-plug-server-backward",
+                "profile_data": {
+                  "protocols": {
+                    "udp": {
+                      "dst-port": 123
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "external"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "rate": "2/minute"
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 123
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "!= 192.168.0.0/16"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "2/minute"
+                  }
+                },
+                "nft_match": "meta l4proto udp udp sport 123 ip daddr 192.168.1.135 ip saddr != 192.168.0.0/16 limit rate 2/minute",
+                "queue_num": 4033,
+                "nft_action": "log prefix \\\"dns-ntp-boot#ntp-plug-server-backward,,QUEUE\\\" group 100 queue num 4033",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 123
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "!= 192.168.0.0/16"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "2/minute"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd3ca5940": {
+        "name": "dns-https-tplinkcloud#https-plug-tplinkcloud",
+        "queue_num": 4040,
+        "policies": [
+          {
+            "interaction_idx": 6,
+            "policy_idx": 2,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1f6e0": {
+                "interaction_name": "dns-https-tplinkcloud",
+                "name": "https-plug-tplinkcloud",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "n-devs.tplinkcloud.com"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "rate": "10/second"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp dport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "10/second"
+                  }
+                },
+                "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.135 limit rate 10/second",
+                "queue_num": 4040,
+                "nft_action": "log prefix \\\"dns-https-tplinkcloud#https-plug-tplinkcloud,,QUEUE\\\" group 100 queue num 4040",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                    "match": "n-devs.tplinkcloud.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 7,
+            "policy_idx": 2,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fefd4543770": {
+                "interaction_name": "dns-https-tplinkra",
+                "name": "https-plug-tplinkra",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "euw1-api.tplinkra.com"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "packet-count": 40
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp dport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.135",
+                "queue_num": 4050,
+                "nft_action": "log prefix \\\"dns-https-tplinkra#https-plug-tplinkra,,QUEUE\\\" group 100 queue num 4050",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                    "match": "euw1-api.tplinkra.com"
+                  }
+                ],
+                "counters": {
+                  "packet-count": {
+                    "default": 40
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {
+              "packet-count": 2
+            }
+          },
+          {
+            "interaction_idx": 10,
+            "policy_idx": 2,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fefd3a1fc80": {
+                "interaction_name": "update-to-cloud",
+                "name": "https-use1-api",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "use1-api.tplinkra.com"
+                    }
+                  },
+                  "stats": {
+                    "packet-count": 40
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp dport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp dport 443 ip saddr 192.168.1.135",
+                "queue_num": 4070,
+                "nft_action": "log prefix \\\"update-to-cloud#https-use1-api,,QUEUE\\\" group 100 queue num 4070",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
+                    "match": "use1-api.tplinkra.com"
+                  }
+                ],
+                "counters": {
+                  "packet-count": {
+                    "default": 40
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {
+              "packet-count": 2
+            }
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "tcp"
+          },
+          {
+            "template": "tcp dport {}",
+            "match": 443
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "10/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f9e0": {
+        "name": "dns-https-tplinkcloud#https-plug-tplinkcloud-backward",
+        "queue_num": 4041,
+        "policies": [
+          {
+            "interaction_idx": 6,
+            "policy_idx": 3,
+            "state": 2,
+            "policy": {
+              "Policy-0x7fefd46f06b0": {
+                "interaction_name": "dns-https-tplinkcloud",
+                "name": "https-plug-tplinkcloud-backward",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "n-devs.tplinkcloud.com"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "rate": "10/second"
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp sport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "10/second"
+                  }
+                },
+                "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.135 limit rate 10/second",
+                "queue_num": 4041,
+                "nft_action": "log prefix \\\"dns-https-tplinkcloud#https-plug-tplinkcloud-backward,,QUEUE\\\" group 100 queue num 4041",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                    "match": "n-devs.tplinkcloud.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          },
+          {
+            "interaction_idx": 7,
+            "policy_idx": 3,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fefd3a1f860": {
+                "interaction_name": "dns-https-tplinkra",
+                "name": "https-plug-tplinkra-backward",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "euw1-api.tplinkra.com"
+                    }
+                  },
+                  "bidirectional": true,
+                  "stats": {
+                    "packet-count": 40
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp sport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.135",
+                "queue_num": 4050,
+                "nft_action": "log prefix \\\"dns-https-tplinkra#https-plug-tplinkra-backward,,QUEUE\\\" group 100 queue num 4050",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                    "match": "euw1-api.tplinkra.com"
+                  }
+                ],
+                "counters": {
+                  "packet-count": {
+                    "default": 40
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {
+              "packet-count": 2
+            }
+          },
+          {
+            "interaction_idx": 10,
+            "policy_idx": 3,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fefd3a1fe60": {
+                "interaction_name": "update-to-cloud",
+                "name": "https-use1-api-backward",
+                "profile_data": {
+                  "protocols": {
+                    "tcp": {
+                      "dst-port": 443
+                    },
+                    "ipv4": {
+                      "src": "self",
+                      "dst": "use1-api.tplinkra.com"
+                    }
+                  },
+                  "stats": {
+                    "packet-count": 40
+                  },
+                  "bidirectional": true
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "tcp"
+                  },
+                  {
+                    "template": "tcp sport {}",
+                    "match": 443
+                  },
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "meta l4proto tcp tcp sport 443 ip daddr 192.168.1.135",
+                "queue_num": 4070,
+                "nft_action": "log prefix \\\"update-to-cloud#https-use1-api-backward,,QUEUE\\\" group 100 queue num 4070",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                    "match": "use1-api.tplinkra.com"
+                  }
+                ],
+                "counters": {
+                  "packet-count": {
+                    "default": 40
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {
+              "packet-count": 2
+            }
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "meta l4proto {}",
+            "match": "tcp"
+          },
+          {
+            "template": "tcp sport {}",
+            "match": 443
+          },
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "10/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f8c0": {
+        "name": "arp-plug-phone#arp-request-plug-phone",
+        "queue_num": 4050,
+        "policies": [
+          {
+            "interaction_idx": 8,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1fbc0": {
+                "interaction_name": "arp-plug-phone",
+                "name": "arp-request-plug-phone",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "self",
+                      "tha": "default",
+                      "spa": "self",
+                      "tpa": "phone"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.222"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation request arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.222",
+                "queue_num": 4050,
+                "nft_action": "log prefix \\\"arp-plug-phone#arp-request-plug-phone,,QUEUE\\\" group 100 queue num 4050",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.222"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1faa0": {
+        "name": "arp-plug-phone#arp-reply-phone-plug",
+        "queue_num": 4051,
+        "policies": [
+          {
+            "interaction_idx": 8,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1fb00": {
+                "interaction_name": "arp-plug-phone",
+                "name": "arp-reply-phone-plug",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "sha": "phone",
+                      "tha": "self",
+                      "spa": "phone",
+                      "tpa": "self"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "3c:cd:5d:a2:a9:d7"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.222"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp saddr ether 3c:cd:5d:a2:a9:d7 arp daddr ether 50:c7:bf:ed:0a:54 arp saddr ip 192.168.1.222 arp daddr ip 192.168.1.135",
+                "queue_num": 4051,
+                "nft_action": "log prefix \\\"arp-plug-phone#arp-reply-phone-plug,,QUEUE\\\" group 100 queue num 4051",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "3c:cd:5d:a2:a9:d7"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.222"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f980": {
+        "name": "arp-phone-plug#arp-request-phone-plug",
+        "queue_num": 4060,
+        "policies": [
+          {
+            "interaction_idx": 9,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1fad0": {
+                "interaction_name": "arp-phone-plug",
+                "name": "arp-request-phone-plug",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "phone",
+                      "tha": "default",
+                      "spa": "phone",
+                      "tpa": "self"
+                    }
+                  },
+                  "stats": {
+                    "rate": "1/second"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "3c:cd:5d:a2:a9:d7"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.222"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "1/second"
+                  }
+                },
+                "nft_match": "arp operation request arp saddr ether 3c:cd:5d:a2:a9:d7 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.222 arp daddr ip 192.168.1.135 limit rate 1/second",
+                "queue_num": 4060,
+                "nft_action": "log prefix \\\"arp-phone-plug#arp-request-phone-plug,,QUEUE\\\" group 100 queue num 4060",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "3c:cd:5d:a2:a9:d7"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.222"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "1/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1fbf0": {
+        "name": "arp-phone-plug#arp-reply-plug-phone",
+        "queue_num": 4061,
+        "policies": [
+          {
+            "interaction_idx": 9,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1fc50": {
+                "interaction_name": "arp-phone-plug",
+                "name": "arp-reply-plug-phone",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "sha": "self",
+                      "tha": "phone",
+                      "spa": "self",
+                      "tpa": "phone"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "3c:cd:5d:a2:a9:d7"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.222"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 3c:cd:5d:a2:a9:d7 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.222",
+                "queue_num": 4061,
+                "nft_action": "log prefix \\\"arp-phone-plug#arp-reply-plug-phone,,QUEUE\\\" group 100 queue num 4061",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "3c:cd:5d:a2:a9:d7"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.222"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1fec0": {
+        "name": "arp-plug-echo#arp-request-plug-echo",
+        "queue_num": 4070,
+        "policies": [
+          {
+            "interaction_idx": 11,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1fb60": {
+                "interaction_name": "arp-plug-echo",
+                "name": "arp-request-plug-echo",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "self",
+                      "tha": "default",
+                      "spa": "self",
+                      "tpa": "192.168.1.150"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.150"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation request arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.150",
+                "queue_num": 4070,
+                "nft_action": "log prefix \\\"arp-plug-echo#arp-request-plug-echo,,QUEUE\\\" group 100 queue num 4070",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.150"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1fd70": {
+        "name": "arp-plug-echo#arp-reply-echo-plug",
+        "queue_num": 4071,
+        "policies": [
+          {
+            "interaction_idx": 11,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1ff20": {
+                "interaction_name": "arp-plug-echo",
+                "name": "arp-reply-echo-plug",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "sha": "50:dc:e7:a2:d8:95",
+                      "tha": "self",
+                      "spa": "192.168.1.150",
+                      "tpa": "self"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "50:dc:e7:a2:d8:95"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.150"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp saddr ether 50:dc:e7:a2:d8:95 arp daddr ether 50:c7:bf:ed:0a:54 arp saddr ip 192.168.1.150 arp daddr ip 192.168.1.135",
+                "queue_num": 4071,
+                "nft_action": "log prefix \\\"arp-plug-echo#arp-reply-echo-plug,,QUEUE\\\" group 100 queue num 4071",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "50:dc:e7:a2:d8:95"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.150"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1fcb0": {
+        "name": "arp-echo-plug#arp-request-echo-plug",
+        "queue_num": 4080,
+        "policies": [
+          {
+            "interaction_idx": 12,
+            "policy_idx": 0,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fefd3a1ffe0": {
+                "interaction_name": "arp-echo-plug",
+                "name": "arp-request-echo-plug",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "request",
+                      "sha": "50:dc:e7:a2:d8:95",
+                      "tha": "default",
+                      "spa": "192.168.1.150",
+                      "tpa": "self"
+                    }
+                  },
+                  "stats": {
+                    "rate": "1/second"
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "request"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "50:dc:e7:a2:d8:95"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "00:00:00:00:00:00"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.150"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.135"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "1/second"
+                  }
+                },
+                "nft_match": "arp operation request arp saddr ether 50:dc:e7:a2:d8:95 arp daddr ether 00:00:00:00:00:00 arp saddr ip 192.168.1.150 arp daddr ip 192.168.1.135 limit rate 1/second",
+                "queue_num": 4080,
+                "nft_action": "log prefix \\\"arp-echo-plug#arp-request-echo-plug,,QUEUE\\\" group 100 queue num 4080",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "request"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "50:dc:e7:a2:d8:95"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "00:00:00:00:00:00"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.150"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.135"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "1/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fefd3a1f650": {
+        "name": "arp-echo-plug#arp-reply-plug-echo",
+        "queue_num": 4081,
+        "policies": [
+          {
+            "interaction_idx": 12,
+            "policy_idx": 1,
+            "state": 1,
+            "policy": {
+              "Policy-0x7fefd3a1ff80": {
+                "interaction_name": "arp-echo-plug",
+                "name": "arp-reply-plug-echo",
+                "profile_data": {
+                  "protocols": {
+                    "arp": {
+                      "type": "reply",
+                      "sha": "self",
+                      "tha": "50:dc:e7:a2:d8:95",
+                      "spa": "self",
+                      "tpa": "192.168.1.150"
+                    }
+                  }
+                },
+                "is_backward": false,
+                "in_interaction": true,
+                "device": {
+                  "name": "tplink-plug",
+                  "mac": "50:c7:bf:ed:0a:54",
+                  "ipv4": "192.168.1.135",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "arp operation {}",
+                    "match": "reply"
+                  },
+                  {
+                    "template": "arp saddr ether {}",
+                    "match": "50:c7:bf:ed:0a:54"
+                  },
+                  {
+                    "template": "arp daddr ether {}",
+                    "match": "50:dc:e7:a2:d8:95"
+                  },
+                  {
+                    "template": "arp saddr ip {}",
+                    "match": "192.168.1.135"
+                  },
+                  {
+                    "template": "arp daddr ip {}",
+                    "match": "192.168.1.150"
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "arp operation reply arp saddr ether 50:c7:bf:ed:0a:54 arp daddr ether 50:dc:e7:a2:d8:95 arp saddr ip 192.168.1.135 arp daddr ip 192.168.1.150",
+                "queue_num": 4081,
+                "nft_action": "log prefix \\\"arp-echo-plug#arp-reply-plug-echo,,QUEUE\\\" group 100 queue num 4081",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": false,
+                "transient": false,
+                "periodic": false,
+                "one_off": true,
+                "initiator": ""
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "arp operation {}",
+            "match": "reply"
+          },
+          {
+            "template": "arp saddr ether {}",
+            "match": "50:c7:bf:ed:0a:54"
+          },
+          {
+            "template": "arp daddr ether {}",
+            "match": "50:dc:e7:a2:d8:95"
+          },
+          {
+            "template": "arp saddr ip {}",
+            "match": "192.168.1.135"
+          },
+          {
+            "template": "arp daddr ip {}",
+            "match": "192.168.1.150"
+          }
+        ],
+        "nft_stats": {}
+      }
+    }
+  ],
+  "other_hosts": {
+    "arp": {
+      "src": {
+        "match": "arp saddr ip",
+        "addrs": []
+      },
+      "dst": {
+        "match": "arp daddr ip",
+        "addrs": []
+      }
+    },
+    "ipv4": {
+      "src": {
+        "match": "ip saddr",
+        "addrs": []
+      },
+      "dst": {
+        "match": "ip daddr",
+        "addrs": []
+      }
+    },
+    "ipv6": {
+      "src": {
+        "match": "ip6 saddr",
+        "addrs": []
+      },
+      "dst": {
+        "match": "ip6 daddr",
+        "addrs": []
+      }
+    }
+  }
+}
