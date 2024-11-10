@@ -244,11 +244,7 @@ if __name__ == "__main__":
                     "max_state": -1,
                     "nfq_id_base": nfq_id_base,
                     "nfq_id_offset": 0,
-                    "policies": [],
-                    "in_loop": False,
-                    "loop_policies": [],
-                    "loop_size": 0,
-                    "next_policy": None
+                    "policies": []
                 }
                 
                 # Parse policy
@@ -287,7 +283,9 @@ if __name__ == "__main__":
                 # First pass, to flatten nested policies
                 single_policies = {}
                 for single_policy_name in interaction_policy:
-                    flatten_policies(single_policy_name, interaction_policy[single_policy_name], single_policies)
+                    # Skip loop and next keywords
+                    if single_policy_name not in ["loop", "next"]:
+                        flatten_policies(single_policy_name, interaction_policy[single_policy_name], single_policies)
 
                 # Second pass, parse policies
                 interaction_data = {
@@ -295,13 +293,20 @@ if __name__ == "__main__":
                     "max_state": -1,
                     "nfq_id_base": nfq_id_base,
                     "nfq_id_offset": 0,
-                    # Add loop keys
                     "policies": [],
-                    "in_loop": False,
+                    # Add loop keys                
+                    "has_loop": False,
                     "loop_policies": [],
                     "loop_size": 0,
                     "next_policy": None
                 }
+
+                # Add loop processing
+                if "loop" in interaction_policy:
+                    interaction_data["has_loop"] = True
+                    interaction_data["loop_size"] = len(interaction_policy["loop"])
+                    loop_policy_names = interaction_policy.get("loop", []) 
+                    next_policy_name = interaction_policy.get("next", None) 
 
                 update_nfq_id_base = False
                 for single_policy_name in single_policies:
@@ -319,21 +324,14 @@ if __name__ == "__main__":
                     single_policy, new_nfq = parse_policy(policy_data, interaction_data, global_accs, len(single_policies), True, args.log_type, args.log_group)
                     if new_nfq:
                         update_nfq_id_base = True
-                    interaction_data["policies"].append(single_policy)
+                    # Add loop policy instances to the loop policies list, the order is kept
+                    if single_policy_name.rsplit("-backward", 1)[0] in loop_policy_names:
+                        interaction_data["loop_policies"].append(single_policy)
 
-                # Add loop processing
-                if "loop" in interaction_policy:
-                    loop_config = interaction_policy["loop"]
-                    interaction_data["in_loop"] = True
-                    
-                    for policy_name in loop_config:
-                        if isinstance(policy_name, str) and policy_name != "next":
-                            interaction_data["loop_policies"].append(policy_name)
-                    
-                    interaction_data["loop_size"] = len(interaction_data["loop_policies"])
-                    
-                    if isinstance(loop_config, dict) and "next" in loop_config:
-                        interaction_data["next_policy"] = loop_config["next"]
+                    # Set next policy
+                    if single_policy.name == next_policy_name:
+                        interaction_data["next_policy"] = single_policy
+                    interaction_data["policies"].append(single_policy)
 
                 # Update nfqueue variables
                 global_accs["interactions"].append(interaction_data)
