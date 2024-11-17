@@ -35,6 +35,11 @@ typedef struct {
     uint8_t current_state;  // Current state
     counters_t *counters;   // Array of counters
     ip_addr_t cached_ip;    // Cached IP address
+
+    // Newly added: New fields for loop support
+    bool in_loop;           // Whether currently in a loop
+    uint8_t loop_state;     // Current state within the loop
+    uint8_t next_after_loop;// State to transition to after exiting the loop
 } interaction_data_t;
 
 /**

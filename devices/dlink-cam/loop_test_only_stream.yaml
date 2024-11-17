@@ -51,7 +51,7 @@ interactions:
       stats:
         rate: 0
     loop:
-      - dns-cam-server-a     
+      #- dns-cam-server-a     
       - dns-cam-server-aaaa  
       - stun-bind-cam-server 
     next: udp-stream-wan     
