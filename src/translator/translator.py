@@ -261,7 +261,12 @@ if __name__ == "__main__":
                     "max_state": -1,
                     "nfq_id_base": nfq_id_base,
                     "nfq_id_offset": 0,
-                    "policies": []
+                    "policies": [],
+                    # Newly added: Add loop keys                
+                    "has_loop": False,
+                    "loop_policies": [],
+                    "loop_size": 0,
+                    "next_policy": None
                 }
                 
                 # Parse policy

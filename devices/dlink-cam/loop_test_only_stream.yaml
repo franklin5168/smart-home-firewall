@@ -12,7 +12,7 @@ interactions:
   stream-app-external:
     start-stream-wan: &id001
       dns-cam-server-a:
-        #bidirectional: true
+        bidirectional: true
         protocols:
           dns:
             domain-name: mp-eu-sas.auto.mydlink.com
@@ -55,7 +55,7 @@ interactions:
       stats:
         rate: 0
     loop:
-      #- dns-cam-server-a     
+      - dns-cam-server-a     
       - dns-cam-server-aaaa  
       - stun-bind-cam-server 
     next: udp-stream-wan     
