@@ -33,30 +33,21 @@ interactions:
             src: self
           udp:
             dst-port: 53
-        stats:
-          rate: 30/second
       stun-bind-cam-server:
-        bidirectional: true
+        #bidirectional: true
         protocols:
           ipv4:
             dst: mp-eu-sas.auto.mydlink.com
             src: self
           udp:
             dst-port: 3478
-        stats:
-          duration: 1
     udp-stream-wan:
-      bidirectional: true
+      #bidirectional: true
       protocols:
         ipv4:
           dst: external
           src: self
         udp: null
       stats:
-        rate: 0
-    loop:
-      #- dns-cam-server-a     
-      - dns-cam-server-aaaa  
-      - stun-bind-cam-server 
-    next: udp-stream-wan     
+        rate: 0   
 

@@ -2,13 +2,13 @@
   "interaction_idx": 1,
   "interactions": [
     {
-      "policy_idx": 3,
+      "policy_idx": 6,
       "max_state": 3,
       "nfq_id_base": 1000,
-      "nfq_id_offset": 3,
+      "nfq_id_offset": 6,
       "policies": [
         {
-          "Policy-0x7fdfda57e060": {
+          "Policy-0x7fabfc94df70": {
             "interaction_name": "stream-app-external",
             "name": "dns-cam-server-a",
             "profile_data": {
@@ -90,10 +90,11 @@
           }
         },
         {
-          "Policy-0x7fdfda246960": {
+          "Policy-0x7fabfc6402c0": {
             "interaction_name": "stream-app-external",
             "name": "dns-cam-server-aaaa",
             "profile_data": {
+              "bidirectional": true,
               "protocols": {
                 "dns": {
                   "domain-name": "mp-eu-sas.auto.mydlink.com",
@@ -106,6 +107,9 @@
                 "udp": {
                   "dst-port": 53
                 }
+              },
+              "stats": {
+                "rate": "30/second"
               }
             },
             "is_backward": false,
@@ -140,8 +144,13 @@
                 "match": 53
               }
             ],
-            "nft_stats": {},
-            "nft_match": "ip saddr 192.168.1.115 ip daddr 192.168.1.1 meta l4proto udp udp dport 53",
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "30/second"
+              }
+            },
+            "nft_match": "ip saddr 192.168.1.115 ip daddr 192.168.1.1 meta l4proto udp udp dport 53 limit rate 30/second",
             "queue_num": 1001,
             "nft_action": "log prefix \\\"stream-app-external#dns-cam-server-aaaa,,QUEUE\\\" group 100 queue num 1001",
             "nfq_matches": [
@@ -161,21 +170,113 @@
             "counters": {},
             "is_device": true,
             "other_host": {},
-            "is_bidirectional": false,
+            "is_bidirectional": true,
             "transient": false,
-            "periodic": false,
-            "one_off": true,
+            "periodic": true,
+            "one_off": false,
             "initiator": "",
             "is_loop_policy": true,
             "loop_role": "enter",
-            "loop_state": 1
+            "loop_state": 0
           }
         },
         {
-          "Policy-0x7fdfdb0ce900": {
+          "Policy-0x7fabf9b45f10": {
+            "interaction_name": "stream-app-external",
+            "name": "dns-cam-server-aaaa-backward",
+            "profile_data": {
+              "bidirectional": true,
+              "protocols": {
+                "dns": {
+                  "domain-name": "mp-eu-sas.auto.mydlink.com",
+                  "qtype": "AAAA"
+                },
+                "ipv4": {
+                  "dst": "gateway",
+                  "src": "self"
+                },
+                "udp": {
+                  "dst-port": 53
+                }
+              },
+              "stats": {
+                "rate": "30/second"
+              }
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "cache-validity": 100,
+              "ipv4": "192.168.1.115",
+              "is-supported": true,
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "mac": "b0:c5:54:43:54:83",
+              "mud-url": "https://dlink-cam.com/dlink-cam",
+              "mud-version": 1,
+              "name": "dlink-cam",
+              "network": "wireless"
+            },
+            "custom_parser": "dns",
+            "nft_matches": [
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.115"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "192.168.1.1"
+              },
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 53
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": "30/second"
+              }
+            },
+            "nft_match": "ip daddr 192.168.1.115 ip saddr 192.168.1.1 meta l4proto udp udp sport 53 limit rate 30/second",
+            "queue_num": 1001,
+            "nft_action": "log prefix \\\"stream-app-external#dns-cam-server-aaaa-backward,,QUEUE\\\" group 100 queue num 1001",
+            "nfq_matches": [
+              {
+                "template": "dns_message.header.qr == {}",
+                "match": 1
+              },
+              {
+                "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                "match": "AAAA"
+              },
+              {
+                "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                "match": "mp-eu-sas.auto.mydlink.com"
+              }
+            ],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": "",
+            "is_loop_policy": true,
+            "loop_role": "in_loop",
+            "loop_state": 0
+          }
+        },
+        {
+          "Policy-0x7fabf9b6d3d0": {
             "interaction_name": "stream-app-external",
             "name": "stun-bind-cam-server",
             "profile_data": {
+              "bidirectional": true,
               "protocols": {
                 "ipv4": {
                   "dst": "mp-eu-sas.auto.mydlink.com",
@@ -184,6 +285,9 @@
                 "udp": {
                   "dst-port": 3478
                 }
+              },
+              "stats": {
+                "duration": 1
               }
             },
             "is_backward": false,
@@ -216,21 +320,99 @@
             ],
             "nft_stats": {},
             "nft_match": "ip saddr 192.168.1.115 meta l4proto udp udp dport 3478",
-            "queue_num": 1001,
-            "nft_action": "log prefix \\\"stream-app-external#stun-bind-cam-server,,QUEUE\\\" group 100 queue num 1001",
+            "queue_num": 1002,
+            "nft_action": "log prefix \\\"stream-app-external#stun-bind-cam-server,,QUEUE\\\" group 100 queue num 1002",
             "nfq_matches": [
               {
                 "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
                 "match": "mp-eu-sas.auto.mydlink.com"
               }
             ],
-            "counters": {},
+            "counters": {
+              "duration": {
+                "default": 1000000
+              }
+            },
             "is_device": true,
             "other_host": {},
-            "is_bidirectional": false,
-            "transient": false,
+            "is_bidirectional": true,
+            "transient": true,
             "periodic": false,
-            "one_off": true,
+            "one_off": false,
+            "initiator": "",
+            "is_loop_policy": true,
+            "loop_role": "in_loop",
+            "loop_state": 2
+          }
+        },
+        {
+          "Policy-0x7fabf9b6e090": {
+            "interaction_name": "stream-app-external",
+            "name": "stun-bind-cam-server-backward",
+            "profile_data": {
+              "bidirectional": true,
+              "protocols": {
+                "ipv4": {
+                  "dst": "mp-eu-sas.auto.mydlink.com",
+                  "src": "self"
+                },
+                "udp": {
+                  "dst-port": 3478
+                }
+              },
+              "stats": {
+                "duration": 1
+              }
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "cache-validity": 100,
+              "ipv4": "192.168.1.115",
+              "is-supported": true,
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "mac": "b0:c5:54:43:54:83",
+              "mud-url": "https://dlink-cam.com/dlink-cam",
+              "mud-version": 1,
+              "name": "dlink-cam",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.115"
+              },
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              },
+              {
+                "template": "udp sport {}",
+                "match": 3478
+              }
+            ],
+            "nft_stats": {},
+            "nft_match": "ip daddr 192.168.1.115 meta l4proto udp udp sport 3478",
+            "queue_num": 1003,
+            "nft_action": "log prefix \\\"stream-app-external#stun-bind-cam-server-backward,,QUEUE\\\" group 100 queue num 1003",
+            "nfq_matches": [
+              {
+                "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                "match": "mp-eu-sas.auto.mydlink.com"
+              }
+            ],
+            "counters": {
+              "duration": {
+                "default": 1000000
+              }
+            },
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": true,
+            "periodic": false,
+            "one_off": false,
             "initiator": "",
             "is_loop_policy": true,
             "loop_role": "exit",
@@ -238,10 +420,11 @@
           }
         },
         {
-          "Policy-0x7fdfd857fbf0": {
+          "Policy-0x7fabf9b6ce60": {
             "interaction_name": "stream-app-external",
             "name": "udp-stream-wan",
             "profile_data": {
+              "bidirectional": true,
               "protocols": {
                 "ipv4": {
                   "dst": "external",
@@ -288,13 +471,13 @@
               }
             },
             "nft_match": "ip saddr 192.168.1.115 ip daddr != 192.168.0.0/16 meta l4proto udp limit rate 0",
-            "queue_num": 1002,
-            "nft_action": "log prefix \\\"stream-app-external#udp-stream-wan,,QUEUE\\\" group 100 queue num 1002",
+            "queue_num": 1004,
+            "nft_action": "log prefix \\\"stream-app-external#udp-stream-wan,,QUEUE\\\" group 100 queue num 1004",
             "nfq_matches": [],
             "counters": {},
             "is_device": true,
             "other_host": {},
-            "is_bidirectional": false,
+            "is_bidirectional": true,
             "transient": false,
             "periodic": true,
             "one_off": false,
@@ -303,12 +486,82 @@
             "loop_role": "next",
             "loop_state": -1
           }
+        },
+        {
+          "Policy-0x7fabf9b6d640": {
+            "interaction_name": "stream-app-external",
+            "name": "udp-stream-wan-backward",
+            "profile_data": {
+              "bidirectional": true,
+              "protocols": {
+                "ipv4": {
+                  "dst": "external",
+                  "src": "self"
+                },
+                "udp": null
+              },
+              "stats": {
+                "rate": 0
+              }
+            },
+            "is_backward": true,
+            "in_interaction": true,
+            "device": {
+              "cache-validity": 100,
+              "ipv4": "192.168.1.115",
+              "is-supported": true,
+              "last-update": "2022-03-15T10:27:29.170+01:00",
+              "mac": "b0:c5:54:43:54:83",
+              "mud-url": "https://dlink-cam.com/dlink-cam",
+              "mud-version": 1,
+              "name": "dlink-cam",
+              "network": "wireless"
+            },
+            "custom_parser": "",
+            "nft_matches": [
+              {
+                "template": "ip daddr {}",
+                "match": "192.168.1.115"
+              },
+              {
+                "template": "ip saddr {}",
+                "match": "!= 192.168.0.0/16"
+              },
+              {
+                "template": "meta l4proto {}",
+                "match": "udp"
+              }
+            ],
+            "nft_stats": {
+              "rate": {
+                "template": "limit rate {}",
+                "match": 0
+              }
+            },
+            "nft_match": "ip daddr 192.168.1.115 ip saddr != 192.168.0.0/16 meta l4proto udp limit rate 0",
+            "queue_num": 1005,
+            "nft_action": "log prefix \\\"stream-app-external#udp-stream-wan-backward,,QUEUE\\\" group 100 queue num 1005",
+            "nfq_matches": [],
+            "counters": {},
+            "is_device": true,
+            "other_host": {},
+            "is_bidirectional": true,
+            "transient": false,
+            "periodic": true,
+            "one_off": false,
+            "initiator": "",
+            "is_loop_policy": false,
+            "loop_role": "",
+            "loop_state": -1
+          }
         }
       ],
       "has_loop": true,
       "loop_policies": [
         "dns-cam-server-aaaa",
-        "stun-bind-cam-server"
+        "dns-cam-server-aaaa-backward",
+        "stun-bind-cam-server",
+        "stun-bind-cam-server-backward"
       ],
       "loop_size": 2,
       "next_policy": "udp-stream-wan"
@@ -319,7 +572,7 @@
   ],
   "nfqueues": [
     {
-      "NFQueue-0x7fdfda41f680": {
+      "NFQueue-0x7fabfcaf7b00": {
         "name": "stream-app-external#dns-cam-server-a",
         "queue_num": 1000,
         "policies": [
@@ -328,7 +581,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7fdfda57e060": {
+              "Policy-0x7fabfc94df70": {
                 "interaction_name": "stream-app-external",
                 "name": "dns-cam-server-a",
                 "profile_data": {
@@ -414,12 +667,13 @@
           {
             "interaction_idx": 0,
             "policy_idx": 1,
-            "state": 1,
+            "state": 0,
             "policy": {
-              "Policy-0x7fdfda246960": {
+              "Policy-0x7fabfc6402c0": {
                 "interaction_name": "stream-app-external",
                 "name": "dns-cam-server-aaaa",
                 "profile_data": {
+                  "bidirectional": true,
                   "protocols": {
                     "dns": {
                       "domain-name": "mp-eu-sas.auto.mydlink.com",
@@ -432,6 +686,9 @@
                     "udp": {
                       "dst-port": 53
                     }
+                  },
+                  "stats": {
+                    "rate": "30/second"
                   }
                 },
                 "is_backward": false,
@@ -466,8 +723,13 @@
                     "match": 53
                   }
                 ],
-                "nft_stats": {},
-                "nft_match": "ip saddr 192.168.1.115 ip daddr 192.168.1.1 meta l4proto udp udp dport 53",
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "30/second"
+                  }
+                },
+                "nft_match": "ip saddr 192.168.1.115 ip daddr 192.168.1.1 meta l4proto udp udp dport 53 limit rate 30/second",
                 "queue_num": 1001,
                 "nft_action": "log prefix \\\"stream-app-external#dns-cam-server-aaaa,,QUEUE\\\" group 100 queue num 1001",
                 "nfq_matches": [
@@ -487,14 +749,14 @@
                 "counters": {},
                 "is_device": true,
                 "other_host": {},
-                "is_bidirectional": false,
+                "is_bidirectional": true,
                 "transient": false,
-                "periodic": false,
-                "one_off": true,
+                "periodic": true,
+                "one_off": false,
                 "initiator": "",
                 "is_loop_policy": true,
                 "loop_role": "enter",
-                "loop_state": 1
+                "loop_state": 0
               }
             },
             "counters_idx": {}
@@ -518,23 +780,158 @@
             "match": 53
           }
         ],
-        "nft_stats": {}
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "30/second"
+          }
+        }
       }
     },
     {
-      "NFQueue-0x7fdfda508500": {
-        "name": "stream-app-external#stun-bind-cam-server",
+      "NFQueue-0x7fabf9b6cf80": {
+        "name": "stream-app-external#dns-cam-server-aaaa-backward",
         "queue_num": 1001,
         "policies": [
           {
             "interaction_idx": 0,
             "policy_idx": 2,
+            "state": 0,
+            "policy": {
+              "Policy-0x7fabf9b45f10": {
+                "interaction_name": "stream-app-external",
+                "name": "dns-cam-server-aaaa-backward",
+                "profile_data": {
+                  "bidirectional": true,
+                  "protocols": {
+                    "dns": {
+                      "domain-name": "mp-eu-sas.auto.mydlink.com",
+                      "qtype": "AAAA"
+                    },
+                    "ipv4": {
+                      "dst": "gateway",
+                      "src": "self"
+                    },
+                    "udp": {
+                      "dst-port": 53
+                    }
+                  },
+                  "stats": {
+                    "rate": "30/second"
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "cache-validity": 100,
+                  "ipv4": "192.168.1.115",
+                  "is-supported": true,
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "mac": "b0:c5:54:43:54:83",
+                  "mud-url": "https://dlink-cam.com/dlink-cam",
+                  "mud-version": 1,
+                  "name": "dlink-cam",
+                  "network": "wireless"
+                },
+                "custom_parser": "dns",
+                "nft_matches": [
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.115"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "192.168.1.1"
+                  },
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 53
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": "30/second"
+                  }
+                },
+                "nft_match": "ip daddr 192.168.1.115 ip saddr 192.168.1.1 meta l4proto udp udp sport 53 limit rate 30/second",
+                "queue_num": 1001,
+                "nft_action": "log prefix \\\"stream-app-external#dns-cam-server-aaaa-backward,,QUEUE\\\" group 100 queue num 1001",
+                "nfq_matches": [
+                  {
+                    "template": "dns_message.header.qr == {}",
+                    "match": 1
+                  },
+                  {
+                    "template": "( dns_message.header.qdcount > 0 && dns_message.questions->qtype == {} )",
+                    "match": "AAAA"
+                  },
+                  {
+                    "template": "dns_contains_full_domain_name(dns_message.questions, dns_message.header.qdcount, \"{}\")",
+                    "match": "mp-eu-sas.auto.mydlink.com"
+                  }
+                ],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": "",
+                "is_loop_policy": true,
+                "loop_role": "in_loop",
+                "loop_state": 0
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.115"
+          },
+          {
+            "template": "ip saddr {}",
+            "match": "192.168.1.1"
+          },
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 53
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": "30/second"
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fabf9b6e960": {
+        "name": "stream-app-external#stun-bind-cam-server",
+        "queue_num": 1002,
+        "policies": [
+          {
+            "interaction_idx": 0,
+            "policy_idx": 3,
             "state": 2,
             "policy": {
-              "Policy-0x7fdfdb0ce900": {
+              "Policy-0x7fabf9b6d3d0": {
                 "interaction_name": "stream-app-external",
                 "name": "stun-bind-cam-server",
                 "profile_data": {
+                  "bidirectional": true,
                   "protocols": {
                     "ipv4": {
                       "dst": "mp-eu-sas.auto.mydlink.com",
@@ -543,6 +940,9 @@
                     "udp": {
                       "dst-port": 3478
                     }
+                  },
+                  "stats": {
+                    "duration": 1
                   }
                 },
                 "is_backward": false,
@@ -575,28 +975,34 @@
                 ],
                 "nft_stats": {},
                 "nft_match": "ip saddr 192.168.1.115 meta l4proto udp udp dport 3478",
-                "queue_num": 1001,
-                "nft_action": "log prefix \\\"stream-app-external#stun-bind-cam-server,,QUEUE\\\" group 100 queue num 1001",
+                "queue_num": 1002,
+                "nft_action": "log prefix \\\"stream-app-external#stun-bind-cam-server,,QUEUE\\\" group 100 queue num 1002",
                 "nfq_matches": [
                   {
                     "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = dst_addr}}) )",
                     "match": "mp-eu-sas.auto.mydlink.com"
                   }
                 ],
-                "counters": {},
+                "counters": {
+                  "duration": {
+                    "default": 1000000
+                  }
+                },
                 "is_device": true,
                 "other_host": {},
-                "is_bidirectional": false,
-                "transient": false,
+                "is_bidirectional": true,
+                "transient": true,
                 "periodic": false,
-                "one_off": true,
+                "one_off": false,
                 "initiator": "",
                 "is_loop_policy": true,
-                "loop_role": "exit",
+                "loop_role": "in_loop",
                 "loop_state": 2
               }
             },
-            "counters_idx": {}
+            "counters_idx": {
+              "duration": 3
+            }
           }
         ],
         "nft_matches": [
@@ -617,19 +1023,125 @@
       }
     },
     {
-      "NFQueue-0x7fdfd8520230": {
-        "name": "stream-app-external#udp-stream-wan",
-        "queue_num": 1002,
+      "NFQueue-0x7fabf9b6cce0": {
+        "name": "stream-app-external#stun-bind-cam-server-backward",
+        "queue_num": 1003,
         "policies": [
           {
             "interaction_idx": 0,
-            "policy_idx": 3,
-            "state": 3,
+            "policy_idx": 4,
+            "state": 2,
             "policy": {
-              "Policy-0x7fdfd857fbf0": {
+              "Policy-0x7fabf9b6e090": {
+                "interaction_name": "stream-app-external",
+                "name": "stun-bind-cam-server-backward",
+                "profile_data": {
+                  "bidirectional": true,
+                  "protocols": {
+                    "ipv4": {
+                      "dst": "mp-eu-sas.auto.mydlink.com",
+                      "src": "self"
+                    },
+                    "udp": {
+                      "dst-port": 3478
+                    }
+                  },
+                  "stats": {
+                    "duration": 1
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "cache-validity": 100,
+                  "ipv4": "192.168.1.115",
+                  "is-supported": true,
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "mac": "b0:c5:54:43:54:83",
+                  "mud-url": "https://dlink-cam.com/dlink-cam",
+                  "mud-version": 1,
+                  "name": "dlink-cam",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.115"
+                  },
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  },
+                  {
+                    "template": "udp sport {}",
+                    "match": 3478
+                  }
+                ],
+                "nft_stats": {},
+                "nft_match": "ip daddr 192.168.1.115 meta l4proto udp udp sport 3478",
+                "queue_num": 1003,
+                "nft_action": "log prefix \\\"stream-app-external#stun-bind-cam-server-backward,,QUEUE\\\" group 100 queue num 1003",
+                "nfq_matches": [
+                  {
+                    "template": "( compare_ip((ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}, interactions_data[{}].cached_ip) || dns_entry_contains(dns_map_get(dns_map, \"{}\"), (ip_addr_t) {{.version = 4, .value.ipv4 = src_addr}}) )",
+                    "match": "mp-eu-sas.auto.mydlink.com"
+                  }
+                ],
+                "counters": {
+                  "duration": {
+                    "default": 1000000
+                  }
+                },
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": true,
+                "periodic": false,
+                "one_off": false,
+                "initiator": "",
+                "is_loop_policy": true,
+                "loop_role": "exit",
+                "loop_state": 2
+              }
+            },
+            "counters_idx": {
+              "duration": 3
+            }
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.115"
+          },
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          },
+          {
+            "template": "udp sport {}",
+            "match": 3478
+          }
+        ],
+        "nft_stats": {}
+      }
+    },
+    {
+      "NFQueue-0x7fabf9b6ccb0": {
+        "name": "stream-app-external#udp-stream-wan",
+        "queue_num": 1004,
+        "policies": [
+          {
+            "interaction_idx": 0,
+            "policy_idx": 5,
+            "state": 2,
+            "policy": {
+              "Policy-0x7fabf9b6ce60": {
                 "interaction_name": "stream-app-external",
                 "name": "udp-stream-wan",
                 "profile_data": {
+                  "bidirectional": true,
                   "protocols": {
                     "ipv4": {
                       "dst": "external",
@@ -676,13 +1188,13 @@
                   }
                 },
                 "nft_match": "ip saddr 192.168.1.115 ip daddr != 192.168.0.0/16 meta l4proto udp limit rate 0",
-                "queue_num": 1002,
-                "nft_action": "log prefix \\\"stream-app-external#udp-stream-wan,,QUEUE\\\" group 100 queue num 1002",
+                "queue_num": 1004,
+                "nft_action": "log prefix \\\"stream-app-external#udp-stream-wan,,QUEUE\\\" group 100 queue num 1004",
                 "nfq_matches": [],
                 "counters": {},
                 "is_device": true,
                 "other_host": {},
-                "is_bidirectional": false,
+                "is_bidirectional": true,
                 "transient": false,
                 "periodic": true,
                 "one_off": false,
@@ -702,6 +1214,108 @@
           },
           {
             "template": "ip daddr {}",
+            "match": "!= 192.168.0.0/16"
+          },
+          {
+            "template": "meta l4proto {}",
+            "match": "udp"
+          }
+        ],
+        "nft_stats": {
+          "rate": {
+            "template": "limit rate {}",
+            "match": 0
+          }
+        }
+      }
+    },
+    {
+      "NFQueue-0x7fabf9b6d370": {
+        "name": "stream-app-external#udp-stream-wan-backward",
+        "queue_num": 1005,
+        "policies": [
+          {
+            "interaction_idx": 0,
+            "policy_idx": 6,
+            "state": 3,
+            "policy": {
+              "Policy-0x7fabf9b6d640": {
+                "interaction_name": "stream-app-external",
+                "name": "udp-stream-wan-backward",
+                "profile_data": {
+                  "bidirectional": true,
+                  "protocols": {
+                    "ipv4": {
+                      "dst": "external",
+                      "src": "self"
+                    },
+                    "udp": null
+                  },
+                  "stats": {
+                    "rate": 0
+                  }
+                },
+                "is_backward": true,
+                "in_interaction": true,
+                "device": {
+                  "cache-validity": 100,
+                  "ipv4": "192.168.1.115",
+                  "is-supported": true,
+                  "last-update": "2022-03-15T10:27:29.170+01:00",
+                  "mac": "b0:c5:54:43:54:83",
+                  "mud-url": "https://dlink-cam.com/dlink-cam",
+                  "mud-version": 1,
+                  "name": "dlink-cam",
+                  "network": "wireless"
+                },
+                "custom_parser": "",
+                "nft_matches": [
+                  {
+                    "template": "ip daddr {}",
+                    "match": "192.168.1.115"
+                  },
+                  {
+                    "template": "ip saddr {}",
+                    "match": "!= 192.168.0.0/16"
+                  },
+                  {
+                    "template": "meta l4proto {}",
+                    "match": "udp"
+                  }
+                ],
+                "nft_stats": {
+                  "rate": {
+                    "template": "limit rate {}",
+                    "match": 0
+                  }
+                },
+                "nft_match": "ip daddr 192.168.1.115 ip saddr != 192.168.0.0/16 meta l4proto udp limit rate 0",
+                "queue_num": 1005,
+                "nft_action": "log prefix \\\"stream-app-external#udp-stream-wan-backward,,QUEUE\\\" group 100 queue num 1005",
+                "nfq_matches": [],
+                "counters": {},
+                "is_device": true,
+                "other_host": {},
+                "is_bidirectional": true,
+                "transient": false,
+                "periodic": true,
+                "one_off": false,
+                "initiator": "",
+                "is_loop_policy": false,
+                "loop_role": "",
+                "loop_state": -1
+              }
+            },
+            "counters_idx": {}
+          }
+        ],
+        "nft_matches": [
+          {
+            "template": "ip daddr {}",
+            "match": "192.168.1.115"
+          },
+          {
+            "template": "ip saddr {}",
             "match": "!= 192.168.0.0/16"
           },
           {

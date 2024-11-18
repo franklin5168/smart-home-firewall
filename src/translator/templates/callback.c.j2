@@ -186,14 +186,15 @@ uint32_t callback_{{nfqueue_name}}(int pkt_id, int pkt_len, uint8_t *payload, vo
     {% set duration = "(interactions_data[{}].counters + {})->duration".format(interaction_idx, counters_idx["duration"]) %}
     {% endif %}
     {% endif %}
-    {# Newly added: Initialize variables using namespace #}
-    {% set vars = namespace(exit_policy=None, exit_state=None, before_exit_policy=None) %}
+    {# Newly added: Initialize variables using namespace {% set policy_idx = policy_dict["policy_idx"] %}#}
+    {% set vars = namespace(exit_policy=None, exit_state=None, exit_policy_idx=None, before_exit_policy=None) %}
     {# Newly added: Find exit policy and before_exit_policy from all nfqueues #}
     {% for nfq in nfqueues %}
         {% for policy_dict in nfq.policies %}
             {% if policy_dict["policy"].is_loop_policy and policy_dict["policy"].loop_role == "exit" %}
                 {% set vars.exit_policy = policy_dict["policy"] %}
                 {% set vars.exit_state = policy_dict["state"] %}
+                {% set vars.exit_policy_idx = policy_dict["policy_idx"] %}
             {% endif %}
             {% if policy_dict["policy"].name == interaction["loop_policies"][-2] %}
                 {% set vars.before_exit_policy = policy_dict["policy"] %}
@@ -224,7 +225,9 @@ uint32_t callback_{{nfqueue_name}}(int pkt_id, int pkt_len, uint8_t *payload, vo
         {%elif vars.exit_policy.transient%}
         ({{interaction_data}}.current_state == {{vars.exit_state}} || {{interaction_data}}.current_state == {{(vars.exit_state + 1) % (max_state + 1)}})
         {%elif vars.exit_policy.periodic%}
-        {%if vars.before_exit_policy.transient %}
+        {%if vars.exit_policy_idx != num_policies - 1 %}
+        {{interaction_data}}.current_state == {{(vars.exit_state + 1) % (max_state + 1)}}
+        {%elif vars.before_exit_policy.transient %}
         {{interaction_data}}.current_state == {{(vars.exit_state + 1) % (max_state + 1)}}
         {%else%}
         {{interaction_data}}.current_state == {{vars.exit_state}}

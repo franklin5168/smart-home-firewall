@@ -33,8 +33,6 @@ interactions:
             src: self
           udp:
             dst-port: 53
-        stats:
-          rate: 30/second
       stun-bind-cam-server:
         bidirectional: true
         protocols:
