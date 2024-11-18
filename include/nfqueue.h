@@ -38,8 +38,6 @@ typedef struct {
 
     // Newly added: New fields for loop support
     bool in_loop;           // Whether currently in a loop
-    uint8_t loop_state;     // Current state within the loop
-    uint8_t next_after_loop;// State to transition to after exiting the loop
 } interaction_data_t;
 
 /**
