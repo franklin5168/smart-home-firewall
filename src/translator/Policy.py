@@ -66,7 +66,7 @@ class Policy:
 
         # Newly added: Add new loop-related attributes
         self.is_loop_policy = False     # Whether this policy is part of a loop
-        self.loop_role = ""             # Role in loop: "enter", "in_loop", "exit", "after_loop", or ""
+        self.loop_role = ""             # Role in terms of loop: "enter", "exit", "next", or ""
 
 
     def __eq__(self, other: object) -> bool:
