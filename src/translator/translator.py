@@ -120,7 +120,6 @@ def parse_policy(policy_data: dict, interaction_data: dict, global_accs: dict, p
     if interaction_data["has_loop"]:
         if policy_data["policy_name"] in interaction_data["loop_policies"]:
             policy.is_loop_policy = True
-            policy.loop_state = interaction_data["max_state"]
             # Determine role based on position in loop_policies
             if policy_data["policy_name"] == interaction_data["loop_policies"][0]:
                 policy.loop_role = "enter"

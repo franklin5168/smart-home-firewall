@@ -67,7 +67,6 @@ class Policy:
         # Newly added: Add new loop-related attributes
         self.is_loop_policy = False     # Whether this policy is part of a loop
         self.loop_role = ""             # Role in loop: "enter", "in_loop", "exit", "after_loop", or ""
-        self.loop_state = -1            # State number in the loop (-1 if not in loop)
 
 
     def __eq__(self, other: object) -> bool:
@@ -96,8 +95,7 @@ class Policy:
                  self.periodic == other.periodic and
                  # Newly added: Add new loop-related attribute comparisons
                  self.is_loop_policy == other.is_loop_policy and
-                 self.loop_role == other.loop_role and
-                 self.loop_state == other.loop_state)
+                 self.loop_role == other.loop_role)
                 
 
 

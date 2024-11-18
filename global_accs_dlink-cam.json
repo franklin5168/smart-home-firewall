@@ -8,7 +8,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f7387cade20": {
+          "Policy-0x7fbfa92a81a0": {
             "interaction_name": "single",
             "name": "dns-ipv4",
             "profile_data": {
@@ -116,12 +116,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f7387bad8e0": {
+          "Policy-0x7fbfa91ccce0": {
             "interaction_name": "single",
             "name": "dns-ipv4-backward",
             "profile_data": {
@@ -229,8 +228,7 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -245,7 +243,7 @@
       "nfq_id_offset": 1,
       "policies": [
         {
-          "Policy-0x7f73889679b0": {
+          "Policy-0x7fbfa9094c20": {
             "interaction_name": "single",
             "name": "igmp-join-mdns",
             "profile_data": {
@@ -312,8 +310,7 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -328,7 +325,7 @@
       "nfq_id_offset": 1,
       "policies": [
         {
-          "Policy-0x7f73851f0a10": {
+          "Policy-0x7fbfa9094590": {
             "interaction_name": "single",
             "name": "mdns-query-any",
             "profile_data": {
@@ -422,8 +419,7 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -438,7 +434,7 @@
       "nfq_id_offset": 0,
       "policies": [
         {
-          "Policy-0x7f73851f02f0": {
+          "Policy-0x7fbfa9094410": {
             "interaction_name": "single",
             "name": "mdns-query-ptr",
             "profile_data": {
@@ -520,8 +516,7 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -536,7 +531,7 @@
       "nfq_id_offset": 0,
       "policies": [
         {
-          "Policy-0x7f73851703e0": {
+          "Policy-0x7fbfa9094b00": {
             "interaction_name": "single",
             "name": "mdns-response",
             "profile_data": {
@@ -609,8 +604,7 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -625,7 +619,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f0b30": {
+          "Policy-0x7fbfa9094f20": {
             "interaction_name": "single",
             "name": "tcp-traffic-phone-cam",
             "profile_data": {
@@ -694,12 +688,11 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f0b90": {
+          "Policy-0x7fbfa9094d40": {
             "interaction_name": "single",
             "name": "tcp-traffic-phone-cam-backward",
             "profile_data": {
@@ -768,8 +761,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -784,7 +776,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f0d10": {
+          "Policy-0x7fbfa9094e00": {
             "interaction_name": "arp-cam-gateway",
             "name": "arp-reply-gateway-cam",
             "profile_data": {
@@ -848,12 +840,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f0f80": {
+          "Policy-0x7fbfa9094ef0": {
             "interaction_name": "arp-cam-gateway",
             "name": "arp-request-cam-gateway",
             "profile_data": {
@@ -917,8 +908,7 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -933,7 +923,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f0f20": {
+          "Policy-0x7fbfa9094fe0": {
             "interaction_name": "arp-camera-phone",
             "name": "arp-reply-phone-cam",
             "profile_data": {
@@ -997,12 +987,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f1700": {
+          "Policy-0x7fbfa9095610": {
             "interaction_name": "arp-camera-phone",
             "name": "arp-request-cam-phone",
             "profile_data": {
@@ -1066,8 +1055,7 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -1082,7 +1070,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f1400": {
+          "Policy-0x7fbfa90956d0": {
             "interaction_name": "arp-gateway-cam",
             "name": "arp-reply-cam-gateway",
             "profile_data": {
@@ -1146,12 +1134,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f1790": {
+          "Policy-0x7fbfa9095760": {
             "interaction_name": "arp-gateway-cam",
             "name": "arp-request-gateway-cam",
             "profile_data": {
@@ -1223,8 +1210,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -1239,7 +1225,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f1610": {
+          "Policy-0x7fbfa9095880": {
             "interaction_name": "arp-phone-camera",
             "name": "arp-reply-cam-phone",
             "profile_data": {
@@ -1303,12 +1289,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f1910": {
+          "Policy-0x7fbfa90958e0": {
             "interaction_name": "arp-phone-camera",
             "name": "arp-request-phone-cam",
             "profile_data": {
@@ -1380,8 +1365,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -1396,7 +1380,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f1760": {
+          "Policy-0x7fbfa9095a00": {
             "interaction_name": "bootstrap-stream-wan",
             "name": "dns-cam-sas-1-a",
             "profile_data": {
@@ -1474,12 +1458,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f7385279be0": {
+          "Policy-0x7fbfabc440b0": {
             "interaction_name": "bootstrap-stream-wan",
             "name": "dns-cam-sas-1-a-backward",
             "profile_data": {
@@ -1557,12 +1540,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f18b0": {
+          "Policy-0x7fbfac1044d0": {
             "interaction_name": "bootstrap-stream-wan",
             "name": "dns-cam-sas-1-aaaa",
             "profile_data": {
@@ -1640,12 +1622,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f1a00": {
+          "Policy-0x7fbfa9095c10": {
             "interaction_name": "bootstrap-stream-wan",
             "name": "dns-cam-sas-1-aaaa-backward",
             "profile_data": {
@@ -1723,12 +1704,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f18e0": {
+          "Policy-0x7fbfa9095910": {
             "interaction_name": "bootstrap-stream-wan",
             "name": "http-relay-cam-sas-1",
             "profile_data": {
@@ -1813,12 +1793,11 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f1b50": {
+          "Policy-0x7fbfa90944d0": {
             "interaction_name": "bootstrap-stream-wan",
             "name": "http-relay-cam-sas-1-backward",
             "profile_data": {
@@ -1895,8 +1874,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -1911,7 +1889,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f1b80": {
+          "Policy-0x7fbfa9095ca0": {
             "interaction_name": "get-ip-address",
             "name": "dhcp-ack",
             "profile_data": {
@@ -1989,12 +1967,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f738520e9c0": {
+          "Policy-0x7fbfa9096150": {
             "interaction_name": "get-ip-address",
             "name": "dhcp-discover",
             "profile_data": {
@@ -2072,12 +2049,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2060": {
+          "Policy-0x7fbfa9095df0": {
             "interaction_name": "get-ip-address",
             "name": "dhcp-offer",
             "profile_data": {
@@ -2155,12 +2131,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f7388154ce0": {
+          "Policy-0x7fbfa9096360": {
             "interaction_name": "get-ip-address",
             "name": "dhcp-request",
             "profile_data": {
@@ -2238,8 +2213,7 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -2254,7 +2228,7 @@
       "nfq_id_offset": 0,
       "policies": [
         {
-          "Policy-0x7f738514dfa0": {
+          "Policy-0x7fbfa9096510": {
             "interaction_name": "http-head-boot",
             "name": "dns-cam-ca-mgr",
             "profile_data": {
@@ -2332,12 +2306,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2ba0": {
+          "Policy-0x7fbfa90962d0": {
             "interaction_name": "http-head-boot",
             "name": "dns-cam-ca-mgr-backward",
             "profile_data": {
@@ -2415,12 +2388,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2b40": {
+          "Policy-0x7fbfa9095e20": {
             "interaction_name": "http-head-boot",
             "name": "http-head-cam-cloud",
             "profile_data": {
@@ -2505,12 +2477,11 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2480": {
+          "Policy-0x7fbfa90964b0": {
             "interaction_name": "http-head-boot",
             "name": "http-head-cam-cloud-backward",
             "profile_data": {
@@ -2587,8 +2558,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -2603,7 +2573,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f23f0": {
+          "Policy-0x7fbfa9096240": {
             "interaction_name": "https-boot-cam-fwd",
             "name": "dns-cam-fwd",
             "profile_data": {
@@ -2681,12 +2651,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f24b0": {
+          "Policy-0x7fbfa9096420": {
             "interaction_name": "https-boot-cam-fwd",
             "name": "dns-cam-fwd-backward",
             "profile_data": {
@@ -2764,12 +2733,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f25d0": {
+          "Policy-0x7fbfa90965d0": {
             "interaction_name": "https-boot-cam-fwd",
             "name": "https-cam-fwd",
             "profile_data": {
@@ -2838,12 +2806,11 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2420": {
+          "Policy-0x7fbfa9096450": {
             "interaction_name": "https-boot-cam-fwd",
             "name": "https-cam-fwd-backward",
             "profile_data": {
@@ -2912,8 +2879,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -2928,7 +2894,7 @@
       "nfq_id_offset": 0,
       "policies": [
         {
-          "Policy-0x7f73851f24e0": {
+          "Policy-0x7fbfa9096810": {
             "interaction_name": "https-dcdda",
             "name": "dns-cam-dcdda",
             "profile_data": {
@@ -3006,12 +2972,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2720": {
+          "Policy-0x7fbfa90967b0": {
             "interaction_name": "https-dcdda",
             "name": "dns-cam-dcdda-backward",
             "profile_data": {
@@ -3089,12 +3054,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2750": {
+          "Policy-0x7fbfa9096630": {
             "interaction_name": "https-dcdda",
             "name": "https-cam-dcdda",
             "profile_data": {
@@ -3164,12 +3128,11 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f25a0": {
+          "Policy-0x7fbfaced31a0": {
             "interaction_name": "https-dcdda",
             "name": "https-cam-dcdda-backward",
             "profile_data": {
@@ -3239,8 +3202,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -3255,7 +3217,7 @@
       "nfq_id_offset": 4,
       "policies": [
         {
-          "Policy-0x7f73851f27e0": {
+          "Policy-0x7fbfa90968a0": {
             "interaction_name": "stream-app-external",
             "name": "dns-cam-server-a",
             "profile_data": {
@@ -3333,12 +3295,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": true,
-            "loop_role": "enter",
-            "loop_state": 0
+            "loop_role": "enter"
           }
         },
         {
-          "Policy-0x7f73851f28a0": {
+          "Policy-0x7fbfa9096660": {
             "interaction_name": "stream-app-external",
             "name": "dns-cam-server-a-backward",
             "profile_data": {
@@ -3416,12 +3377,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": true,
-            "loop_role": "in_loop",
-            "loop_state": 1
+            "loop_role": "in_loop"
           }
         },
         {
-          "Policy-0x7f73851f27b0": {
+          "Policy-0x7fbfa9096b40": {
             "interaction_name": "stream-app-external",
             "name": "dns-cam-server-aaaa",
             "profile_data": {
@@ -3499,12 +3459,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": true,
-            "loop_role": "in_loop",
-            "loop_state": 2
+            "loop_role": "in_loop"
           }
         },
         {
-          "Policy-0x7f73851f28d0": {
+          "Policy-0x7fbfa9096b70": {
             "interaction_name": "stream-app-external",
             "name": "dns-cam-server-aaaa-backward",
             "profile_data": {
@@ -3582,12 +3541,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": true,
-            "loop_role": "in_loop",
-            "loop_state": 3
+            "loop_role": "in_loop"
           }
         },
         {
-          "Policy-0x7f73851f2780": {
+          "Policy-0x7fbfa90967e0": {
             "interaction_name": "stream-app-external",
             "name": "stun-bind-cam-server",
             "profile_data": {
@@ -3649,12 +3607,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": true,
-            "loop_role": "in_loop",
-            "loop_state": 4
+            "loop_role": "in_loop"
           }
         },
         {
-          "Policy-0x7f73851f2900": {
+          "Policy-0x7fbfa9096b10": {
             "interaction_name": "stream-app-external",
             "name": "stun-bind-cam-server-backward",
             "profile_data": {
@@ -3716,12 +3673,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": true,
-            "loop_role": "exit",
-            "loop_state": 5
+            "loop_role": "exit"
           }
         },
         {
-          "Policy-0x7f73851f2a20": {
+          "Policy-0x7fbfa9097440": {
             "interaction_name": "stream-app-external",
             "name": "udp-stream-wan",
             "profile_data": {
@@ -3784,12 +3740,11 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "next",
-            "loop_state": -1
+            "loop_role": "next"
           }
         },
         {
-          "Policy-0x7f73851f2cc0": {
+          "Policy-0x7fbfa9096c30": {
             "interaction_name": "stream-app-external",
             "name": "udp-stream-wan-backward",
             "profile_data": {
@@ -3852,8 +3807,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -3875,7 +3829,7 @@
       "nfq_id_offset": 2,
       "policies": [
         {
-          "Policy-0x7f73851f2c60": {
+          "Policy-0x7fbfa9096c60": {
             "interaction_name": "stream-app-local",
             "name": "dns-cam-server-a",
             "profile_data": {
@@ -3953,12 +3907,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2b70": {
+          "Policy-0x7fbfa9096bd0": {
             "interaction_name": "stream-app-local",
             "name": "dns-cam-server-a-backward",
             "profile_data": {
@@ -4036,12 +3989,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2c00": {
+          "Policy-0x7fbfa9096d80": {
             "interaction_name": "stream-app-local",
             "name": "dns-cam-server-aaaa",
             "profile_data": {
@@ -4119,12 +4071,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2930": {
+          "Policy-0x7fbfa9096ab0": {
             "interaction_name": "stream-app-local",
             "name": "dns-cam-server-aaaa-backward",
             "profile_data": {
@@ -4202,12 +4153,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f3590": {
+          "Policy-0x7fbfa9096e40": {
             "interaction_name": "stream-app-local",
             "name": "stun-bind-cam-server",
             "profile_data": {
@@ -4269,12 +4219,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2e40": {
+          "Policy-0x7fbfa9096c90": {
             "interaction_name": "stream-app-local",
             "name": "stun-bind-cam-server-backward",
             "profile_data": {
@@ -4336,12 +4285,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2d20": {
+          "Policy-0x7fbfa9096de0": {
             "interaction_name": "stream-app-local",
             "name": "udp-stream-lan",
             "profile_data": {
@@ -4404,12 +4352,11 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2f00": {
+          "Policy-0x7fbfa9097020": {
             "interaction_name": "stream-app-local",
             "name": "udp-stream-lan-backward",
             "profile_data": {
@@ -4472,8 +4419,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -4488,7 +4434,7 @@
       "nfq_id_offset": 0,
       "policies": [
         {
-          "Policy-0x7f73851f2d50": {
+          "Policy-0x7fbfa9096f30": {
             "interaction_name": "websocket-sas-1",
             "name": "dns-cam-sas-1",
             "profile_data": {
@@ -4566,12 +4512,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2de0": {
+          "Policy-0x7fbfa9096f60": {
             "interaction_name": "websocket-sas-1",
             "name": "dns-cam-sas-1-backward",
             "profile_data": {
@@ -4649,12 +4594,11 @@
             "one_off": true,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f3020": {
+          "Policy-0x7fbfa9096ea0": {
             "interaction_name": "websocket-sas-1",
             "name": "websocket-cam-sas-1",
             "profile_data": {
@@ -4724,12 +4668,11 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         },
         {
-          "Policy-0x7f73851f2db0": {
+          "Policy-0x7fbfa9096ed0": {
             "interaction_name": "websocket-sas-1",
             "name": "websocket-cam-sas-1-backward",
             "profile_data": {
@@ -4799,8 +4742,7 @@
             "one_off": false,
             "initiator": "",
             "is_loop_policy": false,
-            "loop_role": "",
-            "loop_state": -1
+            "loop_role": ""
           }
         }
       ],
@@ -4810,15 +4752,15 @@
     }
   ],
   "custom_parsers": [
-    "igmp",
     "dhcp",
-    "http",
+    "mdns",
     "dns",
-    "mdns"
+    "igmp",
+    "http"
   ],
   "nfqueues": [
     {
-      "NFQueue-0x7f73881973e0": {
+      "NFQueue-0x7fbfa9247bc0": {
         "name": "single#dns-ipv4",
         "queue_num": 1000,
         "policies": [
@@ -4827,7 +4769,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f7387cade20": {
+              "Policy-0x7fbfa92a81a0": {
                 "interaction_name": "single",
                 "name": "dns-ipv4",
                 "profile_data": {
@@ -4935,8 +4877,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -4946,7 +4887,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f1760": {
+              "Policy-0x7fbfa9095a00": {
                 "interaction_name": "bootstrap-stream-wan",
                 "name": "dns-cam-sas-1-a",
                 "profile_data": {
@@ -5024,8 +4965,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5035,7 +4975,7 @@
             "policy_idx": 2,
             "state": 2,
             "policy": {
-              "Policy-0x7f73851f18b0": {
+              "Policy-0x7fbfac1044d0": {
                 "interaction_name": "bootstrap-stream-wan",
                 "name": "dns-cam-sas-1-aaaa",
                 "profile_data": {
@@ -5113,8 +5053,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5124,7 +5063,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f738514dfa0": {
+              "Policy-0x7fbfa9096510": {
                 "interaction_name": "http-head-boot",
                 "name": "dns-cam-ca-mgr",
                 "profile_data": {
@@ -5202,8 +5141,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5213,7 +5151,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f23f0": {
+              "Policy-0x7fbfa9096240": {
                 "interaction_name": "https-boot-cam-fwd",
                 "name": "dns-cam-fwd",
                 "profile_data": {
@@ -5291,8 +5229,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5302,7 +5239,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f24e0": {
+              "Policy-0x7fbfa9096810": {
                 "interaction_name": "https-dcdda",
                 "name": "dns-cam-dcdda",
                 "profile_data": {
@@ -5380,8 +5317,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5391,7 +5327,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f27e0": {
+              "Policy-0x7fbfa90968a0": {
                 "interaction_name": "stream-app-external",
                 "name": "dns-cam-server-a",
                 "profile_data": {
@@ -5469,8 +5405,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": true,
-                "loop_role": "enter",
-                "loop_state": 0
+                "loop_role": "enter"
               }
             },
             "counters_idx": {}
@@ -5480,7 +5415,7 @@
             "policy_idx": 2,
             "state": 2,
             "policy": {
-              "Policy-0x7f73851f27b0": {
+              "Policy-0x7fbfa9096b40": {
                 "interaction_name": "stream-app-external",
                 "name": "dns-cam-server-aaaa",
                 "profile_data": {
@@ -5558,8 +5493,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": true,
-                "loop_role": "in_loop",
-                "loop_state": 2
+                "loop_role": "in_loop"
               }
             },
             "counters_idx": {}
@@ -5569,7 +5503,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f2c60": {
+              "Policy-0x7fbfa9096c60": {
                 "interaction_name": "stream-app-local",
                 "name": "dns-cam-server-a",
                 "profile_data": {
@@ -5647,8 +5581,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5658,7 +5591,7 @@
             "policy_idx": 2,
             "state": 2,
             "policy": {
-              "Policy-0x7f73851f2c00": {
+              "Policy-0x7fbfa9096d80": {
                 "interaction_name": "stream-app-local",
                 "name": "dns-cam-server-aaaa",
                 "profile_data": {
@@ -5736,8 +5669,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5747,7 +5679,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f2d50": {
+              "Policy-0x7fbfa9096f30": {
                 "interaction_name": "websocket-sas-1",
                 "name": "dns-cam-sas-1",
                 "profile_data": {
@@ -5825,8 +5757,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5854,7 +5785,7 @@
       }
     },
     {
-      "NFQueue-0x7f7387c01490": {
+      "NFQueue-0x7fbfa9094ad0": {
         "name": "single#dns-ipv4-backward",
         "queue_num": 1001,
         "policies": [
@@ -5863,7 +5794,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f7387bad8e0": {
+              "Policy-0x7fbfa91ccce0": {
                 "interaction_name": "single",
                 "name": "dns-ipv4-backward",
                 "profile_data": {
@@ -5971,8 +5902,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -5982,7 +5912,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f7385279be0": {
+              "Policy-0x7fbfabc440b0": {
                 "interaction_name": "bootstrap-stream-wan",
                 "name": "dns-cam-sas-1-a-backward",
                 "profile_data": {
@@ -6060,8 +5990,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6071,7 +6000,7 @@
             "policy_idx": 3,
             "state": 3,
             "policy": {
-              "Policy-0x7f73851f1a00": {
+              "Policy-0x7fbfa9095c10": {
                 "interaction_name": "bootstrap-stream-wan",
                 "name": "dns-cam-sas-1-aaaa-backward",
                 "profile_data": {
@@ -6149,8 +6078,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6160,7 +6088,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f2ba0": {
+              "Policy-0x7fbfa90962d0": {
                 "interaction_name": "http-head-boot",
                 "name": "dns-cam-ca-mgr-backward",
                 "profile_data": {
@@ -6238,8 +6166,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6249,7 +6176,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f24b0": {
+              "Policy-0x7fbfa9096420": {
                 "interaction_name": "https-boot-cam-fwd",
                 "name": "dns-cam-fwd-backward",
                 "profile_data": {
@@ -6327,8 +6254,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6338,7 +6264,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f2720": {
+              "Policy-0x7fbfa90967b0": {
                 "interaction_name": "https-dcdda",
                 "name": "dns-cam-dcdda-backward",
                 "profile_data": {
@@ -6416,8 +6342,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6427,7 +6352,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f28a0": {
+              "Policy-0x7fbfa9096660": {
                 "interaction_name": "stream-app-external",
                 "name": "dns-cam-server-a-backward",
                 "profile_data": {
@@ -6505,8 +6430,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": true,
-                "loop_role": "in_loop",
-                "loop_state": 1
+                "loop_role": "in_loop"
               }
             },
             "counters_idx": {}
@@ -6516,7 +6440,7 @@
             "policy_idx": 3,
             "state": 3,
             "policy": {
-              "Policy-0x7f73851f28d0": {
+              "Policy-0x7fbfa9096b70": {
                 "interaction_name": "stream-app-external",
                 "name": "dns-cam-server-aaaa-backward",
                 "profile_data": {
@@ -6594,8 +6518,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": true,
-                "loop_role": "in_loop",
-                "loop_state": 3
+                "loop_role": "in_loop"
               }
             },
             "counters_idx": {}
@@ -6605,7 +6528,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f2b70": {
+              "Policy-0x7fbfa9096bd0": {
                 "interaction_name": "stream-app-local",
                 "name": "dns-cam-server-a-backward",
                 "profile_data": {
@@ -6683,8 +6606,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6694,7 +6616,7 @@
             "policy_idx": 3,
             "state": 3,
             "policy": {
-              "Policy-0x7f73851f2930": {
+              "Policy-0x7fbfa9096ab0": {
                 "interaction_name": "stream-app-local",
                 "name": "dns-cam-server-aaaa-backward",
                 "profile_data": {
@@ -6772,8 +6694,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6783,7 +6704,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f2de0": {
+              "Policy-0x7fbfa9096f60": {
                 "interaction_name": "websocket-sas-1",
                 "name": "dns-cam-sas-1-backward",
                 "profile_data": {
@@ -6861,8 +6782,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6890,7 +6810,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f0740": {
+      "NFQueue-0x7fbfa9094a70": {
         "name": "single#igmp-join-mdns",
         "queue_num": 1010,
         "policies": [
@@ -6899,7 +6819,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73889679b0": {
+              "Policy-0x7fbfa9094c20": {
                 "interaction_name": "single",
                 "name": "igmp-join-mdns",
                 "profile_data": {
@@ -6966,8 +6886,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -6991,7 +6910,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f0410": {
+      "NFQueue-0x7fbfa9094bf0": {
         "name": "single#mdns-query-any",
         "queue_num": 1020,
         "policies": [
@@ -7000,7 +6919,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f0a10": {
+              "Policy-0x7fbfa9094590": {
                 "interaction_name": "single",
                 "name": "mdns-query-any",
                 "profile_data": {
@@ -7094,8 +7013,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7105,7 +7023,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f02f0": {
+              "Policy-0x7fbfa9094410": {
                 "interaction_name": "single",
                 "name": "mdns-query-ptr",
                 "profile_data": {
@@ -7187,8 +7105,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7198,7 +7115,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851703e0": {
+              "Policy-0x7fbfa9094b00": {
                 "interaction_name": "single",
                 "name": "mdns-response",
                 "profile_data": {
@@ -7271,8 +7188,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7304,7 +7220,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851aa0c0": {
+      "NFQueue-0x7fbfa9095d90": {
         "name": "single#tcp-traffic-phone-cam",
         "queue_num": -1,
         "policies": [
@@ -7313,7 +7229,7 @@
             "policy_idx": 0,
             "state": -1,
             "policy": {
-              "Policy-0x7f73851f0b30": {
+              "Policy-0x7fbfa9094f20": {
                 "interaction_name": "single",
                 "name": "tcp-traffic-phone-cam",
                 "profile_data": {
@@ -7382,8 +7298,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7416,7 +7331,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f0dd0": {
+      "NFQueue-0x7fbfa9095100": {
         "name": "single#tcp-traffic-phone-cam-backward",
         "queue_num": -1,
         "policies": [
@@ -7425,7 +7340,7 @@
             "policy_idx": 1,
             "state": -1,
             "policy": {
-              "Policy-0x7f73851f0b90": {
+              "Policy-0x7fbfa9094d40": {
                 "interaction_name": "single",
                 "name": "tcp-traffic-phone-cam-backward",
                 "profile_data": {
@@ -7494,8 +7409,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7528,7 +7442,7 @@
       }
     },
     {
-      "NFQueue-0x7f7387bab110": {
+      "NFQueue-0x7fbfabcc1940": {
         "name": "arp-cam-gateway#arp-reply-gateway-cam",
         "queue_num": 1030,
         "policies": [
@@ -7537,7 +7451,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f0d10": {
+              "Policy-0x7fbfa9094e00": {
                 "interaction_name": "arp-cam-gateway",
                 "name": "arp-reply-gateway-cam",
                 "profile_data": {
@@ -7601,8 +7515,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7634,7 +7547,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f0ef0": {
+      "NFQueue-0x7fbfa90945c0": {
         "name": "arp-cam-gateway#arp-request-cam-gateway",
         "queue_num": 1031,
         "policies": [
@@ -7643,7 +7556,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f0f80": {
+              "Policy-0x7fbfa9094ef0": {
                 "interaction_name": "arp-cam-gateway",
                 "name": "arp-request-cam-gateway",
                 "profile_data": {
@@ -7707,8 +7620,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7740,7 +7652,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f1280": {
+      "NFQueue-0x7fbfa9095310": {
         "name": "arp-camera-phone#arp-reply-phone-cam",
         "queue_num": 1040,
         "policies": [
@@ -7749,7 +7661,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f0f20": {
+              "Policy-0x7fbfa9094fe0": {
                 "interaction_name": "arp-camera-phone",
                 "name": "arp-reply-phone-cam",
                 "profile_data": {
@@ -7813,8 +7725,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7846,7 +7757,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f1640": {
+      "NFQueue-0x7fbfa90955e0": {
         "name": "arp-camera-phone#arp-request-cam-phone",
         "queue_num": 1041,
         "policies": [
@@ -7855,7 +7766,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f1700": {
+              "Policy-0x7fbfa9095610": {
                 "interaction_name": "arp-camera-phone",
                 "name": "arp-request-cam-phone",
                 "profile_data": {
@@ -7919,8 +7830,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -7952,7 +7862,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f14c0": {
+      "NFQueue-0x7fbfa9095700": {
         "name": "arp-gateway-cam#arp-reply-cam-gateway",
         "queue_num": 1050,
         "policies": [
@@ -7961,7 +7871,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f1400": {
+              "Policy-0x7fbfa90956d0": {
                 "interaction_name": "arp-gateway-cam",
                 "name": "arp-reply-cam-gateway",
                 "profile_data": {
@@ -8025,8 +7935,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -8058,7 +7967,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f14f0": {
+      "NFQueue-0x7fbfa9095490": {
         "name": "arp-gateway-cam#arp-request-gateway-cam",
         "queue_num": 1051,
         "policies": [
@@ -8067,7 +7976,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f1790": {
+              "Policy-0x7fbfa9095760": {
                 "interaction_name": "arp-gateway-cam",
                 "name": "arp-request-gateway-cam",
                 "profile_data": {
@@ -8139,8 +8048,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -8177,7 +8085,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f1880": {
+      "NFQueue-0x7fbfa9095790": {
         "name": "arp-phone-camera#arp-reply-cam-phone",
         "queue_num": 1060,
         "policies": [
@@ -8186,7 +8094,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f1610": {
+              "Policy-0x7fbfa9095880": {
                 "interaction_name": "arp-phone-camera",
                 "name": "arp-reply-cam-phone",
                 "profile_data": {
@@ -8250,8 +8158,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -8283,7 +8190,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f1730": {
+      "NFQueue-0x7fbfa90959d0": {
         "name": "arp-phone-camera#arp-request-phone-cam",
         "queue_num": 1061,
         "policies": [
@@ -8292,7 +8199,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f1910": {
+              "Policy-0x7fbfa90958e0": {
                 "interaction_name": "arp-phone-camera",
                 "name": "arp-request-phone-cam",
                 "profile_data": {
@@ -8364,8 +8271,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -8402,7 +8308,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f10d0": {
+      "NFQueue-0x7fbfac0deb10": {
         "name": "bootstrap-stream-wan#http-relay-cam-sas-1",
         "queue_num": 1070,
         "policies": [
@@ -8411,7 +8317,7 @@
             "policy_idx": 4,
             "state": 5,
             "policy": {
-              "Policy-0x7f73851f18e0": {
+              "Policy-0x7fbfa9095910": {
                 "interaction_name": "bootstrap-stream-wan",
                 "name": "http-relay-cam-sas-1",
                 "profile_data": {
@@ -8496,8 +8402,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {
@@ -8509,7 +8414,7 @@
             "policy_idx": 2,
             "state": 3,
             "policy": {
-              "Policy-0x7f73851f2b40": {
+              "Policy-0x7fbfa9095e20": {
                 "interaction_name": "http-head-boot",
                 "name": "http-head-cam-cloud",
                 "profile_data": {
@@ -8594,8 +8499,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {
@@ -8607,7 +8511,7 @@
             "policy_idx": 2,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f3020": {
+              "Policy-0x7fbfa9096ea0": {
                 "interaction_name": "websocket-sas-1",
                 "name": "websocket-cam-sas-1",
                 "profile_data": {
@@ -8677,8 +8581,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -8707,7 +8610,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f2000": {
+      "NFQueue-0x7fbfa9094aa0": {
         "name": "bootstrap-stream-wan#http-relay-cam-sas-1-backward",
         "queue_num": 1071,
         "policies": [
@@ -8716,7 +8619,7 @@
             "policy_idx": 5,
             "state": 5,
             "policy": {
-              "Policy-0x7f73851f1b50": {
+              "Policy-0x7fbfa90944d0": {
                 "interaction_name": "bootstrap-stream-wan",
                 "name": "http-relay-cam-sas-1-backward",
                 "profile_data": {
@@ -8793,8 +8696,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {
@@ -8806,7 +8708,7 @@
             "policy_idx": 3,
             "state": 3,
             "policy": {
-              "Policy-0x7f73851f2480": {
+              "Policy-0x7fbfa90964b0": {
                 "interaction_name": "http-head-boot",
                 "name": "http-head-cam-cloud-backward",
                 "profile_data": {
@@ -8883,8 +8785,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {
@@ -8896,7 +8797,7 @@
             "policy_idx": 3,
             "state": 2,
             "policy": {
-              "Policy-0x7f73851f2db0": {
+              "Policy-0x7fbfa9096ed0": {
                 "interaction_name": "websocket-sas-1",
                 "name": "websocket-cam-sas-1-backward",
                 "profile_data": {
@@ -8966,8 +8867,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -8996,7 +8896,7 @@
       }
     },
     {
-      "NFQueue-0x7f7388056fc0": {
+      "NFQueue-0x7fbfa9095dc0": {
         "name": "get-ip-address#dhcp-ack",
         "queue_num": 1080,
         "policies": [
@@ -9005,7 +8905,7 @@
             "policy_idx": 0,
             "state": 0,
             "policy": {
-              "Policy-0x7f73851f1b80": {
+              "Policy-0x7fbfa9095ca0": {
                 "interaction_name": "get-ip-address",
                 "name": "dhcp-ack",
                 "profile_data": {
@@ -9083,8 +8983,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -9094,7 +8993,7 @@
             "policy_idx": 2,
             "state": 2,
             "policy": {
-              "Policy-0x7f73851f2060": {
+              "Policy-0x7fbfa9095df0": {
                 "interaction_name": "get-ip-address",
                 "name": "dhcp-offer",
                 "profile_data": {
@@ -9172,8 +9071,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -9205,7 +9103,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f1a60": {
+      "NFQueue-0x7fbfa90965a0": {
         "name": "get-ip-address#dhcp-discover",
         "queue_num": 1081,
         "policies": [
@@ -9214,7 +9112,7 @@
             "policy_idx": 1,
             "state": 1,
             "policy": {
-              "Policy-0x7f738520e9c0": {
+              "Policy-0x7fbfa9096150": {
                 "interaction_name": "get-ip-address",
                 "name": "dhcp-discover",
                 "profile_data": {
@@ -9292,8 +9190,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -9303,7 +9200,7 @@
             "policy_idx": 3,
             "state": 3,
             "policy": {
-              "Policy-0x7f7388154ce0": {
+              "Policy-0x7fbfa9096360": {
                 "interaction_name": "get-ip-address",
                 "name": "dhcp-request",
                 "profile_data": {
@@ -9381,8 +9278,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -9414,7 +9310,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f22d0": {
+      "NFQueue-0x7fbfa90964e0": {
         "name": "https-boot-cam-fwd#https-cam-fwd",
         "queue_num": 1090,
         "policies": [
@@ -9423,7 +9319,7 @@
             "policy_idx": 2,
             "state": 3,
             "policy": {
-              "Policy-0x7f73851f25d0": {
+              "Policy-0x7fbfa90965d0": {
                 "interaction_name": "https-boot-cam-fwd",
                 "name": "https-cam-fwd",
                 "profile_data": {
@@ -9492,8 +9388,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {
@@ -9505,7 +9400,7 @@
             "policy_idx": 2,
             "state": 1,
             "policy": {
-              "Policy-0x7f73851f2750": {
+              "Policy-0x7fbfa9096630": {
                 "interaction_name": "https-dcdda",
                 "name": "https-cam-dcdda",
                 "profile_data": {
@@ -9575,8 +9470,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -9605,7 +9499,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f26f0": {
+      "NFQueue-0x7fbfa9096900": {
         "name": "https-boot-cam-fwd#https-cam-fwd-backward",
         "queue_num": 1091,
         "policies": [
@@ -9614,7 +9508,7 @@
             "policy_idx": 3,
             "state": 3,
             "policy": {
-              "Policy-0x7f73851f2420": {
+              "Policy-0x7fbfa9096450": {
                 "interaction_name": "https-boot-cam-fwd",
                 "name": "https-cam-fwd-backward",
                 "profile_data": {
@@ -9683,8 +9577,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {
@@ -9696,7 +9589,7 @@
             "policy_idx": 3,
             "state": 2,
             "policy": {
-              "Policy-0x7f73851f25a0": {
+              "Policy-0x7fbfaced31a0": {
                 "interaction_name": "https-dcdda",
                 "name": "https-cam-dcdda-backward",
                 "profile_data": {
@@ -9766,8 +9659,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -9796,7 +9688,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f2a50": {
+      "NFQueue-0x7fbfa91e9e20": {
         "name": "stream-app-external#stun-bind-cam-server",
         "queue_num": 1100,
         "policies": [
@@ -9805,7 +9697,7 @@
             "policy_idx": 4,
             "state": 4,
             "policy": {
-              "Policy-0x7f73851f2780": {
+              "Policy-0x7fbfa90967e0": {
                 "interaction_name": "stream-app-external",
                 "name": "stun-bind-cam-server",
                 "profile_data": {
@@ -9867,8 +9759,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": true,
-                "loop_role": "in_loop",
-                "loop_state": 4
+                "loop_role": "in_loop"
               }
             },
             "counters_idx": {}
@@ -9878,7 +9769,7 @@
             "policy_idx": 4,
             "state": 4,
             "policy": {
-              "Policy-0x7f73851f3590": {
+              "Policy-0x7fbfa9096e40": {
                 "interaction_name": "stream-app-local",
                 "name": "stun-bind-cam-server",
                 "profile_data": {
@@ -9940,8 +9831,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -9965,7 +9855,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f2c90": {
+      "NFQueue-0x7fbfa9096a80": {
         "name": "stream-app-external#stun-bind-cam-server-backward",
         "queue_num": 1101,
         "policies": [
@@ -9974,7 +9864,7 @@
             "policy_idx": 5,
             "state": 5,
             "policy": {
-              "Policy-0x7f73851f2900": {
+              "Policy-0x7fbfa9096b10": {
                 "interaction_name": "stream-app-external",
                 "name": "stun-bind-cam-server-backward",
                 "profile_data": {
@@ -10036,8 +9926,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": true,
-                "loop_role": "exit",
-                "loop_state": 5
+                "loop_role": "exit"
               }
             },
             "counters_idx": {}
@@ -10047,7 +9936,7 @@
             "policy_idx": 5,
             "state": 5,
             "policy": {
-              "Policy-0x7f73851f2e40": {
+              "Policy-0x7fbfa9096c90": {
                 "interaction_name": "stream-app-local",
                 "name": "stun-bind-cam-server-backward",
                 "profile_data": {
@@ -10109,8 +9998,7 @@
                 "one_off": true,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -10134,7 +10022,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f3890": {
+      "NFQueue-0x7fbfa9096cf0": {
         "name": "stream-app-external#udp-stream-wan",
         "queue_num": 1102,
         "policies": [
@@ -10143,7 +10031,7 @@
             "policy_idx": 6,
             "state": 5,
             "policy": {
-              "Policy-0x7f73851f2a20": {
+              "Policy-0x7fbfa9097440": {
                 "interaction_name": "stream-app-external",
                 "name": "udp-stream-wan",
                 "profile_data": {
@@ -10206,8 +10094,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "next",
-                "loop_state": -1
+                "loop_role": "next"
               }
             },
             "counters_idx": {}
@@ -10236,7 +10123,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f2bd0": {
+      "NFQueue-0x7fbfa90961b0": {
         "name": "stream-app-external#udp-stream-wan-backward",
         "queue_num": 1103,
         "policies": [
@@ -10245,7 +10132,7 @@
             "policy_idx": 7,
             "state": 6,
             "policy": {
-              "Policy-0x7f73851f2cc0": {
+              "Policy-0x7fbfa9096c30": {
                 "interaction_name": "stream-app-external",
                 "name": "udp-stream-wan-backward",
                 "profile_data": {
@@ -10308,8 +10195,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -10338,7 +10224,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f2f90": {
+      "NFQueue-0x7fbfa9096e70": {
         "name": "stream-app-local#udp-stream-lan",
         "queue_num": 1110,
         "policies": [
@@ -10347,7 +10233,7 @@
             "policy_idx": 6,
             "state": 5,
             "policy": {
-              "Policy-0x7f73851f2d20": {
+              "Policy-0x7fbfa9096de0": {
                 "interaction_name": "stream-app-local",
                 "name": "udp-stream-lan",
                 "profile_data": {
@@ -10410,8 +10296,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
@@ -10440,7 +10325,7 @@
       }
     },
     {
-      "NFQueue-0x7f73851f3650": {
+      "NFQueue-0x7fbfa9096f90": {
         "name": "stream-app-local#udp-stream-lan-backward",
         "queue_num": 1111,
         "policies": [
@@ -10449,7 +10334,7 @@
             "policy_idx": 7,
             "state": 6,
             "policy": {
-              "Policy-0x7f73851f2f00": {
+              "Policy-0x7fbfa9097020": {
                 "interaction_name": "stream-app-local",
                 "name": "udp-stream-lan-backward",
                 "profile_data": {
@@ -10512,8 +10397,7 @@
                 "one_off": false,
                 "initiator": "",
                 "is_loop_policy": false,
-                "loop_role": "",
-                "loop_state": -1
+                "loop_role": ""
               }
             },
             "counters_idx": {}
