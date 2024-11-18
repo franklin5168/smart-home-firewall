@@ -186,7 +186,7 @@ uint32_t callback_{{nfqueue_name}}(int pkt_id, int pkt_len, uint8_t *payload, vo
     {% set duration = "(interactions_data[{}].counters + {})->duration".format(interaction_idx, counters_idx["duration"]) %}
     {% endif %}
     {% endif %}
-    {# Newly added: Initialize variables using namespace {% set policy_idx = policy_dict["policy_idx"] %}#}
+    {# Newly added: Initialize variables using namespace #}
     {% set vars = namespace(exit_policy=None, exit_state=None, exit_policy_idx=None, before_exit_policy=None) %}
     {# Newly added: Find exit policy and before_exit_policy from all nfqueues #}
     {% for nfq in nfqueues %}
