@@ -265,7 +265,6 @@ if __name__ == "__main__":
                     # Newly added: Add loop keys                
                     "has_loop": False,
                     "loop_policies": [],
-                    "loop_size": 0,
                     "next_policy": None
                 }
                 
@@ -319,14 +318,12 @@ if __name__ == "__main__":
                     # Newly added: Add loop keys                
                     "has_loop": False,
                     "loop_policies": [],
-                    "loop_size": 0,
                     "next_policy": None
                 }
 
                 # Newly added: Add loop processing
                 if "loop" in interaction_policy:
                     interaction_data["has_loop"] = True
-                    interaction_data["loop_size"] = len(interaction_policy["loop"])
                     loop_policy_names = interaction_policy.get("loop", []) 
                     next_policy_name = interaction_policy.get("next", None) 
                     # Newly added: Add loop policy
