@@ -76,7 +76,7 @@ def flatten_policies(single_policy_name: str, single_policy: dict, acc: dict = {
         for subpolicy in single_policy:
             flatten_policies(subpolicy, single_policy[subpolicy], acc)
 
-
+# Newly added: Convert to first representation
 def convert_to_first_representation(interaction_policy: dict) -> dict:
     """
     Convert an interaction policy from the second representation to the first representation.
@@ -387,18 +387,9 @@ if __name__ == "__main__":
         # Loop over the device's interaction policies
         if "interactions" in profile:
             for interaction_policy_name in profile["interactions"]:
-
-                print(profile["interactions"])
-                print("\n\n--------------------------------\n\n")
-
-                print(interaction_policy_name)
-
                 interaction_policy = profile["interactions"][interaction_policy_name]
+                # Newly added: Convert to first representation
                 interaction_policy = convert_to_first_representation(interaction_policy)
-
-
-                print(interaction_policy)
-                print("\n\n--------------------------------\n\n")
 
                 # Iterate on single policies
 
@@ -408,9 +399,6 @@ if __name__ == "__main__":
                     # Newly added: Skip loop and next keywords
                     if single_policy_name not in ["loop", "next"]:
                         flatten_policies(single_policy_name, interaction_policy[single_policy_name], single_policies)
-
-                print(single_policies)
-                print("\n\n--------------------------------\n\n")
 
                 # Second pass, parse policies
                 interaction_data = {
