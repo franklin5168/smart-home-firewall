@@ -9,49 +9,7 @@ device-info:
   name: dlink-cam
   network: wireless
 interactions:
-  arp-cam-gateway:
-    arp-reply-gateway-cam:
-      protocols:
-        arp:
-          sha: gateway
-          spa: gateway
-          tha: self
-          tpa: self
-          type: reply
-    arp-request-cam-gateway:
-      protocols:
-        arp:
-          sha: self
-          spa: self
-          tha: default
-          tpa: gateway
-          type: request
-  arp-camera-phone:
-    arp-reply-phone-cam:
-      protocols:
-        arp:
-          sha: phone
-          spa: phone
-          tha: self
-          tpa: self
-          type: reply
-    arp-request-cam-phone:
-      protocols:
-        arp:
-          sha: self
-          spa: self
-          tha: default
-          tpa: phone
-          type: request
   arp-gateway-cam:
-    arp-reply-cam-gateway:
-      protocols:
-        arp:
-          sha: self
-          spa: self
-          tha: gateway
-          tpa: gateway
-          type: reply
     arp-request-gateway-cam:
       protocols:
         arp:
@@ -62,73 +20,34 @@ interactions:
           type: request
       stats:
         rate: 1/second
-  arp-phone-camera:
-    arp-reply-cam-phone:
+    arp-reply-cam-gateway:
       protocols:
         arp:
           sha: self
           spa: self
-          tha: phone
-          tpa: phone
+          tha: gateway
+          tpa: gateway
           type: reply
-    arp-request-phone-cam:
+
+  arp-cam-gateway:
+    arp-request-cam-gateway:
       protocols:
         arp:
-          sha: phone
-          spa: phone
+          sha: self
+          spa: self
           tha: default
-          tpa: self
+          tpa: gateway
           type: request
-      stats:
-        rate: 1/second
-  bootstrap-stream-wan:
-    dns-cam-sas-1-a:
-      bidirectional: true
+    arp-reply-gateway-cam:
       protocols:
-        dns:
-          domain-name: mp-eu-sas-1.auto.mydlink.com
-          qtype: A
-        ipv4:
-          dst: gateway
-          src: 192.168.1.115
-        udp:
-          dst-port: 53
-    dns-cam-sas-1-aaaa:
-      bidirectional: true
-      protocols:
-        dns:
-          domain-name: mp-eu-sas-1.auto.mydlink.com
-          qtype: AAAA
-        ipv4:
-          dst: gateway
-          src: 192.168.1.115
-        udp:
-          dst-port: 53
-    http-relay-cam-sas-1:
-      bidirectional: true
-      protocols:
-        http:
-          method: GET
-          uri: /relay
-        ipv4:
-          dst: mp-eu-sas-1.auto.mydlink.com
-          src: self
-        tcp:
-          dst-port: 80
-      stats:
-        packet-count: 15
+        arp:
+          sha: gateway
+          spa: gateway
+          tha: self
+          tpa: self
+          type: reply
+
   get-ip-address:
-    dhcp-ack:
-      protocols:
-        dhcp:
-          client-mac: self
-          type: ack
-        ipv4:
-          dst: self
-          src: gateway
-        udp:
-          dst-port: 68
-          src-port: 67
     dhcp-discover:
       protocols:
         dhcp:
@@ -162,6 +81,18 @@ interactions:
         udp:
           dst-port: 67
           src-port: 68
+    dhcp-ack:
+      protocols:
+        dhcp:
+          client-mac: self
+          type: ack
+        ipv4:
+          dst: self
+          src: gateway
+        udp:
+          dst-port: 68
+          src-port: 67
+
   http-head-boot:
     dns-cam-ca-mgr:
       bidirectional: true
@@ -231,8 +162,77 @@ interactions:
           dst-port: 443
       stats:
         rate: 20/second
-  stream-app-external:
-    start-stream-wan: &id001
+  websocket-sas-1:
+    dns-cam-sas-1:
+      bidirectional: true
+      protocols:
+        dns:
+          domain-name: mp-eu-sas-1.auto.mydlink.com
+          qtype: A
+        ipv4:
+          dst: gateway
+          src: 192.168.1.115
+        udp:
+          dst-port: 53
+    websocket-cam-sas-1:
+      bidirectional: true
+      protocols:
+        ipv4:
+          dst: mp-eu-sas-1.auto.mydlink.com
+          src: self
+        tcp:
+          dst-port: 80
+      stats:
+        rate: 0 
+  arp-camera-phone:
+    arp-request-cam-phone:
+      protocols:
+        arp:
+          sha: self
+          spa: self
+          tha: default
+          tpa: phone
+          type: request
+    arp-reply-phone-cam:
+      protocols:
+        arp:
+          sha: phone
+          spa: phone
+          tha: self
+          tpa: self
+          type: reply
+  arp-phone-camera:
+    arp-request-phone-cam:
+      protocols:
+        arp:
+          sha: phone
+          spa: phone
+          tha: default
+          tpa: self
+          type: request
+      stats:
+        rate: 1/second
+    arp-reply-cam-phone:
+      protocols:
+        arp:
+          sha: self
+          spa: self
+          tha: phone
+          tpa: phone
+          type: reply
+  stream-app-local:
+    start-stream-lan:
+      dns-cam-server-aaaa:
+        bidirectional: true
+        protocols:
+          dns:
+            domain-name: mp-eu-sas.auto.mydlink.com
+            qtype: AAAA
+          ipv4:
+            dst: gateway
+            src: self
+          udp:
+            dst-port: 53
       dns-cam-server-a:
         bidirectional: true
         protocols:
@@ -244,12 +244,78 @@ interactions:
             src: self
           udp:
             dst-port: 53
+      stun-bind-cam-server:
+        bidirectional: true
+        protocols:
+          ipv4:
+            dst: mp-eu-sas.auto.mydlink.com
+            src: self
+          udp:
+            dst-port: 3478
+    udp-stream-lan:
+      bidirectional: true
+      protocols:
+        ipv4:
+          dst: phone
+          src: self
+        udp: null
+      stats:
+        rate: 0
+  bootstrap-stream-wan:
+    dns-cam-sas-1-aaaa:
+      bidirectional: true
+      protocols:
+        dns:
+          domain-name: mp-eu-sas-1.auto.mydlink.com
+          qtype: AAAA
+        ipv4:
+          dst: gateway
+          src: 192.168.1.115
+        udp:
+          dst-port: 53
+    dns-cam-sas-1-a:
+      bidirectional: true
+      protocols:
+        dns:
+          domain-name: mp-eu-sas-1.auto.mydlink.com
+          qtype: A
+        ipv4:
+          dst: gateway
+          src: 192.168.1.115
+        udp:
+          dst-port: 53
+    http-relay-cam-sas-1:
+      bidirectional: true
+      protocols:
+        http:
+          method: GET
+          uri: /relay
+        ipv4:
+          dst: mp-eu-sas-1.auto.mydlink.com
+          src: self
+        tcp:
+          dst-port: 80
+      stats:
+        packet-count: 15
+  stream-app-external:
+    start-stream-wan:
       dns-cam-server-aaaa:
         bidirectional: true
         protocols:
           dns:
             domain-name: mp-eu-sas.auto.mydlink.com
             qtype: AAAA
+          ipv4:
+            dst: gateway
+            src: self
+          udp:
+            dst-port: 53
+      dns-cam-server-a:
+        bidirectional: true
+        protocols:
+          dns:
+            domain-name: mp-eu-sas.auto.mydlink.com
+            qtype: A
           ipv4:
             dst: gateway
             src: self
@@ -273,55 +339,11 @@ interactions:
       stats:
         rate: 0
     loop:
-      - dns-cam-server-a     
-      - dns-cam-server-aaaa  
+      - dns-cam-server-aaaa     
+      - dns-cam-server-a  
       - stun-bind-cam-server 
     next: udp-stream-wan 
-  stream-app-local:
-    start-stream-lan: *id001
-    udp-stream-lan:
-      bidirectional: true
-      protocols:
-        ipv4:
-          dst: phone
-          src: self
-        udp: null
-      stats:
-        rate: 0
-  websocket-sas-1:
-    dns-cam-sas-1:
-      bidirectional: true
-      protocols:
-        dns:
-          domain-name: mp-eu-sas-1.auto.mydlink.com
-          qtype: A
-        ipv4:
-          dst: gateway
-          src: 192.168.1.115
-        udp:
-          dst-port: 53
-    websocket-cam-sas-1:
-      bidirectional: true
-      protocols:
-        ipv4:
-          dst: mp-eu-sas-1.auto.mydlink.com
-          src: self
-        tcp:
-          dst-port: 80
-      stats:
-        rate: 0
 patterns:
-  dns-a:
-    bidirectional: true
-    protocols:
-      dns:
-        domain-name: null
-        qtype: A
-      ipv4:
-        dst: gateway
-        src: self
-      udp:
-        dst-port: 53
   dns-aaaa:
     bidirectional: true
     protocols:
@@ -333,7 +355,48 @@ patterns:
         src: self
       udp:
         dst-port: 53
-  start-stream: *id001
+  dns-a:
+    bidirectional: true
+    protocols:
+      dns:
+        domain-name: null
+        qtype: A
+      ipv4:
+        dst: gateway
+        src: self
+      udp:
+        dst-port: 53
+  start-stream:
+    dns-cam-server-aaaa:
+        bidirectional: true
+        protocols:
+          dns:
+            domain-name: mp-eu-sas.auto.mydlink.com
+            qtype: AAAA
+          ipv4:
+            dst: gateway
+            src: self
+          udp:
+            dst-port: 53
+    dns-cam-server-a:
+        bidirectional: true
+        protocols:
+          dns:
+            domain-name: mp-eu-sas.auto.mydlink.com
+            qtype: A
+          ipv4:
+            dst: gateway
+            src: self
+          udp:
+            dst-port: 53
+    stun-bind-cam-server:
+        bidirectional: true
+        protocols:
+          ipv4:
+            dst: mp-eu-sas.auto.mydlink.com
+            src: self
+          udp:
+            dst-port: 3478
   tcp-stop-stream:
     bidirectional: true
     protocols:
@@ -373,6 +436,17 @@ single-policies:
       ipv4:
         dst: igmpv3
         src: self
+  mdns-query-ptr:
+    protocols:
+      ipv4:
+        dst: mdns
+        src: self
+      mdns:
+        domain-name: _dcp._tcp.local
+        qtype: PTR
+      udp:
+        dst-port: 5353
+        src-port: 5353
   mdns-query-any:
     protocols:
       ipv4:
@@ -384,17 +458,6 @@ single-policies:
         - DCS-8000LH-5483._http._tcp.local
         - DCS-8000LH-5483._dcp._tcp.local
         qtype: ANY
-      udp:
-        dst-port: 5353
-        src-port: 5353
-  mdns-query-ptr:
-    protocols:
-      ipv4:
-        dst: mdns
-        src: self
-      mdns:
-        domain-name: _dcp._tcp.local
-        qtype: PTR
       udp:
         dst-port: 5353
         src-port: 5353

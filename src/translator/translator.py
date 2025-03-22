@@ -77,6 +77,97 @@ def flatten_policies(single_policy_name: str, single_policy: dict, acc: dict = {
             flatten_policies(subpolicy, single_policy[subpolicy], acc)
 
 
+def convert_to_first_representation(interaction_policy: dict) -> dict:
+    """
+    Convert an interaction policy from the second representation to the first representation.
+    The second representation has loop and next as dictionaries with full policy definitions,
+    while the first representation has them as lists/strings of policy names.
+
+    :param interaction_policy: The interaction policy to convert
+    :return: The converted interaction policy in the first representation
+    """
+    def find_key(d: dict, target_key: str) -> bool:
+        """
+        Recursively search for a key in a dictionary.
+        
+        :param d: Dictionary to search in
+        :param target_key: Key to search for
+        :return: True if key is found, False otherwise
+        """
+        for key, value in d.items():
+            if key == target_key:
+                return True
+            elif isinstance(value, dict):
+                if find_key(value, target_key):
+                    return True
+        return False
+    
+    # First check if this interaction policy supports loop functionality
+    has_loop = find_key(interaction_policy, "loop")
+    has_next = find_key(interaction_policy, "next")
+    if not (has_loop and has_next):
+        return interaction_policy
+    
+    # Create a shared dictionary to store loop and next info
+    shared_info = {
+        "loop_info": None,
+        "next_info": None
+    }
+    
+    def process_dict(d: dict) -> dict:
+        result = {}
+        
+        for key, value in d.items():
+            if key == "loop" and isinstance(value, dict):
+                # Keep original loop dictionary
+                result["loop-original"] = value
+                # Store loop info in shared dictionary
+                shared_info["loop_info"] = list(value.keys())
+            elif key == "next" and isinstance(value, dict):
+                # Keep original next dictionary
+                result["next-original"] = value
+                # Store next info in shared dictionary
+                shared_info["next_info"] = list(value.keys())[0]
+            elif isinstance(value, dict):
+                # Recursively process nested dictionaries
+                result[key] = process_dict(value)
+            else:
+                # Keep other values as is
+                result[key] = value
+        
+        return result
+    
+    # Create a copy to avoid modifying the original
+    converted = interaction_policy.copy()
+    result = process_dict(converted)
+    
+    # Add loop and next info at the top level
+    if shared_info["loop_info"] is not None:
+        result["loop"] = shared_info["loop_info"]
+    if shared_info["next_info"] is not None:
+        result["next"] = shared_info["next_info"]
+    
+    # Process loop-original and next-original
+    def process_original(d: dict) -> dict:
+        result = {}
+        for key, value in d.items():
+            if key == "loop-original":
+                # Move the value up one level
+                result.update(value)
+            elif key == "next-original":
+                # Move the value up one level
+                result.update(value)
+            elif isinstance(value, dict):
+                # Recursively process nested dictionaries
+                result[key] = process_original(value)
+            else:
+                # Keep other values as is
+                result[key] = value
+        return result
+    
+    return process_original(result)
+
+
 def parse_policy(policy_data: dict, interaction_data: dict, global_accs: dict, policies_count: int, is_interaction: bool = False, log_type: LogType = LogType.NONE, log_group: int = 100) -> Tuple[Policy, bool]:
     """
     Parse a policy.
@@ -296,7 +387,18 @@ if __name__ == "__main__":
         # Loop over the device's interaction policies
         if "interactions" in profile:
             for interaction_policy_name in profile["interactions"]:
+
+                print(profile["interactions"])
+                print("\n\n--------------------------------\n\n")
+
+                print(interaction_policy_name)
+
                 interaction_policy = profile["interactions"][interaction_policy_name]
+                interaction_policy = convert_to_first_representation(interaction_policy)
+
+
+                print(interaction_policy)
+                print("\n\n--------------------------------\n\n")
 
                 # Iterate on single policies
 
@@ -306,6 +408,9 @@ if __name__ == "__main__":
                     # Newly added: Skip loop and next keywords
                     if single_policy_name not in ["loop", "next"]:
                         flatten_policies(single_policy_name, interaction_policy[single_policy_name], single_policies)
+
+                print(single_policies)
+                print("\n\n--------------------------------\n\n")
 
                 # Second pass, parse policies
                 interaction_data = {
