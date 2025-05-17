@@ -42,40 +42,39 @@ patterns:
 
   # Start streaming camera
   start-stream: &pattern-start-stream
-    loop:
-      dns-cam-server-aaaa:
-        protocols:
-          dns:
-            qtype: AAAA
-            domain-name: mp-eu-sas.auto.mydlink.com
-          udp:
-            dst-port: 53
-          ipv4:
-            src: self
-            dst: gateway
-        bidirectional: true
+    dns-cam-server-aaaa:
+      protocols:
+        dns:
+          qtype: AAAA
+          domain-name: mp-eu-sas.auto.mydlink.com
+        udp:
+          dst-port: 53
+        ipv4:
+          src: self
+          dst: gateway
+      bidirectional: true
 
-      dns-cam-server-a:
-        protocols:
-          dns:
-            qtype: A
-            domain-name: mp-eu-sas.auto.mydlink.com
-          udp:
-            dst-port: 53
-          ipv4:
-            src: self
-            dst: gateway
-        bidirectional: true
+    dns-cam-server-a:
+      protocols:
+        dns:
+          qtype: A
+          domain-name: mp-eu-sas.auto.mydlink.com
+        udp:
+          dst-port: 53
+        ipv4:
+          src: self
+          dst: gateway
+      bidirectional: true
 
-      stun-bind-cam-server:
-        protocols:
-          udp:
-            dst-port: 3478
-          ipv4:
-            src: self
-            dst: mp-eu-sas.auto.mydlink.com
-        bidirectional: true
-    
+    stun-bind-cam-server:
+      protocols:
+        udp:
+          dst-port: 3478
+        ipv4:
+          src: self
+          dst: mp-eu-sas.auto.mydlink.com
+      bidirectional: true
+  
 
   # Stop streaming camera
   tcp-stop-stream: &pattern-tcp-stop-stream
@@ -466,16 +465,15 @@ interactions:
 
     start-stream-wan: *pattern-start-stream
 
-    next:
-      # UDP stream from camera to phone in WAN
-      udp-stream-wan:
-        protocols:
-          udp:
-          ipv4:
-            src: self
-            dst: external
-        bidirectional: true
-        stats:
-          rate: 0
+    # UDP stream from camera to phone in WAN
+    udp-stream-wan:
+      protocols:
+        udp:
+        ipv4:
+          src: self
+          dst: external
+      bidirectional: true
+      stats:
+        rate: 0
 
 ...

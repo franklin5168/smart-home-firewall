@@ -414,7 +414,7 @@ if __name__ == "__main__":
                 }
 
                 # Newly added: Add loop processing
-                if "loop" in interaction_policy:
+                if "loop" in interaction_policy and "next" in interaction_policy:
                     interaction_data["has_loop"] = True
                     loop_policy_names = interaction_policy.get("loop", []) 
                     next_policy_name = interaction_policy.get("next", None) 
