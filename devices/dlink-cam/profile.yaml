@@ -42,7 +42,6 @@ patterns:
 
   # Start streaming camera
   start-stream: &pattern-start-stream
-    
     dns-cam-server-aaaa:
       protocols:
         dns:

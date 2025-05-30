@@ -24,9 +24,9 @@ set(EXECUTABLE_OUTPUT_PATH ${BIN_DIR})
 #add_compile_options(-Wall -Werror -Wno-unused-variable -DLOG)     # Logging
 #add_compile_options(-Wall -Werror -Wno-unused-variable)           # Production
 # With optimisation
-#add_compile_options(-Wall -Werror -Wno-unused-variable -O3 -DDEBUG)   # Debug
-#add_compile_options(-Wall -Werror -Wno-unused-variable -O3 -DLOG)     # Packet Logging
-add_compile_options(-Wall -Werror -Wno-unused-variable -O3)           # Production
+add_compile_options(-Wall -Werror -Wno-unused-variable -O3 -DDEBUG)   # Debug
+add_compile_options(-Wall -Werror -Wno-unused-variable -O3 -DLOG)     # Packet Logging
+#add_compile_options(-Wall -Werror -Wno-unused-variable -O3)           # Production
 # With debug symbols
 #add_compile_options(-Wall -Werror -Wno-unused-variable -g)  # Without debug logging
 #add_compile_options(-Wall -Werror -Wno-unused-variable -DDEBUG -g)  # With debug logging
